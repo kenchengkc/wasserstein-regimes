@@ -52,6 +52,28 @@ Use daily SPY distribution windows of 63 returns, stride 5, and compare W1 with 
 
 Use the [data guide](docs/data.md) for provider choices. Keep source data and credentials outside version control. Software licensing does not grant rights to redistribute third-party market data.
 
+## Documentation deployment
+
+Vercel serves the documentation as a static site. The root `vercel.json` selects
+the **Other** framework preset (`framework: null`), installs the separate docs
+dependencies, runs a strict MkDocs build, and publishes `site/`. Keep the Vercel
+project root at the repository root so these settings are read.
+
+The Python package is a research library, so it does not define an ASGI/WSGI
+entrypoint. Selecting the Python framework preset without this configuration
+causes the "No python entrypoint found" error. A future inference API should be
+configured as a separate application with an actual HTTP entrypoint.
+
+Build and preview the documentation locally:
+
+```bash
+python -m pip install -r requirements-docs.txt
+python -m mkdocs build --strict
+python -m mkdocs serve
+```
+
+The documentation build does not run clustering or download market data.
+
 ## License
 
 Original project code and documentation are licensed under **GNU GPL version 3 only**, SPDX identifier `GPL-3.0-only`. See [LICENSE](LICENSE). Third-party papers and datasets retain their own terms and are not included.

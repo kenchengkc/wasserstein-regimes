@@ -13,3 +13,6 @@ artifacts/
 tmp/
 *.npz
 *.parquet
+site/
+.vercel/
+.venv-docs/

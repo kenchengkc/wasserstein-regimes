@@ -61,7 +61,7 @@ Use one installable Python package with a `src/` layout. Begin with Python 3.11+
 The committed reference core needs only NumPy at runtime. Dependency bounds in its package metadata are compatibility ranges, not a reproducibility lock. Before the research release, generate and commit a resolved lock for each supported Python/platform target, and persist the actual installed versions in every run.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Provider adapters] --> B[Immutable raw snapshots]
     B --> C[Validation and corporate actions]
     C --> D[Canonical returns]

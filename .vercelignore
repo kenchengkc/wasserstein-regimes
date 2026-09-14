@@ -1,0 +1,17 @@
+.git/
+.github/
+.venv/
+.venv-docs/
+.pytest_cache/
+**/__pycache__/
+**/*.egg-info/
+.env
+.env.*
+site/
+data/
+artifacts/
+tmp/
+build/
+dist/
+tests/
+examples/
