@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "Please cite the motivating paper when using this methodology."
+title: "Wasserstein Regimes"
+type: software
+version: 0.1.0
+license: GPL-3.0-only
+authors:
+  - name: "Wasserstein Regimes contributors"
+preferred-citation:
+  type: article
+  title: "Clustering Market Regimes using the Wasserstein Distance"
+  authors:
+    - family-names: Horvath
+      given-names: Blanka
+    - family-names: Issa
+      given-names: Zacharia
+    - family-names: Muguruza
+      given-names: Aitor
+  year: 2021
+  doi: 10.48550/arXiv.2110.11848
+  url: "https://arxiv.org/abs/2110.11848v1"
