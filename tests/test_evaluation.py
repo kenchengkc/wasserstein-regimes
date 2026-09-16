@@ -67,3 +67,12 @@ def test_component_fractions_are_ratio_of_sums_not_mean_of_ratios():
     e = evaluation()
     result = e.component_fractions({'location':np.array([1.,0.]), 'scale':np.array([0.,9.]), 'shape':np.array([0.,0.])})
     assert result == {'location':.1, 'scale':.9, 'shape':0.}
+
+
+def test_collapsed_model_novelty_has_no_second_center():
+    result=evaluation().novelty([[1.],[4.]],[1.,2.,3.])
+    np.testing.assert_array_equal(result['nearest_distance'],[1.,4.])
+    np.testing.assert_allclose(result['novelty_percentile'],[1/3,1.])
+    assert np.isnan(result['second_distance']).all()
+    np.testing.assert_array_equal(result['margin'],[0.,0.])
+    np.testing.assert_array_equal(result['ood'],[False,True])

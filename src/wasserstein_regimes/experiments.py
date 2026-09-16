@@ -288,6 +288,7 @@ def stability_study(series, batch, config, *, year, test_end):
                 return WassersteinKMeans(n_clusters=k, n_init=config['n_init'],random_state=seed).fit(transform(samples))
             return FeatureBaseline(kind=name,n_clusters=k,n_init=config['n_init'],random_state=seed).fit(samples)
         reference = fit(train, config['seed'])
+        reference_k = len(reference.centers_)
         ref_labels = reference.predict(transform(validation))
         groups = {}
         for group, repeats in (('seed',config['seed_repeats']),('block_bootstrap',config['bootstrap_repeats'])):
@@ -299,16 +300,19 @@ def stability_study(series, batch, config, *, year, test_end):
                     indices=moving_block_indices(len(raw),block_length=min(len(raw),config['bootstrap_block_length']),rng=np.random.default_rng(seed))
                     samples=np.lib.stride_tricks.sliding_window_view(raw[indices],config['window_length'])[::config['fit_stride']]
                 model=fit(samples,seed)
+                effective_k = len(model.centers_)
                 labels=model.predict(transform(validation))
-                if len(model.centers_)==len(reference.centers_):
+                if effective_k == reference_k:
                     mapping=align_centroids(reference.centers_,model.centers_)
-                    displacement=float(pairwise_distance(model.centers_,reference.centers_)[np.arange(k),mapping].mean())
-                    occupancy=np.bincount(mapping[labels],minlength=k)/len(labels)
-                    occupancy_l1=float(np.abs(occupancy-np.bincount(ref_labels,minlength=k)/len(ref_labels)).sum())
+                    displacement=float(pairwise_distance(model.centers_,reference.centers_)[np.arange(reference_k),mapping].mean())
+                    occupancy=np.bincount(mapping[labels],minlength=reference_k)/len(labels)
+                    occupancy_l1=float(np.abs(occupancy-np.bincount(ref_labels,minlength=reference_k)/len(ref_labels)).sum())
                 else:
                     displacement,occupancy_l1=None,None
-                rows.append(dict(ari=float(adjusted_rand_score(ref_labels,labels)),centroid_displacement=displacement,occupancy_l1=occupancy_l1))
-            groups[group]=dict(repetitions=repeats,ari_mean=float(np.mean([r['ari'] for r in rows])),
+                rows.append(dict(ari=float(adjusted_rand_score(ref_labels,labels)),effective_clusters=effective_k,
+                                 centroid_displacement=displacement,occupancy_l1=occupancy_l1))
+            groups[group]=dict(repetitions=repeats,reference_effective_clusters=reference_k,
+                               ari_mean=float(np.mean([r['ari'] for r in rows])),
                                ari_range=np.quantile([r['ari'] for r in rows],[0,1]).tolist(),draws=rows)
         output['models'][name]=groups
     return output

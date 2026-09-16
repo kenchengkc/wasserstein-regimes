@@ -1,6 +1,7 @@
 import importlib.util
 import numpy as np
 import pandas as pd
+from types import SimpleNamespace
 
 
 def module():
@@ -63,6 +64,10 @@ def test_csv_pipeline_prefix_invariance_and_strict_intervals(tmp_path):
         strict=frame[frame.policy=='strict']
         assert (strict.price_start > pd.Timestamp('2018-12-31')).all()
     np.testing.assert_array_equal(results[0][2].centers_, results[1][2].centers_)
+    assert (tmp_path/'0'/'model.json').read_bytes() == (tmp_path/'1'/'model.json').read_bytes()
+    with np.load(tmp_path/'0'/'model.npz', allow_pickle=False) as left, np.load(tmp_path/'1'/'model.npz', allow_pickle=False) as right:
+        for name in left.files:
+            np.testing.assert_array_equal(left[name], right[name])
     columns=['date','regime','nearest_distance','novelty_percentile','ood']
     pd.testing.assert_frame_equal(results[0][1][columns],results[1][1][columns])
     # Future evaluation outcomes may change; fitted state and available predictions may not.
@@ -78,3 +83,52 @@ def test_completed_artifact_rejects_modified_assignments(tmp_path):
     import pytest
     with pytest.raises(ValueError,match='integrity'):
         e.verify_artifact(tmp_path)
+
+
+def test_stability_uses_effective_reference_count_for_collapsed_volatility():
+    e = module()
+    a = np.array([-1., -1., 1., 1.])
+    b = np.array([-np.sqrt(2), 0., 0., np.sqrt(2)])
+    train = np.tile(np.stack([a, b]), (12, 1))
+    validation = np.tile(np.stack([a, b]), (6, 1))
+    dates = pd.DatetimeIndex(list(pd.date_range('2017-06-01', periods=len(train))) +
+                             list(pd.date_range('2018-06-01', periods=len(validation))))
+    batch = SimpleNamespace(samples=np.vstack([train, validation]), dates=dates,
+                            price_start=dates - pd.Timedelta(days=1))
+    raw_dates = pd.date_range('2017-01-01', periods=80)
+    series = SimpleNamespace(returns=np.random.default_rng(9).normal(size=len(raw_dates)), dates=raw_dates)
+    config = dict(validation_years=1, fit_stride=1, k_candidates=[2], seed=5, n_init=2,
+                  bootstrap_block_length=4, window_length=4, seed_repeats=1, bootstrap_repeats=1)
+
+    result = e.stability_study(series, batch, config, year=2019, test_end='2019-06-30')
+    volatility = result['models']['volatility']
+    seed = volatility['seed']
+    bootstrap = volatility['block_bootstrap']
+    assert seed['reference_effective_clusters'] == 1
+    assert seed['draws'][0]['effective_clusters'] == 1
+    assert seed['draws'][0]['centroid_displacement'] is not None
+    assert seed['draws'][0]['occupancy_l1'] == 0.
+    assert bootstrap['reference_effective_clusters'] == 1
+    assert bootstrap['draws'][0]['effective_clusters'] == 2
+    assert bootstrap['draws'][0]['centroid_displacement'] is None
+    assert bootstrap['draws'][0]['occupancy_l1'] is None
+
+
+def test_single_prototype_summary_keeps_novelty_and_occupancy():
+    e = module()
+    from wasserstein_regimes.windows import WindowBatch
+    samples = np.tile([-1., -1., 1., 1.], (4, 1))
+    dates = pd.date_range('2019-01-01', periods=4)
+    endpoints = np.array([3, 7, 11, 15])
+    batch = WindowBatch(samples, endpoints, endpoints - 3, dates, dates.tz_localize('UTC'),
+                        dates - pd.Timedelta(days=1), dates)
+    frame, metrics, _ = e._summary(batch, np.zeros(4, dtype=int), samples[:1],
+                                    np.zeros((4, 1)), [0., 1.], np.tile(samples[0], 5),
+                                    threshold=.99, horizon=1, bandwidth=1., seed=5)
+    np.testing.assert_array_equal(frame.nearest_distance, [0., 0., 0., 0.])
+    np.testing.assert_array_equal(frame.novelty_percentile, [.5, .5, .5, .5])
+    assert frame.second_distance.isna().all()
+    assert not frame.ood.any()
+    assert metrics['occupancy'] == [1.]
+    assert metrics['between_centroid_w2_mean'] is None
+    assert metrics['temporal']['transitions'] == [[0]]

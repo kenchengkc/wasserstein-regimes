@@ -41,12 +41,13 @@ def future_outcomes(returns, endpoints, *, horizon=21):
 
 def novelty(distances, calibration, *, threshold=.99):
     d, cal = np.asarray(distances, float), np.sort(np.asarray(calibration, float))
-    if d.ndim != 2 or d.shape[1] < 2 or not len(cal) or cal.ndim != 1:
-        raise ValueError('Novelty requires at least two centers and calibration distances')
+    if d.ndim != 2 or d.shape[1] < 1 or not len(cal) or cal.ndim != 1:
+        raise ValueError('Novelty requires at least one center and calibration distances')
     if not np.isfinite(d).all() or not np.isfinite(cal).all() or (d < 0).any() or not 0 < threshold <= 1:
         raise ValueError('Invalid distances or novelty threshold')
     ordered = np.sort(d, axis=1)
-    d1, d2 = ordered[:, 0], ordered[:, 1]
+    d1 = ordered[:, 0]
+    d2 = ordered[:, 1] if d.shape[1] > 1 else np.full(len(d1), np.nan)
     percentile = np.searchsorted(cal, d1, side='right') / len(cal)
     margin = np.divide(d2 - d1, d2, out=np.zeros(len(d2)), where=d2 > 0)
     return dict(nearest_distance=d1, second_distance=d2, margin=margin,
