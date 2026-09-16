@@ -210,6 +210,23 @@ def test_load_rejects_inconsistent_metadata_and_labels(tmp_path):
         WassersteinKMeans.load(base)
 
 
+def test_load_rejects_complex_centers_and_objective_history(tmp_path):
+    base = tmp_path / "regime_model"
+    WassersteinKMeans(n_clusters=1).fit([[1, 2], [2, 3]]).save(base)
+    arrays_path = base.with_suffix(".npz")
+    with np.load(arrays_path, allow_pickle=False) as archive:
+        centers = archive["centers"].copy()
+        labels = archive["labels"].copy()
+        history = archive["objective_history"].copy()
+    np.savez(arrays_path, centers=centers.astype(complex) + 1j, labels=labels, objective_history=history)
+    with pytest.raises(ValueError, match="model"):
+        WassersteinKMeans.load(base)
+
+    np.savez(arrays_path, centers=centers, labels=labels, objective_history=history.astype(complex) + 1j)
+    with pytest.raises(ValueError, match="model"):
+        WassersteinKMeans.load(base)
+
+
 def test_unfitted_and_wrong_dimension_calls_fail():
     model = WassersteinKMeans(n_clusters=1)
     with pytest.raises(RuntimeError):

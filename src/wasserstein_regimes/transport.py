@@ -33,6 +33,11 @@ def _paired_quantiles(samples, centers):
     return np.sort(samples, axis=1), np.sort(centers, axis=1)
 
 
+def _constant_rows(values):
+    """Identify exact constant observations without reduction roundoff."""
+    return np.all(values == values[:, :1], axis=1)
+
+
 def pairwise_distance(samples, centers, metric="w2", chunk_size=256):
     """Return all true W1 or W2 distances between equal-size samples.
 
@@ -72,6 +77,8 @@ def w2_decomposition(samples, centers, chunk_size=256):
     center_means = center_quantiles.mean(axis=1)
     sample_scales = quantiles.std(axis=1, ddof=0)
     center_scales = center_quantiles.std(axis=1, ddof=0)
+    sample_scales[_constant_rows(quantiles)] = 0.0
+    center_scales[_constant_rows(center_quantiles)] = 0.0
 
     center_shapes = np.zeros_like(center_quantiles)
     nonconstant_centers = center_scales > 0
@@ -122,6 +129,7 @@ def standardize_windows(samples):
     windows = _windows(samples, "samples")
     means = windows.mean(axis=1, keepdims=True)
     scales = windows.std(axis=1, ddof=0, keepdims=True)
+    scales[_constant_rows(windows), 0] = 0.0
     standardized = np.zeros_like(windows)
     nonconstant = scales[:, 0] > 0
     standardized[nonconstant] = (

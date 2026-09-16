@@ -5,7 +5,12 @@ import warnings
 import numpy as np
 import pytest
 
-from wasserstein_regimes.baselines import CausalGaussianHMM, FeatureBaseline, feature_matrix
+from wasserstein_regimes.baselines import (
+    CausalGaussianHMM,
+    FeatureBaseline,
+    _approximately_distinct_rows,
+    feature_matrix,
+)
 
 
 def test_moment_features_are_finite_for_constant_windows():
@@ -14,6 +19,26 @@ def test_moment_features_are_finite_for_constant_windows():
     np.testing.assert_allclose(features[0], [2.0, 0.0, 0.0, 0.0])
     np.testing.assert_allclose(features[1], [1.0, np.sqrt(2.0 / 3.0), 0.0, -1.5])
     assert np.isfinite(features).all()
+
+
+@pytest.mark.parametrize("value", [0.1, 0.01])
+def test_length_63_constant_decimals_have_zero_moment_shape(value):
+    samples = np.full((1, 63), value)
+    features = feature_matrix(samples, "moments")
+    np.testing.assert_allclose(features, [[value, 0.0, 0.0, 0.0]], atol=1e-15)
+
+
+def test_distinct_rows_stop_at_cluster_limit_without_losing_approximate_collapse():
+    values = np.array([
+        [0.0, 0.0],
+        [1e-13, -1e-13],
+        [1.0, 1.0],
+        [2.0, 2.0],
+        [3.0, 3.0],
+    ])
+    representatives = _approximately_distinct_rows(values, limit=2)
+    np.testing.assert_array_equal(representatives, [[0.0, 0.0], [1.0, 1.0]])
+    assert len(_approximately_distinct_rows(values, limit=4)) == 4
 
 
 def test_feature_kinds_have_the_documented_columns():

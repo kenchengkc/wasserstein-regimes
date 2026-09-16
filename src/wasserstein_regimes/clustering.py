@@ -300,6 +300,7 @@ class WassersteinKMeans:
             centers.shape == (model.n_clusters, n_features)
             and centers.ndim == 2
             and np.issubdtype(centers.dtype, np.number)
+            and not np.issubdtype(centers.dtype, np.complexfloating)
             and np.isfinite(centers).all()
             and np.all(np.diff(centers, axis=1) >= 0)
             and labels.shape == (n_samples,)
@@ -307,6 +308,8 @@ class WassersteinKMeans:
             and np.all((labels >= 0) & (labels < model.n_clusters))
             and history.ndim == 1
             and len(history) >= 1
+            and np.issubdtype(history.dtype, np.number)
+            and not np.issubdtype(history.dtype, np.complexfloating)
             and np.isfinite(history).all()
         )
         valid_scalars = (

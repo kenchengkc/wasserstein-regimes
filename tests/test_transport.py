@@ -141,6 +141,19 @@ def test_standardization_preserves_order_and_maps_constants_to_zero():
     np.testing.assert_allclose(standardized.std(axis=1), [1, 0])
 
 
+@pytest.mark.parametrize("value", [0.1, 0.01])
+def test_length_63_constant_decimals_have_zero_standardized_shape(value):
+    constant = np.full((1, 63), value)
+    np.testing.assert_array_equal(standardize_windows(constant), np.zeros((1, 63)))
+    same = w2_decomposition(constant, constant)
+    np.testing.assert_array_equal(same["scale"], [[0.0]])
+    np.testing.assert_array_equal(same["shape"], [[0.0]])
+    shifted = w2_decomposition(constant, np.full((1, 63), value + 0.2))
+    np.testing.assert_array_equal(shifted["scale"], [[0.0]])
+    np.testing.assert_array_equal(shifted["shape"], [[0.0]])
+    assert shifted["total"][0, 0] == pytest.approx(0.04)
+
+
 @pytest.mark.parametrize(
     "call",
     [

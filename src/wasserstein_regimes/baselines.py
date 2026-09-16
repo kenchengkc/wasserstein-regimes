@@ -29,6 +29,8 @@ def _samples(values):
 def _moment_features(samples):
     means = samples.mean(axis=1)
     standard_deviations = samples.std(axis=1, ddof=0)
+    constant = np.all(samples == samples[:, :1], axis=1)
+    standard_deviations[constant] = 0.0
     centered = samples - means[:, None]
     standardized = np.divide(
         centered,
@@ -38,7 +40,6 @@ def _moment_features(samples):
     )
     skewness = np.mean(standardized ** 3, axis=1)
     excess_kurtosis = np.mean(standardized ** 4, axis=1) - 3.0
-    constant = standard_deviations == 0
     skewness[constant] = 0.0
     excess_kurtosis[constant] = 0.0
     return np.column_stack([means, standard_deviations, skewness, excess_kurtosis])
@@ -72,11 +73,13 @@ def feature_matrix(samples, kind="moments"):
     ])
 
 
-def _approximately_distinct_rows(values):
+def _approximately_distinct_rows(values, limit):
     representatives = []
     for row in values:
         if not any(np.allclose(row, other, rtol=1e-12, atol=1e-12) for other in representatives):
             representatives.append(row)
+            if len(representatives) == limit:
+                break
     return np.asarray(representatives)
 
 
@@ -100,7 +103,7 @@ class FeatureBaseline:
         raw_features = feature_matrix(samples, self.kind)
         self.scaler_ = StandardScaler().fit(raw_features)
         scaled_features = self.scaler_.transform(raw_features)
-        distinct = _approximately_distinct_rows(raw_features)
+        distinct = _approximately_distinct_rows(raw_features, self.n_clusters)
         self.n_effective_clusters_ = min(self.n_clusters, len(distinct))
 
         if self.kind == "gmm":
