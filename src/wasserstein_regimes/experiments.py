@@ -5,6 +5,8 @@ from __future__ import annotations
 import hashlib
 import importlib.metadata
 import json
+import os
+import platform
 from pathlib import Path
 import subprocess
 
@@ -78,14 +80,17 @@ def code_provenance():
         worktree_hash = digest.hexdigest()
     except (OSError, subprocess.CalledProcessError):
         sha, worktree_hash = 'unavailable', 'unavailable'
-    packages = ['numpy', 'scipy', 'scikit-learn', 'pandas', 'pyarrow', 'hmmlearn', 'exchange-calendars']
+    packages = ['numpy', 'scipy', 'scikit-learn', 'pandas', 'pyarrow', 'hmmlearn', 'exchange-calendars', 'matplotlib', 'PyYAML', 'threadpoolctl']
     versions = {}
     for package in packages:
         try:
             versions[package] = importlib.metadata.version(package)
         except importlib.metadata.PackageNotFoundError:
             versions[package] = 'unavailable'
-    return dict(git_sha=sha, dirty_worktree_hash=worktree_hash, dependency_versions=versions)
+    return dict(git_sha=sha, dirty_worktree_hash=worktree_hash, dependency_versions=versions,
+                execution_environment=dict(python=platform.python_version(),platform=platform.platform(),
+                                           accelerate_thread_limit=os.environ.get('VECLIB_MAXIMUM_THREADS'),
+                                           threadpoolctl_requested=1))
 
 
 def _json_safe(value):
@@ -417,6 +422,12 @@ def run(config_path, *, output_root='artifacts', stage='development'):
         latest=years[-1]
         sensitivity=dict(stability=stability_study(series,batch,config,year=latest,test_end=str(cutoff.date())),
                          overlap=overlap_study(series,batch,config,year=latest,test_end=str(cutoff.date())))
+    from .synthetic import run_synthetic
+    from .benchmark import run_benchmark
+    print('Running synthetic controls and transport benchmark', flush=True)
+    with threadpool_limits(limits=1):
+        write_json(output/'synthetic.json',run_synthetic(config))
+        write_json(output/'benchmark.json',run_benchmark())
     import shutil
     shutil.copyfile(output/'models'/str(years[-1])/'model.json',output/'model.json')
     shutil.copyfile(output/'models'/str(years[-1])/'centroids.npz',output/'centroids.npz')

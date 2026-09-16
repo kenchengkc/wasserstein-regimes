@@ -3,7 +3,9 @@
 Install Python 3.11 or newer and the research dependencies:
 
 ```bash
+python -m pip install -r requirements-research.txt
 python -m pip install -e '.[research,dev,data]'
+export VECLIB_MAXIMUM_THREADS=1
 python -m pytest
 ```
 
@@ -65,7 +67,8 @@ regimes run --config configs/spy_daily_w2.yaml --stage holdout
 regimes report --run RUN_ID
 ```
 
-`run` writes configuration, provenance, fitted primary model, all model
+`run` includes the synthetic controls and transport benchmark, and writes
+configuration, provenance, fitted primary model, all model
 prototypes, feature/HMM parameter audit records, per-fold distances and exact
 location/scale/shape decompositions, assignments in Parquet and summary metrics.
 `checksums.json` verifies saved research inputs on reuse. Source code identity,

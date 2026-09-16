@@ -8,8 +8,8 @@ import numpy as np
 
 from wasserstein_regimes.synthetic import _delays, _metric_record, _novelty_distances, _stationary_once, exact_moment_blocks, run_synthetic
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-import benchmarks.transport as transport_benchmark
-from benchmarks.transport import run_benchmark
+import wasserstein_regimes.benchmark as transport_benchmark
+from wasserstein_regimes.benchmark import run_benchmark
 
 
 def test_exact_blocks_share_four_moments_but_differ_in_w2():
