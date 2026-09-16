@@ -25,3 +25,4 @@ null_repeats: 20
 fit_strides: [1, 5, 21, 63]
 window_lengths: [21, 63, 126, 252]
 synthetic_repeats: 10
+synthetic_n_init: 5

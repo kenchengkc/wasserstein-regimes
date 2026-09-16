@@ -14,6 +14,7 @@ theme:
     - content.code.copy
 nav:
   - Overview: index.md
+  - Research workflow: research-workflow.md
   - System design: design.md
   - Data sourcing: data.md
   - Implementation plan: implementation-plan.md

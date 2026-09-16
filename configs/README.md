@@ -27,3 +27,7 @@ significance. Future 21-session outcomes are descriptive and never fit inputs.
 
 No result is a trading strategy evaluation. A single ETF and a single historical
 holdout cannot establish general incremental economic value.
+
+Synthetic controls use five restarts per fit (all compared synthetic methods),
+recorded separately as `synthetic_n_init`; empirical and overlap-null fits use
+20. This computational setting is fixed before the holdout run.
