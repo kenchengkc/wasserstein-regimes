@@ -175,6 +175,7 @@ def _synthetic_section(root, config, chart):
     if not path.exists():
         return ''
     value = json.loads(path.read_text())
+    controls = _synthetic_controls(value) if isinstance(value, dict) else ''
     if not isinstance(value, dict) or not isinstance(value.get('recovery'), dict):
         return _optional_json(path, 'Synthetic recovery')
     records = []
@@ -210,6 +211,38 @@ def _synthetic_section(root, config, chart):
     rows = [(r['suite'], r['length'], _NAMES.get(r['method'], r['method']), r['repeats'], r['stride'],
              _n(r['pure']), _n(r['mixed']), _n(r['delay']), r['detected'], r['censored']) for r in records]
     note = value.get('inference_note', '')
+    shape_suites = [suite for suite in sorted(value['recovery']) if suite != 'variance']
+    def by_length(ax, key, ylabel):
+        ax.set_visible(False)
+        for panel, suite in enumerate(shape_suites):
+            axis = ax.figure.add_subplot(1, len(shape_suites), panel+1)
+            suite_rows = [row for row in records if row['suite'] == suite]
+            for i, method in enumerate(sorted({r['method'] for r in suite_rows})):
+                points = sorted([r for r in suite_rows if r['method'] == method], key=lambda r: int(r['length']))
+                axis.plot([int(r['length']) for r in points],
+                          [np.nan if r[key] is None else r[key] for r in points], marker='o', markersize=3,
+                          color=_COLORS[i % len(_COLORS)], linestyle=('-', '--')[i//len(_COLORS) % 2],
+                          linewidth=1.3, label=_NAMES.get(method,method))
+            axis.set_title(suite.replace('_',' '), fontsize=10)
+            axis.set_xticks(sorted({int(row['length']) for row in suite_rows}))
+            axis.set_xlabel('window length, observations', fontsize=8)
+            axis.set_ylabel(ylabel if panel == 0 else '', fontsize=8)
+            axis.tick_params(labelsize=7)
+            axis.grid(axis='y', color='#e5eaf0')
+            axis.spines[['top','right']].set_visible(False)
+            axis.legend(frameon=False, fontsize=6, ncol=2)
+    tradeoff = ''
+    if shape_suites:
+        tradeoff = ('<h3>Recovery and delay versus window length</h3><p>Shape-changing contrasts show saved '
+                    'pure-window recovery and first correct post-switch assignment delay across L. Delay is detected-only; '
+                    'it is not a persistence-confirmed change detector. Score stride sets raw-observation resolution, '
+                    'and censor counts remain in the table below.</p>'
+                    + chart('synthetic_recovery_by_length', lambda ax: by_length(ax,'pure','mean pure-window ARI'),
+                            'Synthetic recovery versus window length',
+                            'Shape-changing synthetic contrasts: pure-window ARI versus window length')
+                    + chart('synthetic_delay_by_length', lambda ax: by_length(ax,'delay','detected-only delay, observations'),
+                            'Synthetic delay versus window length',
+                            'Shape-changing synthetic contrasts: detected-only transition delay versus window length'))
     return ('<section><h2>Synthetic recovery</h2><p>Saved independent-stream synthetic measurements. '
             'Pure-window and mixed-window ARI are shown separately. Transition delay averages include detected events only; '
             'censored transitions are counted separately and must not be read as zero delay. '
@@ -220,8 +253,53 @@ def _synthetic_section(root, config, chart):
             + chart('synthetic_delay', lambda ax: bars(ax,'delay','mean detected-only delay, observations'),
                     f'Synthetic detected-only delay, L={featured}',
                     f'Saved mean detected-only synthetic transition delay at length {featured}')
+            + tradeoff
             + _table(['contrast','window length','method','repeats','score stride','pure ARI','mixed ARI',
-                      'detected-only delay','detected','censored'], rows) + '</section>')
+                      'detected-only delay','detected','censored'], rows) + '</section>' + controls)
+
+
+def _synthetic_controls(value):
+    sections = []
+    exact = value.get('exact_moments', {})
+    if exact:
+        numeric = lambda key: f'{float(exact[key]):.12e}' if exact.get(key) is not None else '—'
+        methods = exact.get('methods') or {
+            'w2': {'test_ari': exact.get('w2_test_ari')},
+            'moments': {'effective_clusters': exact.get('moments_effective_clusters')}}
+        rows = [(_NAMES.get(name,name), _n(result.get('test_ari')),
+                 _n(result.get('test_balanced_accuracy')), result.get('effective_clusters','—'))
+                for name, result in sorted(methods.items())]
+        sections.append('<section><h2>Exact finite-moment blocks</h2><p>These are disjoint '
+                        f'{_e(exact.get("block_length", "—"))}-atom empirical blocks. The exact-block first-four-moment '
+                        f'maximum measured gap is {numeric("max_first_four_moment_gap")}; saved W2 between laws is '
+                        f'{numeric("w2_between_laws")}. This finite counterexample is separate from iid rolling windows '
+                        'whose distributions match only population moments. Effective cluster counts show baseline '
+                        'collapse where measured; test recovery uses the saved training-derived label mapping.</p>'
+                        f'<p>Saved scope: {_e(exact.get("scope", "unspecified"))}.</p>'
+                        + _table(['method','test ARI','test balanced accuracy','effective clusters'],rows) + '</section>')
+    stationary = value.get('stationary', {})
+    if stationary:
+        rows = []
+        for length, study in sorted(stationary.items(), key=lambda pair: int(pair[0])):
+            for name, result in sorted(study.get('methods', {}).items()):
+                row = [length, _NAMES.get(name,name), study.get('repetitions','—'),
+                       study.get('score_stride','—'), result.get('forced_k','—')]
+                row.extend(_n(result.get(key, {}).get('mean')) for key in (
+                    'seed_ari','switch_frequency','mean_dwell_scored_windows',
+                    'mean_dwell_observations_approx','novelty_false_flag_rate','centroid_w2_distance'))
+                row.extend(result.get(key, 'not saved') for key in (
+                    'calibration_segment','novelty_distance_metric','novelty_distance_units'))
+                rows.append(row)
+        sections.append('<section><h2>Stationary forced-clustering control</h2><p>A stationary single-law stream '
+                        'is forced into K states. Persistence, seed stability, and false-novelty means below are guardrails: '
+                        'stable or persistent clusters can occur without switching generating laws. Dwell counts scored windows; '
+                        'its raw-observation conversion is approximate. False-novelty calibration and distance geometry are '
+                        'reported as saved; missing definitions remain marked as not saved. These independent-stream means '
+                        'are descriptive, not significance tests.</p>'
+                        + _table(['L','method','repeats','score stride','forced K','seed ARI','switch frequency',
+                                  'dwell scored windows','dwell observations (approx.)','false-novelty rate',
+                                  'centroid W2','calibration','novelty metric','novelty units'],rows) + '</section>')
+    return ''.join(sections)
 
 
 def report(run_path) -> Path:

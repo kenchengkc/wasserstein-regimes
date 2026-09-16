@@ -113,3 +113,36 @@ def test_synthetic_recovery_schema_gets_recovery_and_delay_figures(tmp_path):
     assert 'censored' in html and 'detected-only' in html
     assert (run/'figures'/'synthetic_recovery.png').exists()
     assert (run/'figures'/'synthetic_delay.png').exists()
+
+
+def test_complete_synthetic_artifact_renders_exact_blocks_stationary_and_length_tradeoff(tmp_path):
+    _artifacts(tmp_path / 'run')
+    run = tmp_path / 'run'
+    mean = lambda value: {'n': 3, 'mean': value, 'range': [value, value], 'standard_error': 0}
+    studies = {}
+    for length, ari, delay in [(21, .2, 4), (63, .7, 12), (126, .9, 25), (252, .95, 50)]:
+        studies[str(length)] = {'repetitions': 3, 'score_stride': max(1,length//5), 'methods': {
+            'w2': {'pure': {'ari': mean(ari)}, 'mixed': {'ari': mean(.1)},
+                   'detection_delay': {'detected_only_delay': mean(delay), 'detected': 2, 'censored': 1}}}}
+    synthetic = {'recovery': {'normal_t5': studies}, 'exact_moments': {
+        'block_length': 300, 'max_first_four_moment_gap': 0, 'w2_between_laws': .565685424949238,
+        'methods': {'moments': {'test_ari': 0, 'test_balanced_accuracy': .5, 'effective_clusters': 1},
+                    'w2': {'test_ari': 1, 'test_balanced_accuracy': 1, 'effective_clusters': 2}},
+        'scope': 'exact <blocks>'}, 'stationary': {'63': {'repetitions': 3, 'score_stride': 12,
+            'methods': {'gmm': {'forced_k': 2, 'seed_ari': mean(.6), 'switch_frequency': mean(.2),
+                'mean_dwell_scored_windows': mean(5), 'mean_dwell_observations_approx': mean(60),
+                'novelty_false_flag_rate': mean(.025), 'centroid_w2_distance': mean(.003),
+                'calibration_segment': 'heldout_validation', 'novelty_distance_metric': 'empirical_w2',
+                'novelty_distance_units': 'raw return units'}}}}}
+    (run/'synthetic.json').write_text(json.dumps(synthetic))
+    from wasserstein_regimes.reporting import report
+    first = report(run).read_bytes()
+    html = first.decode()
+    assert 'Exact finite-moment blocks' in html and '5.656854249492e-01' in html
+    assert 'exact &lt;blocks&gt;' in html and 'population moments' in html
+    assert 'Stationary forced-clustering control' in html and '0.025' in html
+    assert 'heldout_validation' in html and 'empirical_w2' in html
+    assert 'Recovery and delay versus window length' in html
+    for name in ('synthetic_recovery_by_length', 'synthetic_delay_by_length'):
+        assert (run/'figures'/f'{name}.png').exists()
+    assert first == report(run).read_bytes()
