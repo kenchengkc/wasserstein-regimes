@@ -128,7 +128,42 @@ def test_single_prototype_summary_keeps_novelty_and_occupancy():
     np.testing.assert_array_equal(frame.nearest_distance, [0., 0., 0., 0.])
     np.testing.assert_array_equal(frame.novelty_percentile, [.5, .5, .5, .5])
     assert frame.second_distance.isna().all()
+    assert frame.margin.isna().all()
     assert not frame.ood.any()
     assert metrics['occupancy'] == [1.]
     assert metrics['between_centroid_w2_mean'] is None
     assert metrics['temporal']['transitions'] == [[0]]
+
+
+def test_run_root_model_is_loadable_and_matches_latest_fold(tmp_path, monkeypatch):
+    import hashlib
+    import yaml
+    import exchange_calendars as xc
+    from wasserstein_regimes.clustering import WassersteinKMeans
+    from wasserstein_regimes import synthetic, benchmark
+    e = module()
+    dates = xc.get_calendar('XNYS', start='2015-01-01', end='2019-12-31').sessions
+    prices = 100 * np.exp(np.cumsum(np.random.default_rng(19).normal(0, .01, len(dates))))
+    source = tmp_path / 'prices.csv'
+    pd.DataFrame({'Date': dates, 'Adj Close': prices}).to_csv(source, index=False)
+    config = dict(dataset=str(source), dataset_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
+                  price_column='Adj Close', provider='test fixture', data_cutoff='2019-12-31',
+                  holdout_start='2020-01-01', development_years=[2019], window_length=21,
+                  score_stride=1, fit_stride=5, metric='w2', validation_years=1,
+                  k_candidates=[2], seed=42, n_init=2, models=['w2'], novelty_threshold=.99, horizon=5)
+    spec = tmp_path / 'study.yaml'
+    spec.write_text(yaml.safe_dump(config))
+    # These supplementary studies do not participate in fold model persistence.
+    monkeypatch.setattr(e, 'stability_study', lambda *args, **kwargs: {})
+    monkeypatch.setattr(e, 'overlap_study', lambda *args, **kwargs: {})
+    monkeypatch.setattr(synthetic, 'run_synthetic', lambda config: {})
+    monkeypatch.setattr(benchmark, 'run_benchmark', lambda: {})
+
+    output = e.run(spec, output_root=tmp_path / 'artifacts')
+    root = WassersteinKMeans.load(output / 'model')
+    latest = WassersteinKMeans.load(output / 'models' / '2019' / 'model')
+    np.testing.assert_array_equal(root.centers_, latest.centers_)
+    np.testing.assert_array_equal(root.predict(latest.centers_), [0, 1])
+    with np.load(output / 'centroids.npz', allow_pickle=False) as centroids:
+        np.testing.assert_array_equal(root.centers_, centroids['centers'])
+    e.verify_artifact(output)

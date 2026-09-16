@@ -430,6 +430,7 @@ def run(config_path, *, output_root='artifacts', stage='development'):
         write_json(output/'benchmark.json',run_benchmark())
     import shutil
     shutil.copyfile(output/'models'/str(years[-1])/'model.json',output/'model.json')
+    shutil.copyfile(output/'models'/str(years[-1])/'model.npz',output/'model.npz')
     shutil.copyfile(output/'models'/str(years[-1])/'centroids.npz',output/'centroids.npz')
     pd.concat(frames,ignore_index=True).to_parquet(output/'assignments.parquet',index=False)
     write_json(output/'metrics.json',dict(folds=folds,**sensitivity))

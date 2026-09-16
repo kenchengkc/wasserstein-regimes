@@ -74,5 +74,5 @@ def test_collapsed_model_novelty_has_no_second_center():
     np.testing.assert_array_equal(result['nearest_distance'],[1.,4.])
     np.testing.assert_allclose(result['novelty_percentile'],[1/3,1.])
     assert np.isnan(result['second_distance']).all()
-    np.testing.assert_array_equal(result['margin'],[0.,0.])
+    assert np.isnan(result['margin']).all()
     np.testing.assert_array_equal(result['ood'],[False,True])

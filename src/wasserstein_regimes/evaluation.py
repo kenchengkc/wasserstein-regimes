@@ -50,6 +50,8 @@ def novelty(distances, calibration, *, threshold=.99):
     d2 = ordered[:, 1] if d.shape[1] > 1 else np.full(len(d1), np.nan)
     percentile = np.searchsorted(cal, d1, side='right') / len(cal)
     margin = np.divide(d2 - d1, d2, out=np.zeros(len(d2)), where=d2 > 0)
+    if d.shape[1] == 1:
+        margin[:] = np.nan
     return dict(nearest_distance=d1, second_distance=d2, margin=margin,
                 novelty_percentile=percentile, ood=percentile >= threshold)
 
