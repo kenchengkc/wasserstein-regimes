@@ -1,0 +1,78 @@
+{
+  "blas_threads": 1,
+  "implementations": {
+    "broadcast_numpy": {
+      "max_absolute_error": 2.220446049250313e-16,
+      "median_seconds": 0.00047529186122119427,
+      "peak_tracemalloc_bytes": 5172536,
+      "seconds": [
+        0.000505165895447135,
+        0.00047529186122119427,
+        0.00047450000420212746
+      ]
+    },
+    "chunked_numpy": {
+      "max_absolute_error": 2.220446049250313e-16,
+      "median_seconds": 0.0005864161066710949,
+      "peak_tracemalloc_bytes": 338760,
+      "seconds": [
+        0.0005924999713897705,
+        0.0005811671726405621,
+        0.0005864161066710949
+      ]
+    },
+    "matrix_product_blas": {
+      "max_absolute_error": 2.0261570199409107e-15,
+      "median_seconds": 9.208405390381813e-05,
+      "peak_tracemalloc_bytes": 1168848,
+      "seconds": [
+        9.208405390381813e-05,
+        9.070802479982376e-05,
+        9.516696445643902e-05
+      ]
+    },
+    "naive_scalar_python": {
+      "max_absolute_error": 0.0,
+      "median_seconds": 0.04447562503628433,
+      "peak_tracemalloc_bytes": 80965,
+      "seconds": [
+        0.043611041037365794,
+        0.04495295789092779,
+        0.04447562503628433
+      ]
+    }
+  },
+  "machine": {
+    "blas": "accelerate",
+    "cpu": "Apple M5",
+    "logical_cpus": 10,
+    "platform": "macOS-26.4-arm64-arm-64bit",
+    "ram_bytes": 25769803776,
+    "threadpools": [
+      {
+        "filepath": "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sklearn/.dylibs/libomp.dylib",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libomp",
+        "user_api": "openmp",
+        "version": null
+      }
+    ]
+  },
+  "matrix": {
+    "dtype": "float64",
+    "k": 5,
+    "length": 63,
+    "n": 2000,
+    "sorted": true
+  },
+  "memory_note": "tracemalloc peak Python-traced allocations, not process RSS",
+  "repeats": 3,
+  "single_thread_control": {
+    "accelerate_env": "1",
+    "threadpoolctl_requested": 1,
+    "threadpoolctl_visibility": true
+  },
+  "timing_tracemalloc_active": false,
+  "warmup": true
+}

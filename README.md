@@ -1,79 +1,58 @@
 # Wasserstein Regimes
 
-Market regime research by clustering **entire empirical return distributions** using optimal transport.
+**Question:** What market-state information is lost when a return window is compressed into volatility or a few moments?
 
-Each observation is a rolling window of returns. Sorting its returns preserves the full empirical marginal distribution, including asymmetry, tails, and multimodality. Wasserstein clustering compares these distributions and represents each cluster by a distributional centroid.
+**Measured result:** In the frozen SPY study, **97.87% of raw-W2 centroid separation is scale**. Strict holdout assignments agree closely with volatility-only clustering (**ARI 0.990**). Full distributions separate exact matched-four-moment synthetic laws, but this study does not establish added predictive value from shape.
 
-Motivated by Horvath, Issa, and Muguruza, [Clustering Market Regimes using the Wasserstein Distance](https://arxiv.org/abs/2110.11848v1) (2021). This is an independent project, not the authors' implementation.
+![What drives W2 separation](docs/assets/components.png)
 
-## Project status
+Rolling returns → empirical distributions → Wasserstein geometry → distributional k-means → chronological regime assignments.
 
-**Design and implementation plan, with a tested mathematical reference implementation.** The repository currently contains exact equal-size empirical W1/W2 distances, corresponding median/mean centroids, a small Lloyd clustering implementation, rolling windows, and an offline synthetic example. Market-data adapters, walk-forward evaluation, reports, and multivariate methods are planned, not implemented. No empirical performance or paper replication is claimed.
+Exact one-dimensional W2 clustering of equal-size empirical distributions is Euclidean k-means over **all order statistics**, rather than selected moments. W2 uses mean quantile barycenters; W1 uses median barycenters. Sorting intentionally discards within-window temporal order.
 
-## Read the plan
+## Completed research release
 
-| Document | Contents |
-| --- | --- |
-| [Design](docs/design.md) | Mathematical specification, architecture, interfaces, temporal controls, multivariate roadmap |
-| [Paper review](docs/paper-review.md) | Experiment settings, evidence, ambiguities, explicit reproduction decisions |
-| [Data sourcing](docs/data.md) | Verified providers, acquisition recipes, schemas, quality and licensing requirements |
-| [Implementation plan](docs/implementation-plan.md) | Sequenced milestones, acceptance criteria, experiments, resource estimates, release gates |
+- Frozen daily SPY snapshot, five development folds and a fixed 2024–August 2026 holdout.
+- Raw W2, W1 and shape-only W2; volatility, mean/volatility, moments, rich features, GMM and causal HMM baselines.
+- Exact location/scale/shape decomposition, seed/block/refit stability, overlap-null persistence, validation-calibrated novelty and evaluation-only future outcomes.
+- Five synthetic controls, window-length power/delay studies, measured kernels, immutable artifacts and saved-artifact HTML reports.
+- 142 tests, including independent numerical oracles and a full price-prefix leakage regression.
 
-## Mathematical contract
+Read the [measured results](docs/research-results.md), [reproduction workflow](docs/research-workflow.md), [data sourcing](docs/data.md), [paper review](docs/paper-review.md), [design](docs/design.md) and [future implementation roadmap](docs/implementation-plan.md). Aggregate evidence is saved in [results](results/).
 
-For sorted equal-length return vectors `x` and `y` with `w` entries:
-
-```text
-W1(x, y)   = mean(abs(x - y))
-W2(x, y)^2 = mean((x - y)^2)
-```
-
-The W1 objective uses coordinate-wise **medians**. The squared W2 objective uses coordinate-wise **means**. W2 clustering is equivalent to Euclidean k-means on the full sorted vectors, up to a constant factor in the objective. This is distributional clustering even though the implementation uses arrays: the array contains every order statistic, not just selected moments.
-
-These empirical marginal distributions do not retain the temporal order of returns within a window. A cluster describes observed behavior; it does not automatically predict a future regime or imply a trading strategy.
-
-## Run the reference example
-
-Python 3.11 or newer:
+## Run
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev]'
+python -m pip install -r requirements-research.txt
+python -m pip install -e '.[research,dev,data]'
+export VECLIB_MAXIMUM_THREADS=1
 python -m pytest
-python examples/synthetic.py
+regimes run --config configs/spy_daily_w2.yaml --stage development
+regimes run --config configs/spy_daily_w2.yaml --stage holdout
+regimes report --run RUN_ID
 ```
 
-The example uses no external data or credentials. It prints cluster membership counts and centroids' standard deviations for a synthetic variance-switching process. It fits retrospectively and is a mathematical smoke test, not an out-of-sample benchmark.
+The frozen CSV is deliberately excluded. A new download may differ because adjusted history is revised; follow the workflow before claiming an exact reproduction. `run` includes synthetic controls and the numerical benchmark. `report` never refits models.
 
-## Recommended first experiment
+```python
+from wasserstein_regimes import WassersteinKMeans
 
-Use daily SPY distribution windows of 63 returns, stride 5, and compare W1 with squared W2 for `k=2..6`. Select settings within chronological training/validation folds, then lock them before final evaluation. Include volatility-only, moment-feature, and filtered Gaussian HMM baselines. The daily experiment is a proposed extension; the paper uses hourly SPY data with 35-return windows and 28-return overlap.
-
-Use the [data guide](docs/data.md) for provider choices. Keep source data and credentials outside version control. Software licensing does not grant rights to redistribute third-party market data.
-
-## Documentation deployment
-
-Vercel serves the documentation as a static site. The root `vercel.json` selects
-the **Other** framework preset (`framework: null`), installs the separate docs
-dependencies, runs a strict MkDocs build, and publishes `site/`. Keep the Vercel
-project root at the repository root so these settings are read.
-
-The Python package is a research library, so it does not define an ASGI/WSGI
-entrypoint. Selecting the Python framework preset without this configuration
-causes the "No python entrypoint found" error. A future inference API should be
-configured as a separate application with an actual HTTP entrypoint.
-
-Build and preview the documentation locally:
-
-```bash
-python -m pip install -r requirements-docs.txt
-python -m mkdocs build --strict
-python -m mkdocs serve
+model = WassersteinKMeans(metric="w2", n_clusters=3, n_init=20, random_state=42)
+model.fit(train_windows)
+labels = model.predict(test_windows)
+distances = model.transform(test_windows)  # true W2 distances
 ```
 
-The documentation build does not run clustering or download market data.
+The base estimator remains NumPy-only. Research commands require the `research` extra. Multivariate OT, live inference and trading remain outside this release.
 
-## License
+## Paper and license
 
-Original project code and documentation are licensed under **GNU GPL version 3 only**, SPDX identifier `GPL-3.0-only`. See [LICENSE](LICENSE). Third-party papers and datasets retain their own terms and are not included.
+Motivated by Horvath, Issa and Muguruza, [Clustering Market Regimes using the Wasserstein Distance](https://arxiv.org/abs/2110.11848v1). This is an independent empirical study, not a claim to reproduce the paper's hourly experiment.
+
+Original code and documentation are **GNU GPL v3 only** (`GPL-3.0-only`); see [LICENSE](LICENSE). Third-party data and papers retain their own terms.
+
+## Static documentation deployment
+
+Vercel serves MkDocs output with `framework: null`, `requirements-docs.txt`, and output directory `site/`. The research package needs no HTTP entrypoint. Build with `python -m mkdocs build --strict`; the documentation build neither downloads data nor runs research.
