@@ -17,7 +17,8 @@ def test_moment_features_are_finite_for_constant_windows():
     features = feature_matrix([[2.0, 2.0, 2.0], [0.0, 1.0, 2.0]], kind="moments")
 
     np.testing.assert_allclose(features[0], [2.0, 0.0, 0.0, 0.0])
-    np.testing.assert_allclose(features[1], [1.0, np.sqrt(2.0 / 3.0), 0.0, -1.5])
+    # A symmetric third moment can retain machine-roundoff on another NumPy backend.
+    np.testing.assert_allclose(features[1], [1.0, np.sqrt(2.0 / 3.0), 0.0, -1.5], atol=1e-15)
     assert np.isfinite(features).all()
 
 
