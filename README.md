@@ -1,5 +1,9 @@
 # Wasserstein Regimes
 
+**Market-regime research using optimal transport on full empirical return distributions.**
+
+Instead of representing each rolling market window with a few summary statistics, this project treats the entire empirical return distribution as the observation. Windows are compared with Wasserstein distance and clustered around distributional centroids.
+
 **Question:** What market-state information is lost when a return window is compressed into volatility or a few moments?
 
 **Measured result:** In the frozen SPY study, **97.87% of raw-W2 centroid separation is scale**. Strict holdout assignments agree closely with volatility-only clustering (**ARI 0.990**). Full distributions separate exact matched-four-moment synthetic laws, but this study does not establish added predictive value from shape.
@@ -9,6 +13,17 @@
 Rolling returns → empirical distributions → Wasserstein geometry → distributional k-means → chronological regime assignments.
 
 Exact one-dimensional W2 clustering of equal-size empirical distributions is Euclidean k-means over **all order statistics**, rather than selected moments. W2 uses mean quantile barycenters; W1 uses median barycenters. Sorting intentionally discards within-window temporal order.
+
+## Why this is interesting
+
+Moment-based representations can discard differences in skew, tails and multimodality. For equal-length sorted samples `x` and `y`:
+
+```text
+W1(x, y)   = mean(abs(x - y))
+W2(x, y)^2 = mean((x - y)^2)
+```
+
+A discovered cluster describes observed return distributions. It does not automatically imply persistence, predict the next regime or define a trading strategy.
 
 ## Completed research release
 
@@ -20,7 +35,25 @@ Exact one-dimensional W2 clustering of equal-size empirical distributions is Euc
 
 Read the [measured results](docs/research-results.md), [reproduction workflow](docs/research-workflow.md), [data sourcing](docs/data.md), [paper review](docs/paper-review.md), [design](docs/design.md) and [future implementation roadmap](docs/implementation-plan.md). Aggregate evidence is saved in [results](results/).
 
+## Repository structure
+
+```text
+wasserstein-regimes/
+├── src/wasserstein_regimes/  # transport, clustering, data, evaluation and reporting
+├── tests/                   # numerical, temporal and artifact verification
+├── configs/                 # frozen empirical specifications
+├── results/                 # measured aggregate evidence
+├── examples/                # offline mathematical smoke example
+├── benchmarks/              # transport benchmark entry point
+├── scripts/                 # immutable snapshot acquisition
+├── docs/                    # results, reproduction, design and paper review
+├── mkdocs.yml
+└── pyproject.toml
+```
+
 ## Run
+
+Requires Python 3.11+.
 
 ```bash
 python3 -m venv .venv
@@ -56,3 +89,15 @@ Original code and documentation are **GNU GPL v3 only** (`GPL-3.0-only`); see [L
 ## Static documentation deployment
 
 Vercel serves MkDocs output with `framework: null`, `requirements-docs.txt`, and output directory `site/`. The research package needs no HTTP entrypoint. Build with `python -m mkdocs build --strict`; the documentation build neither downloads data nor runs research.
+
+Preview the documentation locally:
+
+```bash
+python -m pip install -r requirements-docs.txt
+python -m mkdocs build --strict
+python -m mkdocs serve
+```
+
+For a small offline mathematical smoke test, run `python examples/synthetic.py`.
+It fits a synthetic variance-switching process retrospectively; the completed
+chronological experiments are described in the research results above.
