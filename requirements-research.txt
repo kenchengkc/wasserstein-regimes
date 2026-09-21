@@ -1,0 +1,15 @@
+# Tested direct dependencies for the first study (Python 3.11).
+# Transitive dependencies are resolved by pip; this is not a platform lockfile.
+numpy==2.4.1
+scipy==1.17.0
+scikit-learn==1.8.0
+pandas==3.0.2
+pyarrow==25.0.0
+exchange-calendars==4.13.2
+hmmlearn==0.3.3
+matplotlib==3.10.8
+PyYAML==6.0.3
+threadpoolctl==3.6.0
+pytest==9.0.0
+hypothesis==6.168.0
+yfinance==1.7.0

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wasserstein-regimes"
-version = "0.1.0"
+version = "0.2.0"
 description = "Distributional market regime research using exact one-dimensional Wasserstein clustering"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -12,7 +12,12 @@ license = {file = "LICENSE"}
 dependencies = ["numpy>=1.26,<3"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8,<10", "scipy>=1.11,<2"]
+dev = ["pytest>=8,<10", "scipy>=1.11,<2", "hypothesis>=6,<7"]
+research = ["scipy>=1.11,<2", "scikit-learn>=1.4,<2", "pandas>=2.2,<4", "pyarrow>=15,<26", "exchange-calendars>=4.5,<5", "hmmlearn>=0.3.3,<0.4", "matplotlib>=3.8,<4", "PyYAML>=6,<7", "threadpoolctl>=3,<4"]
+data = ["yfinance>=1,<2"]
+
+[project.scripts]
+regimes = "wasserstein_regimes.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

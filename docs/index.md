@@ -1,51 +1,58 @@
 # Wasserstein Regimes
 
-Discover recurring market conditions by clustering **entire empirical return distributions** with optimal transport.
+**Question:** What market-state information is lost when a return window is compressed into volatility or a few moments?
 
-Each observation is a rolling window of returns. Its sorted values retain the full empirical marginal distribution, including asymmetry, tails, and multimodality. Wasserstein clustering compares these distributions and represents each cluster with a distributional centroid.
+**Measured result:** In the frozen SPY study, **97.87% of raw-W2 centroid separation is scale**. Strict holdout assignments agree closely with volatility-only clustering (**ARI 0.990**). Full distributions separate exact matched-four-moment synthetic laws, but this study does not establish added predictive value from shape.
 
-## Explore the project
+![What drives W2 separation](assets/components.png)
 
-| Guide | What you will find |
-| --- | --- |
-| [System design](design.md) | Mathematical specification, package architecture, temporal controls, and multivariate extensions |
-| [Data sourcing](data.md) | Provider comparisons, acquisition recipes, canonical schemas, and data-quality rules |
-| [Implementation plan](implementation-plan.md) | Sequenced milestones, experiments, acceptance criteria, and resource estimates |
-| [Paper review](paper-review.md) | The motivating experiments, mathematical ambiguities, and reproduction decisions |
+Rolling returns → empirical distributions → Wasserstein geometry → distributional k-means → chronological regime assignments.
 
-## The mathematical foundation
+Exact one-dimensional W2 clustering of equal-size empirical distributions is Euclidean k-means over **all order statistics**, rather than selected moments. W2 uses mean quantile barycenters; W1 uses median barycenters. Sorting intentionally discards within-window temporal order.
 
-For sorted equal-length samples `x` and `y`:
+## Completed research release
 
-```text
-W1(x, y)   = mean(abs(x - y))
-W2(x, y)^2 = mean((x - y)^2)
-```
+- Frozen daily SPY snapshot, five development folds and a fixed 2024–August 2026 holdout.
+- Raw W2, W1 and shape-only W2; volatility, mean/volatility, moments, rich features, GMM and causal HMM baselines.
+- Exact location/scale/shape decomposition, seed/block/refit stability, overlap-null persistence, validation-calibrated novelty and evaluation-only future outcomes.
+- Five synthetic controls, window-length power/delay studies, measured kernels, immutable artifacts and saved-artifact HTML reports.
+- 142 tests, including independent numerical oracles and a full price-prefix leakage regression.
 
-The W1 objective uses coordinate-wise median centroids. The squared W2 objective uses coordinate-wise mean centroids. Each sample contains every observed return in the window, rather than a handful of summary statistics.
+Read the [measured results](research-results.md), [reproduction workflow](research-workflow.md), [data sourcing](data.md), [paper review](paper-review.md), [design](design.md) and [future implementation roadmap](implementation-plan.md). Aggregate evidence is saved in [results](https://github.com/kenchengkc/wasserstein-regimes/tree/feat/distributional-evidence/results).
 
-Sorting discards the temporal order within each window. These models describe empirical marginal distributions; joint dependence and return ordering require the extensions described in the design.
-
-## Current status
-
-The repository provides a design and implementation plan, a tested mathematical reference implementation, and an offline synthetic example. Market-data ingestion, walk-forward evaluation, and the full research reporting pipeline remain planned. This site publishes the documentation; it does not run market inference or accept uploaded data.
-
-## Run the reference example locally
-
-After cloning the repository, use Python 3.11 or newer:
+## Run
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev]'
+python -m pip install -r requirements-research.txt
+python -m pip install -e '.[research,dev,data]'
+export VECLIB_MAXIMUM_THREADS=1
 python -m pytest
-python examples/synthetic.py
+regimes run --config configs/spy_daily_w2.yaml --stage development
+regimes run --config configs/spy_daily_w2.yaml --stage holdout
+regimes report --run RUN_ID
 ```
 
-The example uses artificial returns and requires no credentials. It fits retrospectively and makes no out-of-sample performance claim.
+The frozen CSV is deliberately excluded. A new download may differ because adjusted history is revised; follow the workflow before claiming an exact reproduction. `run` includes synthetic controls and the numerical benchmark. `report` never refits models.
 
-## Research and license
+```python
+from wasserstein_regimes import WassersteinKMeans
 
-Motivated by Horvath, Issa, and Muguruza, [Clustering Market Regimes using the Wasserstein Distance](https://arxiv.org/abs/2110.11848v1) (2021). This is an independent implementation.
+model = WassersteinKMeans(metric="w2", n_clusters=3, n_init=20, random_state=42)
+model.fit(train_windows)
+labels = model.predict(test_windows)
+distances = model.transform(test_windows)  # true W2 distances
+```
 
-Original project code and documentation are licensed under [GNU GPL version 3 only](https://github.com/kenchengkc/wasserstein-regimes/blob/main/LICENSE). Third-party papers and market datasets retain their own terms. Repository links require access while the repository is private.
+The base estimator remains NumPy-only. Research commands require the `research` extra. Multivariate OT, live inference and trading remain outside this release.
+
+## Paper and license
+
+Motivated by Horvath, Issa and Muguruza, [Clustering Market Regimes using the Wasserstein Distance](https://arxiv.org/abs/2110.11848v1). This is an independent empirical study, not a claim to reproduce the paper's hourly experiment.
+
+Original code and documentation are **GNU GPL v3 only** (`GPL-3.0-only`); see [LICENSE](https://github.com/kenchengkc/wasserstein-regimes/blob/main/LICENSE). Third-party data and papers retain their own terms.
+
+## Static documentation deployment
+
+Vercel serves MkDocs output with `framework: null`, `requirements-docs.txt`, and output directory `site/`. The research package needs no HTTP entrypoint. Build with `python -m mkdocs build --strict`; the documentation build neither downloads data nor runs research.
