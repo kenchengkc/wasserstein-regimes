@@ -1,0 +1,6 @@
+assets:
+  QQQ: configs/cross_asset/qqq_daily_w2.yaml
+  TLT: configs/cross_asset/tlt_daily_w2.yaml
+  GLD: configs/cross_asset/gld_daily_w2.yaml
+  HYG: configs/cross_asset/hyg_daily_w2.yaml
+reference_holdout: results/holdout-summary.json
