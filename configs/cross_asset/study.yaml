@@ -4,3 +4,4 @@ assets:
   GLD: configs/cross_asset/gld_daily_w2.yaml
   HYG: configs/cross_asset/hyg_daily_w2.yaml
 reference_holdout: results/holdout-summary.json
+reference_config: configs/spy_daily_w2.yaml

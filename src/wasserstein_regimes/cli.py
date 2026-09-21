@@ -16,10 +16,17 @@ def main():
     synth=sub.add_parser('synthetic',help='Run synthetic controls')
     synth.add_argument('--config',required=True)
     synth.add_argument('--output',default='artifacts/synthetic-standalone.json')
+    cross=sub.add_parser('cross-asset',help='Run the frozen independent-asset replication')
+    cross.add_argument('--config',required=True)
+    cross.add_argument('--stage',choices=['all','development','holdout'],default='all')
+    cross.add_argument('--output-root',default='artifacts')
     args=parser.parse_args()
     if args.command=='run':
         from .experiments import run
         print(run(args.config,output_root=args.output_root,stage=args.stage))
+    elif args.command=='cross-asset':
+        from .cross_asset import run_cross_asset
+        print(run_cross_asset(args.config,output_root=args.output_root,stage=args.stage))
     elif args.command=='report':
         from .reporting import report
         path=Path(args.run)
