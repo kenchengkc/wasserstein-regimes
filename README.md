@@ -14,6 +14,8 @@ Rolling returns → empirical distributions → Wasserstein geometry → distrib
 
 Exact one-dimensional W2 clustering of equal-size empirical distributions is Euclidean k-means over **all order statistics**, rather than selected moments. W2 uses mean quantile barycenters; W1 uses median barycenters. Sorting intentionally discards within-window temporal order.
 
+**Cross-asset replication:** QQQ, TLT, GLD and HYG show 95.27–97.53% scale contribution to raw centroid separation. Shape stability is mixed; TLT and HYG occupy only one raw holdout state. Read the [cross-asset results](docs/cross-asset-results.md).
+
 ## Why this is interesting
 
 Moment-based representations can discard differences in skew, tails and multimodality. For equal-length sorted samples `x` and `y`:
