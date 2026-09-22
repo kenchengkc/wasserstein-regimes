@@ -81,6 +81,15 @@ def refit_history(development, holdout):
     return rows
 
 
+def acquisition_metadata(config):
+    source = Path(config['dataset'])
+    metadata = json.loads(source.with_suffix('.json').read_text())
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()
+    if metadata.get('symbol') != config['symbol'] or metadata.get('sha256') != digest or digest != config['dataset_sha256']:
+        raise ValueError('Acquisition metadata does not match frozen snapshot')
+    return metadata
+
+
 def summarize_asset(symbol, development, holdout):
     paths = dict(development=Path(development),holdout=Path(holdout))
     configs, metrics, manifests = {}, {}, {}
@@ -108,7 +117,7 @@ def summarize_asset(symbol, development, holdout):
                                 raw_vs_volatility_ari=fold['ari_against_raw_w2']['volatility'],
                                 shape_occupancy=fold['models']['shape_w2']['strict']['occupancy'],
                                 raw_occupancy=fold['models']['w2']['strict']['occupancy']))
-    row=dict(symbol=symbol,k=latest['k'],strict_windows=raw['n'],
+    row=dict(symbol=symbol,acquisition=acquisition_metadata(configs['holdout']),k=latest['k'],strict_windows=raw['n'],
              training_start=manifests['holdout']['training_period'][0],
              raw_centroid_decomposition=raw['centroid_decomposition'],
              raw_vs_volatility_ari=latest['ari_against_raw_w2']['volatility'],
@@ -168,7 +177,7 @@ def render_comparison(summary, output):
     return output/'report.html'
 
 
-def run_cross_asset(config_path, *, output_root='artifacts', stage='all'):
+def run_cross_asset(config_path, *, output_root='artifacts', stage='development'):
     """Execute all development studies before opening any new holdout."""
     specification=yaml.safe_load(Path(config_path).read_text())
     configs={symbol:yaml.safe_load(Path(path).read_text()) for symbol,path in specification['assets'].items()}
@@ -205,7 +214,7 @@ def run_cross_asset(config_path, *, output_root='artifacts', stage='all'):
     if any('development' not in paths or 'holdout' not in paths for paths in selected.values()):
         raise ValueError('Both development and holdout artifacts are required for comparison')
     rows=[summarize_asset(symbol,paths['development'],paths['holdout']) for symbol,paths in selected.items()]
-    identity=artifact_id(configs,{r['symbol']:r['runs'] for r in rows})
+    identity=artifact_id(configs,{r['symbol']:dict(runs=r['runs'],acquisition=r['acquisition']) for r in rows})
     reference_path=specification.get('reference_holdout')
     reference=json.loads(Path(reference_path).read_text()) if reference_path else None
     summary=dict(study_id=identity,assets=rows,protocol=specification,spy_reference=reference,

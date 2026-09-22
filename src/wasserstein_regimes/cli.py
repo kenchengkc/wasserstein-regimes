@@ -18,7 +18,7 @@ def main():
     synth.add_argument('--output',default='artifacts/synthetic-standalone.json')
     cross=sub.add_parser('cross-asset',help='Run the frozen independent-asset replication')
     cross.add_argument('--config',required=True)
-    cross.add_argument('--stage',choices=['all','development','holdout'],default='all')
+    cross.add_argument('--stage',choices=['all','development','holdout'],default='development')
     cross.add_argument('--output-root',default='artifacts')
     args=parser.parse_args()
     if args.command=='run':

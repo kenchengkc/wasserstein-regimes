@@ -17,3 +17,5 @@ site/
 .vercel/
 .venv-docs/
 .hypothesis/
+
+.venv
