@@ -1,0 +1,3682 @@
+{
+  "config": {
+    "bootstrap_block_length": 126,
+    "bootstrap_repeats": 20,
+    "data_cutoff": "2026-08-31",
+    "dataset": "data/raw/TLT_daily_2026-08-31.csv",
+    "dataset_sha256": "a953d148eb8c1e766bcbffb317e7b7656a37f706e1f4a6474bfae138fc21ebb9",
+    "development_years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "fit_stride": 5,
+    "fit_strides": [
+      1,
+      5,
+      21,
+      63
+    ],
+    "holdout_start": "2024-01-01",
+    "horizon": 21,
+    "k_candidates": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "metric": "w2",
+    "models": [
+      "w2",
+      "w1",
+      "shape_w2",
+      "volatility",
+      "mean_vol",
+      "moments",
+      "rich",
+      "gmm",
+      "hmm"
+    ],
+    "n_init": 20,
+    "novelty_threshold": 0.99,
+    "null_repeats": 20,
+    "price_column": "Adj Close",
+    "provider": "Yahoo Finance via yfinance",
+    "schema_version": 1,
+    "score_stride": 1,
+    "seed": 42,
+    "seed_repeats": 5,
+    "selection": "validation_silhouette_w2",
+    "stage": "holdout",
+    "symbol": "TLT",
+    "synthetic_n_init": 5,
+    "synthetic_repeats": 10,
+    "validation_years": 3,
+    "window_length": 63,
+    "window_lengths": [
+      21,
+      63,
+      126,
+      252
+    ]
+  },
+  "manifest": {
+    "data_cutoff": "2026-08-31",
+    "dataset_sha256": "a953d148eb8c1e766bcbffb317e7b7656a37f706e1f4a6474bfae138fc21ebb9",
+    "dependency_versions": {
+      "PyYAML": "6.0.3",
+      "exchange-calendars": "4.13.2",
+      "hmmlearn": "0.3.3",
+      "matplotlib": "3.10.8",
+      "numpy": "2.4.1",
+      "pandas": "3.0.2",
+      "pyarrow": "25.0.0",
+      "scikit-learn": "1.8.0",
+      "scipy": "1.17.0",
+      "threadpoolctl": "3.6.0"
+    },
+    "dirty_worktree_hash": "fe57464135da9d7cd7f3f06a60166a28409ae6bf9109c909a2cbffeed18dcd8c",
+    "execution_environment": {
+      "accelerate_thread_limit": "1",
+      "platform": "macOS-26.4-arm64-arm-64bit",
+      "python": "3.11.5",
+      "threadpoolctl_requested": 1
+    },
+    "fit_stride": 5,
+    "git_sha": "e6c2a150721e15d691a7a8ecd2fb9671b3441851",
+    "k": [
+      2
+    ],
+    "metric": "w2",
+    "point_in_time": false,
+    "provider": "Yahoo Finance via yfinance",
+    "quality": {
+      "assumed_availability_lag_minutes": 1,
+      "calendar": "XNYS",
+      "expected_session_count": 6061,
+      "invalid_return_count": 0,
+      "missing_session_count": 0,
+      "observed_price_count": 6061,
+      "point_in_time_verified": false
+    },
+    "return_basis": "adjusted_close",
+    "run_id": "4a1ea5c823e12a564f10",
+    "score_stride": 1,
+    "seed": 42,
+    "split_boundaries": [
+      {
+        "test_end": "2026-08-31",
+        "train_end": "2020-12-31",
+        "validation_end": "2023-12-31"
+      }
+    ],
+    "test_period": [
+      "2023-12-31",
+      "2026-08-31"
+    ],
+    "training_period": [
+      "2002-07-31",
+      "2020-12-31"
+    ],
+    "validation_period": [
+      "2020-12-31",
+      "2023-12-31"
+    ],
+    "window_length": 63
+  },
+  "metrics": {
+    "folds": [
+      {
+        "ari_against_raw_w2": {
+          "gmm": 0.0,
+          "hmm": 0.0,
+          "mean_vol": 1.0,
+          "moments": 1.0,
+          "rich": 0.0,
+          "shape_w2": 0.0,
+          "volatility": 1.0,
+          "w1": 0.0,
+          "w2": 1.0
+        },
+        "boundaries": {
+          "test_end": "2026-08-31",
+          "train_end": "2020-12-31",
+          "validation_end": "2023-12-31"
+        },
+        "k": 2,
+        "models": {
+          "gmm": {
+            "converged": null,
+            "distance_geometry": "w2",
+            "effective_clusters": 2,
+            "operational": {
+              "assignment_decomposition": {
+                "location": 0.12244893458860273,
+                "scale": 0.5431697434810125,
+                "shape": 0.3343813219303847
+              },
+              "between_centroid_w2_mean": 0.0042001086730779034,
+              "centroid_decomposition": {
+                "location": 0.00021255997627319078,
+                "scale": 0.9299280869203348,
+                "shape": 0.06985935310339213
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.13062746449703072,
+                    "scale": 0.3893834345523306,
+                    "shape": 0.4799891009506387
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.08309243576707058,
+                      0.12657463872142302
+                    ],
+                    "mean": 0.10640080298304866,
+                    "n": 98
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.032628429125158454,
+                      0.05718692654197017
+                    ],
+                    "mean": 0.0443058471324669,
+                    "n": 98
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.03273003747702348,
+                      0.0024016203994254148
+                    ],
+                    "mean": -0.012922741624715081,
+                    "n": 98
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.11787757721333786,
+                      0.15588663616308118
+                    ],
+                    "mean": 0.13764193055837826,
+                    "n": 98
+                  },
+                  "n": 98,
+                  "occupancy": 0.1467065868263473,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.11931260364950678,
+                    "scale": 0.6021442491810352,
+                    "shape": 0.27854314716945816
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07062273605082785,
+                      0.09355210489337953
+                    ],
+                    "mean": 0.08174137036485676,
+                    "n": 549
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.027951060707189876,
+                      0.03840694228958152
+                    ],
+                    "mean": 0.033095094855857134,
+                    "n": 549
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.005329948830040534,
+                      0.009950194701702796
+                    ],
+                    "mean": 0.0008832996371270863,
+                    "n": 549
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.10007433839473141,
+                      0.12772239636983115
+                    ],
+                    "mean": 0.11382772746542394,
+                    "n": 549
+                  },
+                  "n": 570,
+                  "occupancy": 0.8532934131736527,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": 0.035729526376001054,
+                "between_pairs": 3,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.011598626311740277,
+                "within_pairs": 7
+              },
+              "n": 668,
+              "occupancy": [
+                0.1467065868263473,
+                0.8532934131736527
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 667,
+                "dwell_times": [
+                  23,
+                  166,
+                  2,
+                  3,
+                  8,
+                  2,
+                  6,
+                  22,
+                  1,
+                  3,
+                  9,
+                  74,
+                  15,
+                  3,
+                  1,
+                  4,
+                  5,
+                  1,
+                  17,
+                  3,
+                  11,
+                  289
+                ],
+                "mean_dwell": 30.363636363636363,
+                "median_dwell": 5.5,
+                "switching_frequency": 0.031484257871064465,
+                "transitions": [
+                  [
+                    87,
+                    11
+                  ],
+                  [
+                    10,
+                    559
+                  ]
+                ]
+              },
+              "within_w2": 0.002173132000481327
+            },
+            "shape_standardized": false,
+            "strict": {
+              "assignment_decomposition": {
+                "location": 0.11918213191077849,
+                "scale": 0.5435176707195023,
+                "shape": 0.3373001973697192
+              },
+              "between_centroid_w2_mean": 0.0042001086730779034,
+              "centroid_decomposition": {
+                "location": 0.00021255997627319078,
+                "scale": 0.9299280869203348,
+                "shape": 0.06985935310339213
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.08353679152171607,
+                    "scale": 0.4899488502461267,
+                    "shape": 0.42651435823215716
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.08480382804290712,
+                      0.1292765931388809
+                    ],
+                    "mean": 0.09915889583031158,
+                    "n": 75
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.033328050777511886,
+                      0.053070475033405916
+                    ],
+                    "mean": 0.04106810646971939,
+                    "n": 75
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.03442949164138246,
+                      4.112526893602816e-05
+                    ],
+                    "mean": -0.012092118092679568,
+                    "n": 75
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.11873245473485672,
+                      0.15641298253673197
+                    ],
+                    "mean": 0.12906503353514615,
+                    "n": 75
+                  },
+                  "n": 75,
+                  "occupancy": 0.12396694214876033,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.13117678796561397,
+                    "scale": 0.5615435773268784,
+                    "shape": 0.3072796347075076
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.06780855782178026,
+                      0.08961150617505326
+                    ],
+                    "mean": 0.0801915319194498,
+                    "n": 509
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.026629553286877918,
+                      0.037692887683724495
+                    ],
+                    "mean": 0.03220568248590625,
+                    "n": 509
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.00415492864029566,
+                      0.010605608421201488
+                    ],
+                    "mean": 0.0025009597118628027,
+                    "n": 509
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.09684547963213616,
+                      0.12513722292691185
+                    ],
+                    "mean": 0.11291725311920435,
+                    "n": 509
+                  },
+                  "n": 530,
+                  "occupancy": 0.8760330578512396,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": 0.009989778979477393,
+                "between_pairs": 2,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.011998779797190138,
+                "within_pairs": 7
+              },
+              "n": 605,
+              "occupancy": [
+                0.12396694214876033,
+                0.8760330578512396
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 604,
+                "dwell_times": [
+                  126,
+                  2,
+                  3,
+                  8,
+                  2,
+                  6,
+                  22,
+                  1,
+                  3,
+                  9,
+                  74,
+                  15,
+                  3,
+                  1,
+                  4,
+                  5,
+                  1,
+                  17,
+                  3,
+                  11,
+                  289
+                ],
+                "mean_dwell": 28.80952380952381,
+                "median_dwell": 5.0,
+                "switching_frequency": 0.033112582781456956,
+                "transitions": [
+                  [
+                    65,
+                    10
+                  ],
+                  [
+                    10,
+                    519
+                  ]
+                ]
+              },
+              "within_w2": 0.0020667825098574857
+            }
+          },
+          "hmm": {
+            "converged": true,
+            "distance_geometry": "w2",
+            "effective_clusters": 2,
+            "operational": {
+              "assignment_decomposition": {
+                "location": 0.09447240373092385,
+                "scale": 0.6831870991728739,
+                "shape": 0.22234049709620216
+              },
+              "between_centroid_w2_mean": 0.0062995183967396815,
+              "centroid_decomposition": {
+                "location": 0.0011081681688818244,
+                "scale": 0.9988918318311182,
+                "shape": 0.0
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.10600983531412571,
+                    "scale": 0.6736859113369995,
+                    "shape": 0.2203042533488748
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07172656050183031,
+                      0.09475942619658463
+                    ],
+                    "mean": 0.08295852756126629,
+                    "n": 523
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.027467822396763073,
+                      0.03867626996620393
+                    ],
+                    "mean": 0.033124120898933934,
+                    "n": 523
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.008257625486034335,
+                      0.006585017302752033
+                    ],
+                    "mean": -0.0016072068342501654,
+                    "n": 523
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.09826930623662697,
+                      0.12667767840708527
+                    ],
+                    "mean": 0.1137782490856954,
+                    "n": 523
+                  },
+                  "n": 544,
+                  "occupancy": 0.8143712574850299,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.0762658782395426,
+                    "scale": 0.6981803511184896,
+                    "shape": 0.22555377064196772
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.08690541984253869,
+                      0.10025610909668416
+                    ],
+                    "mean": 0.09609662183953928,
+                    "n": 124
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.0330676057565635,
+                      0.05317585543026082
+                    ],
+                    "mean": 0.04183278116697478,
+                    "n": 124
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.024124793176909843,
+                      0.02376215062726808
+                    ],
+                    "mean": 0.00047638706349620037,
+                    "n": 124
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.1230387205059183,
+                      0.13882799338646867
+                    ],
+                    "mean": 0.13285731694693645,
+                    "n": 124
+                  },
+                  "n": 124,
+                  "occupancy": 0.18562874251497005,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": 0.026448627725606542,
+                "between_pairs": 5,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.011227164936430478,
+                "within_pairs": 5
+              },
+              "n": 668,
+              "occupancy": [
+                0.8143712574850299,
+                0.18562874251497005
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 667,
+                "dwell_times": [
+                  8,
+                  1,
+                  6,
+                  6,
+                  14,
+                  1,
+                  1,
+                  31,
+                  9,
+                  32,
+                  10,
+                  2,
+                  1,
+                  1,
+                  15,
+                  9,
+                  11,
+                  56,
+                  10,
+                  3,
+                  8,
+                  1,
+                  1,
+                  2,
+                  3,
+                  1,
+                  5,
+                  44,
+                  1,
+                  23,
+                  21,
+                  331
+                ],
+                "mean_dwell": 20.875,
+                "median_dwell": 7.0,
+                "switching_frequency": 0.046476761619190406,
+                "transitions": [
+                  [
+                    528,
+                    15
+                  ],
+                  [
+                    16,
+                    108
+                  ]
+                ]
+              },
+              "within_w2": 0.002406414052196391
+            },
+            "shape_standardized": false,
+            "strict": {
+              "assignment_decomposition": {
+                "location": 0.08543772477428223,
+                "scale": 0.6801231767964455,
+                "shape": 0.23443909842927216
+              },
+              "between_centroid_w2_mean": 0.0062995183967396815,
+              "centroid_decomposition": {
+                "location": 0.0011081681688818244,
+                "scale": 0.9988918318311182,
+                "shape": 0.0
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.11451638604064414,
+                    "scale": 0.6321213637010599,
+                    "shape": 0.253362250258296
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.06814213806917031,
+                      0.0909660977416736
+                    ],
+                    "mean": 0.08058142107194288,
+                    "n": 489
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.026217131145587085,
+                      0.03742572162892494
+                    ],
+                    "mean": 0.031692344677549576,
+                    "n": 489
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.007188750168997436,
+                      0.007953236466727825
+                    ],
+                    "mean": 0.0003078796320354786,
+                    "n": 489
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.097545067938573,
+                      0.12473146078342111
+                    ],
+                    "mean": 0.11202952189094083,
+                    "n": 489
+                  },
+                  "n": 510,
+                  "occupancy": 0.8429752066115702,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.04372234559370237,
+                    "scale": 0.7489851445564858,
+                    "shape": 0.20729250984981187
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.08634447590278675,
+                      0.10243884022939695
+                    ],
+                    "mean": 0.09315886347466586,
+                    "n": 95
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.031960974023569254,
+                      0.05371101954582019
+                    ],
+                    "mean": 0.04184467182351046,
+                    "n": 95
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.027189000167830265,
+                      0.02993050946695478
+                    ],
+                    "mean": 0.002268699961282631,
+                    "n": 95
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.12118528897790558,
+                      0.13897644567992534
+                    ],
+                    "mean": 0.13023498050674648,
+                    "n": 95
+                  },
+                  "n": 95,
+                  "occupancy": 0.15702479338842976,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": 0.011796788598404495,
+                "between_pairs": 4,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.011356772429133554,
+                "within_pairs": 5
+              },
+              "n": 605,
+              "occupancy": [
+                0.8429752066115702,
+                0.15702479338842976
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 604,
+                "dwell_times": [
+                  5,
+                  9,
+                  32,
+                  10,
+                  2,
+                  1,
+                  1,
+                  15,
+                  9,
+                  11,
+                  56,
+                  10,
+                  3,
+                  8,
+                  1,
+                  1,
+                  2,
+                  3,
+                  1,
+                  5,
+                  44,
+                  1,
+                  23,
+                  21,
+                  331
+                ],
+                "mean_dwell": 24.2,
+                "median_dwell": 8.0,
+                "switching_frequency": 0.039735099337748346,
+                "transitions": [
+                  [
+                    497,
+                    12
+                  ],
+                  [
+                    12,
+                    83
+                  ]
+                ]
+              },
+              "within_w2": 0.0023184386961411733
+            }
+          },
+          "mean_vol": {
+            "converged": null,
+            "distance_geometry": "w2",
+            "effective_clusters": 2,
+            "operational": {
+              "assignment_decomposition": {
+                "location": 0.08697886900704528,
+                "scale": 0.6078805029491235,
+                "shape": 0.3051406280438311
+              },
+              "between_centroid_w2_mean": 0.009878043659398157,
+              "centroid_decomposition": {
+                "location": 0.0401883455197431,
+                "scale": 0.9344750042608467,
+                "shape": 0.025336650219410103
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.0032996996415831236,
+                    "scale": 0.6835600039172254,
+                    "shape": 0.31314029644119157
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.11862027605927145,
+                      0.1311001946041432
+                    ],
+                    "mean": 0.13001571761153918,
+                    "n": 23
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.05108829626283165,
+                      0.059665541496452035
+                    ],
+                    "mean": 0.05486369711968709,
+                    "n": 23
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.021785494629461333,
+                      -0.010269413651370525
+                    ],
+                    "mean": -0.015631296620483064,
+                    "n": 23
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.1438047035341913,
+                      0.16635498004030885
+                    ],
+                    "mean": 0.1656100730254395,
+                    "n": 23
+                  },
+                  "n": 23,
+                  "occupancy": 0.0344311377245509,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.10954221337064311,
+                    "scale": 0.5874741980759146,
+                    "shape": 0.30298358855344226
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07331747906930129,
+                      0.09439983956079208
+                    ],
+                    "mean": 0.08383482294483932,
+                    "n": 624
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.02906781345490204,
+                      0.039017942489303306
+                    ],
+                    "mean": 0.0340533895209848,
+                    "n": 624
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.007454963658588289,
+                      0.008902431538308865
+                    ],
+                    "mean": -0.0006762457630900596,
+                    "n": 624
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.10267394799310356,
+                      0.1276686046931441
+                    ],
+                    "mean": 0.11565913444495785,
+                    "n": 624
+                  },
+                  "n": 645,
+                  "occupancy": 0.9655688622754491,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": 0.08175745601970918,
+                "between_pairs": 1,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.011846834143386213,
+                "within_pairs": 9
+              },
+              "n": 668,
+              "occupancy": [
+                0.0344311377245509,
+                0.9655688622754491
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 667,
+                "dwell_times": [
+                  23,
+                  645
+                ],
+                "mean_dwell": 334.0,
+                "median_dwell": 334.0,
+                "switching_frequency": 0.0014992503748125937,
+                "transitions": [
+                  [
+                    22,
+                    1
+                  ],
+                  [
+                    0,
+                    644
+                  ]
+                ]
+              },
+              "within_w2": 0.002205295816233455
+            },
+            "shape_standardized": false,
+            "strict": {
+              "assignment_decomposition": {
+                "location": 0.11613889510129834,
+                "scale": 0.5593202630311099,
+                "shape": 0.32454084186759186
+              },
+              "between_centroid_w2_mean": 0.009878043659398157,
+              "centroid_decomposition": {
+                "location": 0.0401883455197431,
+                "scale": 0.9344750042608467,
+                "shape": 0.025336650219410103
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.0,
+                    "scale": 0.0,
+                    "shape": 0.0
+                  },
+                  "forward_downside": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_drawdown": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_log_return": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_volatility": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "n": 0,
+                  "occupancy": 0.0,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.11613889510129834,
+                    "scale": 0.5593202630311099,
+                    "shape": 0.32454084186759186
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07040389139052022,
+                      0.09171039062549306
+                    ],
+                    "mean": 0.08262740913402966,
+                    "n": 584
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.027441378177594577,
+                      0.03876774789349748
+                    ],
+                    "mean": 0.03334383625095074,
+                    "n": 584
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.005976574264743088,
+                      0.008052368967306225
+                    ],
+                    "mean": 0.0006268486924438339,
+                    "n": 584
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.09983402591244886,
+                      0.1260581081375893
+                    ],
+                    "mean": 0.11499102628905988,
+                    "n": 584
+                  },
+                  "n": 605,
+                  "occupancy": 1.0,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": null,
+                "between_pairs": 0,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.01155233517103175,
+                "within_pairs": 9
+              },
+              "n": 605,
+              "occupancy": [
+                0.0,
+                1.0
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 604,
+                "dwell_times": [
+                  605
+                ],
+                "mean_dwell": 605.0,
+                "median_dwell": 605.0,
+                "switching_frequency": 0.0,
+                "transitions": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    604
+                  ]
+                ]
+              },
+              "within_w2": 0.002012592961120089
+            }
+          },
+          "moments": {
+            "converged": null,
+            "distance_geometry": "w2",
+            "effective_clusters": 2,
+            "operational": {
+              "assignment_decomposition": {
+                "location": 0.11670190239341288,
+                "scale": 0.6064645134146294,
+                "shape": 0.2768335841919578
+              },
+              "between_centroid_w2_mean": 0.005587924119780442,
+              "centroid_decomposition": {
+                "location": 0.007803273395225742,
+                "scale": 0.8379505693740225,
+                "shape": 0.15424615723075175
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.11670190239341288,
+                    "scale": 0.6064645134146294,
+                    "shape": 0.2768335841919578
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07331747906930129,
+                      0.09440343388660243
+                    ],
+                    "mean": 0.08547649307982247,
+                    "n": 647
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.02906781345490204,
+                      0.039017942489303306
+                    ],
+                    "mean": 0.03479316861645645,
+                    "n": 647
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.007539450587106971,
+                      0.008902431538308865
+                    ],
+                    "mean": -0.001207878173785638,
+                    "n": 647
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.10267394799310356,
+                      0.1276686046931441
+                    ],
+                    "mean": 0.11743482468815888,
+                    "n": 647
+                  },
+                  "n": 668,
+                  "occupancy": 1.0,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.0,
+                    "scale": 0.0,
+                    "shape": 0.0
+                  },
+                  "forward_downside": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_drawdown": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_log_return": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_volatility": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "n": 0,
+                  "occupancy": 0.0,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": null,
+                "between_pairs": 0,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.01883789633101851,
+                "within_pairs": 10
+              },
+              "n": 668,
+              "occupancy": [
+                1.0,
+                0.0
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 667,
+                "dwell_times": [
+                  668
+                ],
+                "mean_dwell": 668.0,
+                "median_dwell": 668.0,
+                "switching_frequency": 0.0,
+                "transitions": [
+                  [
+                    667,
+                    0
+                  ],
+                  [
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "within_w2": 0.002195005676669713
+            },
+            "shape_standardized": false,
+            "strict": {
+              "assignment_decomposition": {
+                "location": 0.12039500394095563,
+                "scale": 0.549071082288133,
+                "shape": 0.3305339137709114
+              },
+              "between_centroid_w2_mean": 0.005587924119780442,
+              "centroid_decomposition": {
+                "location": 0.007803273395225742,
+                "scale": 0.8379505693740225,
+                "shape": 0.15424615723075175
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.12039500394095563,
+                    "scale": 0.549071082288133,
+                    "shape": 0.3305339137709114
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07040389139052022,
+                      0.09171039062549306
+                    ],
+                    "mean": 0.08262740913402966,
+                    "n": 584
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.027441378177594577,
+                      0.03876774789349748
+                    ],
+                    "mean": 0.03334383625095074,
+                    "n": 584
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.005976574264743088,
+                      0.008052368967306225
+                    ],
+                    "mean": 0.0006268486924438339,
+                    "n": 584
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.09983402591244886,
+                      0.1260581081375893
+                    ],
+                    "mean": 0.11499102628905988,
+                    "n": 584
+                  },
+                  "n": 605,
+                  "occupancy": 1.0,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.0,
+                    "scale": 0.0,
+                    "shape": 0.0
+                  },
+                  "forward_downside": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_drawdown": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_log_return": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_volatility": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "n": 0,
+                  "occupancy": 0.0,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": null,
+                "between_pairs": 0,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.01155233517103175,
+                "within_pairs": 9
+              },
+              "n": 605,
+              "occupancy": [
+                1.0,
+                0.0
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 604,
+                "dwell_times": [
+                  605
+                ],
+                "mean_dwell": 605.0,
+                "median_dwell": 605.0,
+                "switching_frequency": 0.0,
+                "transitions": [
+                  [
+                    604,
+                    0
+                  ],
+                  [
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "within_w2": 0.0020491279090336587
+            }
+          },
+          "rich": {
+            "converged": null,
+            "distance_geometry": "w2",
+            "effective_clusters": 2,
+            "operational": {
+              "assignment_decomposition": {
+                "location": 0.12708718411520287,
+                "scale": 0.535298318972521,
+                "shape": 0.3376144969122761
+              },
+              "between_centroid_w2_mean": 0.005292462371886501,
+              "centroid_decomposition": {
+                "location": 0.00017722783718758468,
+                "scale": 0.9969803873971784,
+                "shape": 0.0028423847656339394
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.12246566433085487,
+                    "scale": 0.48287859599337385,
+                    "shape": 0.39465573967577117
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07214782406784498,
+                      0.08877521550246902
+                    ],
+                    "mean": 0.0880254004553724,
+                    "n": 160
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.02631658490086142,
+                      0.03777345524248716
+                    ],
+                    "mean": 0.03505918172986473,
+                    "n": 160
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.0016188566121424018,
+                      0.026221100411927656
+                    ],
+                    "mean": 0.0042875951908480925,
+                    "n": 160
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.11387054291943999,
+                      0.12402625136218987
+                    ],
+                    "mean": 0.12478493063653943,
+                    "n": 160
+                  },
+                  "n": 160,
+                  "occupancy": 0.23952095808383234,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.13086496284588855,
+                    "scale": 0.5781478844357572,
+                    "shape": 0.2909871527183543
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07250900871397786,
+                      0.09996230111330144
+                    ],
+                    "mean": 0.08463906971208533,
+                    "n": 487
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.02880634399193441,
+                      0.04149122065879153
+                    ],
+                    "mean": 0.03470577211102456,
+                    "n": 487
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.010552538769624089,
+                      0.006116447529316507
+                    ],
+                    "mean": -0.0030133725030287526,
+                    "n": 487
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.09980752229209221,
+                      0.13146661575624127
+                    ],
+                    "mean": 0.11502000548540554,
+                    "n": 487
+                  },
+                  "n": 508,
+                  "occupancy": 0.7604790419161677,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": 0.035604005173246245,
+                "between_pairs": 3,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.01165242111292091,
+                "within_pairs": 7
+              },
+              "n": 668,
+              "occupancy": [
+                0.23952095808383234,
+                0.7604790419161677
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 667,
+                "dwell_times": [
+                  51,
+                  17,
+                  17,
+                  38,
+                  8,
+                  18,
+                  16,
+                  79,
+                  9,
+                  7,
+                  2,
+                  57,
+                  1,
+                  1,
+                  2,
+                  2,
+                  54,
+                  289
+                ],
+                "mean_dwell": 37.111111111111114,
+                "median_dwell": 16.5,
+                "switching_frequency": 0.025487256371814093,
+                "transitions": [
+                  [
+                    151,
+                    9
+                  ],
+                  [
+                    8,
+                    499
+                  ]
+                ]
+              },
+              "within_w2": 0.002120470951968042
+            },
+            "shape_standardized": false,
+            "strict": {
+              "assignment_decomposition": {
+                "location": 0.11011573451091175,
+                "scale": 0.5602757464604013,
+                "shape": 0.32960851902868704
+              },
+              "between_centroid_w2_mean": 0.005292462371886501,
+              "centroid_decomposition": {
+                "location": 0.00017722783718758468,
+                "scale": 0.9969803873971784,
+                "shape": 0.0028423847656339394
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.0829028973567615,
+                    "scale": 0.5418785719115697,
+                    "shape": 0.3752185307316688
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.06869862275489087,
+                      0.08676763988733348
+                    ],
+                    "mean": 0.07885222423290361,
+                    "n": 109
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.02531757566516043,
+                      0.03776126133764842
+                    ],
+                    "mean": 0.030619661754985757,
+                    "n": 109
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.0037297645427670474,
+                      0.029782136763403723
+                    ],
+                    "mean": 0.011521264277974877,
+                    "n": 109
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.111541084994587,
+                      0.1232404579789867
+                    ],
+                    "mean": 0.11801891639118005,
+                    "n": 109
+                  },
+                  "n": 109,
+                  "occupancy": 0.18016528925619835,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.1286708255580042,
+                    "scale": 0.5728198721180513,
+                    "shape": 0.2985093023239445
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.06931634923386085,
+                      0.09480291087021454
+                    ],
+                    "mean": 0.08349371472186701,
+                    "n": 475
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.02712736127178152,
+                      0.04058882212438277
+                    ],
+                    "mean": 0.03396896260897219,
+                    "n": 475
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.009050904512128954,
+                      0.007654903950575152
+                    ],
+                    "mean": -0.0018731329892885528,
+                    "n": 475
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.09776872023168431,
+                      0.1283135975023239
+                    ],
+                    "mean": 0.1142962051919418,
+                    "n": 475
+                  },
+                  "n": 496,
+                  "occupancy": 0.8198347107438017,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": 0.011796788598404495,
+                "between_pairs": 4,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.011356772429133554,
+                "within_pairs": 5
+              },
+              "n": 605,
+              "occupancy": [
+                0.18016528925619835,
+                0.8198347107438017
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 604,
+                "dwell_times": [
+                  5,
+                  17,
+                  38,
+                  8,
+                  18,
+                  16,
+                  79,
+                  9,
+                  7,
+                  2,
+                  57,
+                  1,
+                  1,
+                  2,
+                  2,
+                  54,
+                  289
+                ],
+                "mean_dwell": 35.588235294117645,
+                "median_dwell": 9.0,
+                "switching_frequency": 0.026490066225165563,
+                "transitions": [
+                  [
+                    101,
+                    8
+                  ],
+                  [
+                    8,
+                    487
+                  ]
+                ]
+              },
+              "within_w2": 0.0020836867158451136
+            }
+          },
+          "shape_w2": {
+            "converged": true,
+            "distance_geometry": "w2",
+            "effective_clusters": 2,
+            "operational": {
+              "assignment_decomposition": {
+                "location": 7.200696879400381e-31,
+                "scale": 0.005123073997793376,
+                "shape": 0.9948769260022066
+              },
+              "between_centroid_w2_mean": 0.1442673012636288,
+              "centroid_decomposition": {
+                "location": 1.7404079410604388e-30,
+                "scale": 0.0010076445302029768,
+                "shape": 0.998992355469797
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 1.0889953373063794e-30,
+                    "scale": 0.0034620839021312715,
+                    "shape": 0.9965379160978688
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.0685141956283939,
+                      0.0967614561161552
+                    ],
+                    "mean": 0.08471581065276952,
+                    "n": 415
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.02622885642411161,
+                      0.037827702328307566
+                    ],
+                    "mean": 0.03341443539033134,
+                    "n": 415
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.00521585456395195,
+                      0.01114710778245439
+                    ],
+                    "mean": 0.00020200242639296784,
+                    "n": 415
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.09807121348204773,
+                      0.1327794693022753
+                    ],
+                    "mean": 0.11653018515632318,
+                    "n": 415
+                  },
+                  "n": 421,
+                  "occupancy": 0.6302395209580839,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 1.143896187976924e-31,
+                    "scale": 0.007849988208592514,
+                    "shape": 0.9921500117914075
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07710280658713609,
+                      0.0964082113791189
+                    ],
+                    "mean": 0.08683719655924906,
+                    "n": 232
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.02994524403552945,
+                      0.04475158900281699
+                    ],
+                    "mean": 0.03725943710284402,
+                    "n": 232
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.015514017079906963,
+                      0.009851726966117243
+                    ],
+                    "mean": -0.0037298628680706436,
+                    "n": 232
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.10723137006194355,
+                      0.1306142346447125
+                    ],
+                    "mean": 0.1190530376438133,
+                    "n": 232
+                  },
+                  "n": 247,
+                  "occupancy": 0.36976047904191617,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 1.0,
+                "between_mean": 0.004355432937622472,
+                "between_pairs": 4,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.008647621803732538,
+                "within_pairs": 6
+              },
+              "n": 668,
+              "occupancy": [
+                0.6302395209580839,
+                0.36976047904191617
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 667,
+                "dwell_times": [
+                  66,
+                  5,
+                  6,
+                  2,
+                  2,
+                  1,
+                  2,
+                  21,
+                  1,
+                  2,
+                  5,
+                  1,
+                  45,
+                  1,
+                  4,
+                  3,
+                  5,
+                  17,
+                  14,
+                  4,
+                  1,
+                  4,
+                  2,
+                  30,
+                  9,
+                  7,
+                  1,
+                  11,
+                  3,
+                  2,
+                  39,
+                  66,
+                  114,
+                  2,
+                  1,
+                  2,
+                  3,
+                  2,
+                  21,
+                  1,
+                  27,
+                  6,
+                  3,
+                  10,
+                  1,
+                  11,
+                  7,
+                  4,
+                  7,
+                  14,
+                  26,
+                  18,
+                  6
+                ],
+                "mean_dwell": 12.60377358490566,
+                "median_dwell": 5.0,
+                "switching_frequency": 0.07796101949025487,
+                "transitions": [
+                  [
+                    394,
+                    26
+                  ],
+                  [
+                    26,
+                    221
+                  ]
+                ]
+              },
+              "within_w2": 0.14429583361797738
+            },
+            "shape_standardized": true,
+            "strict": {
+              "assignment_decomposition": {
+                "location": 6.705062924132946e-31,
+                "scale": 0.0052269577868754805,
+                "shape": 0.9947730422131245
+              },
+              "between_centroid_w2_mean": 0.1442673012636288,
+              "centroid_decomposition": {
+                "location": 1.7404079410604388e-30,
+                "scale": 0.0010076445302029768,
+                "shape": 0.998992355469797
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 1.060349779295407e-30,
+                    "scale": 0.003388186582351512,
+                    "shape": 0.9966118134176486
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.0667978279385838,
+                      0.09423171084311696
+                    ],
+                    "mean": 0.07985277651286232,
+                    "n": 352
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.025454498515122704,
+                      0.03689903511529679
+                    ],
+                    "mean": 0.030763099325839274,
+                    "n": 352
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.003938534291873429,
+                      0.0136609398791624
+                    ],
+                    "mean": 0.003498317675510194,
+                    "n": 352
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.09552514462272589,
+                      0.1293177803734536
+                    ],
+                    "mean": 0.1123137915325179,
+                    "n": 352
+                  },
+                  "n": 358,
+                  "occupancy": 0.5917355371900826,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 1.143896187976924e-31,
+                    "scale": 0.007849988208592514,
+                    "shape": 0.9921500117914075
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07451748818156054,
+                      0.09484604269758455
+                    ],
+                    "mean": 0.08683719655924906,
+                    "n": 232
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.0314768057408683,
+                      0.046080131544279763
+                    ],
+                    "mean": 0.03725943710284402,
+                    "n": 232
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.01999788814546741,
+                      0.0027883806485893402
+                    ],
+                    "mean": -0.0037298628680706436,
+                    "n": 232
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.10330225551802312,
+                      0.12655880139133815
+                    ],
+                    "mean": 0.1190530376438133,
+                    "n": 232
+                  },
+                  "n": 247,
+                  "occupancy": 0.40826446280991735,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 1.0,
+                "between_mean": 0.0038375920266738306,
+                "between_pairs": 4,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.009520028066910324,
+                "within_pairs": 5
+              },
+              "n": 605,
+              "occupancy": [
+                0.5917355371900826,
+                0.40826446280991735
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 604,
+                "dwell_times": [
+                  3,
+                  5,
+                  6,
+                  2,
+                  2,
+                  1,
+                  2,
+                  21,
+                  1,
+                  2,
+                  5,
+                  1,
+                  45,
+                  1,
+                  4,
+                  3,
+                  5,
+                  17,
+                  14,
+                  4,
+                  1,
+                  4,
+                  2,
+                  30,
+                  9,
+                  7,
+                  1,
+                  11,
+                  3,
+                  2,
+                  39,
+                  66,
+                  114,
+                  2,
+                  1,
+                  2,
+                  3,
+                  2,
+                  21,
+                  1,
+                  27,
+                  6,
+                  3,
+                  10,
+                  1,
+                  11,
+                  7,
+                  4,
+                  7,
+                  14,
+                  26,
+                  18,
+                  6
+                ],
+                "mean_dwell": 11.415094339622641,
+                "median_dwell": 4.0,
+                "switching_frequency": 0.08609271523178808,
+                "transitions": [
+                  [
+                    331,
+                    26
+                  ],
+                  [
+                    26,
+                    221
+                  ]
+                ]
+              },
+              "within_w2": 0.14522475534334472
+            }
+          },
+          "volatility": {
+            "converged": null,
+            "distance_geometry": "w2",
+            "effective_clusters": 2,
+            "operational": {
+              "assignment_decomposition": {
+                "location": 0.1085335376577023,
+                "scale": 0.5972672212576788,
+                "shape": 0.2941992410846188
+              },
+              "between_centroid_w2_mean": 0.008514947683183957,
+              "centroid_decomposition": {
+                "location": 0.009427846300076075,
+                "scale": 0.9726468662351389,
+                "shape": 0.01792528746478496
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.11430388726055091,
+                    "scale": 0.6049394042611927,
+                    "shape": 0.28075670847825634
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07331747906930129,
+                      0.09440343388660243
+                    ],
+                    "mean": 0.08438752888998689,
+                    "n": 632
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.02906781345490204,
+                      0.039017942489303306
+                    ],
+                    "mean": 0.03436962842946005,
+                    "n": 632
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.0074623768678762,
+                      0.008902431538308865
+                    ],
+                    "mean": -0.0008480928329443956,
+                    "n": 632
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.10267394799310356,
+                      0.1276686046931441
+                    ],
+                    "mean": 0.11624509879135449,
+                    "n": 632
+                  },
+                  "n": 653,
+                  "occupancy": 0.9775449101796407,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.04437025776291715,
+                    "scale": 0.5119565452432725,
+                    "shape": 0.4436731969938103
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.1287284799889237,
+                      0.13346574937835298
+                    ],
+                    "mean": 0.13135818427822832,
+                    "n": 15
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.0527189185999496,
+                      0.061685585633095084
+                    ],
+                    "mean": 0.05263832849523795,
+                    "n": 15
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.017072019265192234,
+                      -0.0008189791044501682
+                    ],
+                    "mean": -0.016366833867896644,
+                    "n": 15
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.16779658273471038,
+                      0.16921056085507052
+                    ],
+                    "mean": 0.16756194247351772,
+                    "n": 15
+                  },
+                  "n": 15,
+                  "occupancy": 0.02245508982035928,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": 0.08175745601970918,
+                "between_pairs": 1,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.011846834143386213,
+                "within_pairs": 9
+              },
+              "n": 668,
+              "occupancy": [
+                0.9775449101796407,
+                0.02245508982035928
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 667,
+                "dwell_times": [
+                  13,
+                  1,
+                  2,
+                  652
+                ],
+                "mean_dwell": 167.0,
+                "median_dwell": 7.5,
+                "switching_frequency": 0.004497751124437781,
+                "transitions": [
+                  [
+                    651,
+                    1
+                  ],
+                  [
+                    2,
+                    13
+                  ]
+                ]
+              },
+              "within_w2": 0.002165548378796401
+            },
+            "shape_standardized": false,
+            "strict": {
+              "assignment_decomposition": {
+                "location": 0.1190703875291087,
+                "scale": 0.5661657771482216,
+                "shape": 0.31476383532266966
+              },
+              "between_centroid_w2_mean": 0.008514947683183957,
+              "centroid_decomposition": {
+                "location": 0.009427846300076075,
+                "scale": 0.9726468662351389,
+                "shape": 0.01792528746478496
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.1190703875291087,
+                    "scale": 0.5661657771482216,
+                    "shape": 0.31476383532266966
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07040389139052022,
+                      0.09171039062549306
+                    ],
+                    "mean": 0.08262740913402966,
+                    "n": 584
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.027441378177594577,
+                      0.03876774789349748
+                    ],
+                    "mean": 0.03334383625095074,
+                    "n": 584
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.005976574264743088,
+                      0.008052368967306225
+                    ],
+                    "mean": 0.0006268486924438339,
+                    "n": 584
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.09983402591244886,
+                      0.1260581081375893
+                    ],
+                    "mean": 0.11499102628905988,
+                    "n": 584
+                  },
+                  "n": 605,
+                  "occupancy": 1.0,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.0,
+                    "scale": 0.0,
+                    "shape": 0.0
+                  },
+                  "forward_downside": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_drawdown": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_log_return": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_volatility": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "n": 0,
+                  "occupancy": 0.0,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": null,
+                "between_pairs": 0,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.01155233517103175,
+                "within_pairs": 9
+              },
+              "n": 605,
+              "occupancy": [
+                1.0,
+                0.0
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 604,
+                "dwell_times": [
+                  605
+                ],
+                "mean_dwell": 605.0,
+                "median_dwell": 605.0,
+                "switching_frequency": 0.0,
+                "transitions": [
+                  [
+                    604,
+                    0
+                  ],
+                  [
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "within_w2": 0.002012077896739372
+            }
+          },
+          "w1": {
+            "converged": true,
+            "distance_geometry": "w1",
+            "effective_clusters": 2,
+            "operational": {
+              "assignment_decomposition": {
+                "location": 0.1661280316184537,
+                "scale": 0.39084313635900964,
+                "shape": 0.44302883202253673
+              },
+              "between_centroid_w2_mean": 0.0040845290840259936,
+              "centroid_decomposition": {
+                "location": 0.0021037710130430124,
+                "scale": 0.9866816210992628,
+                "shape": 0.011214607887694015
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.19310903367626503,
+                    "scale": 0.2935274411114095,
+                    "shape": 0.5133635252123254
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.08246130267126307,
+                      0.09466571303281146
+                    ],
+                    "mean": 0.09284476079121429,
+                    "n": 271
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.03345587470256415,
+                      0.042643150806500864
+                    ],
+                    "mean": 0.038801349381762974,
+                    "n": 271
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.0100879278476443,
+                      0.018724158491947775
+                    ],
+                    "mean": 0.0008145400260075385,
+                    "n": 271
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.11805069496205835,
+                      0.13403434310981055
+                    ],
+                    "mean": 0.12881846952463244,
+                    "n": 271
+                  },
+                  "n": 271,
+                  "occupancy": 0.405688622754491,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.12867050395874743,
+                    "scale": 0.5259458037340038,
+                    "shape": 0.3453836923072488
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.06818311501766468,
+                      0.09952658371642631
+                    ],
+                    "mean": 0.08016585331975017,
+                    "n": 376
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.02651295646103743,
+                      0.039329510848439636
+                    ],
+                    "mean": 0.031904293649972215,
+                    "n": 376
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.009306429229303182,
+                      0.008578135352889643
+                    ],
+                    "mean": -0.0026655253337429536,
+                    "n": 376
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.0950975541549868,
+                      0.13166540366545224
+                    ],
+                    "mean": 0.1092301232235729,
+                    "n": 376
+                  },
+                  "n": 397,
+                  "occupancy": 0.594311377245509,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": 0.009507737273958853,
+                "between_pairs": 3,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.02283653592690122,
+                "within_pairs": 7
+              },
+              "n": 668,
+              "occupancy": [
+                0.405688622754491,
+                0.594311377245509
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 667,
+                "dwell_times": [
+                  84,
+                  25,
+                  77,
+                  16,
+                  1,
+                  26,
+                  2,
+                  8,
+                  38,
+                  11,
+                  2,
+                  2,
+                  1,
+                  23,
+                  66,
+                  286
+                ],
+                "mean_dwell": 41.75,
+                "median_dwell": 19.5,
+                "switching_frequency": 0.022488755622188907,
+                "transitions": [
+                  [
+                    263,
+                    8
+                  ],
+                  [
+                    7,
+                    389
+                  ]
+                ]
+              },
+              "within_w2": 0.001865908390761151
+            },
+            "shape_standardized": false,
+            "strict": {
+              "assignment_decomposition": {
+                "location": 0.1451858546260253,
+                "scale": 0.40536868842636864,
+                "shape": 0.44944545694760607
+              },
+              "between_centroid_w2_mean": 0.0040845290840259936,
+              "centroid_decomposition": {
+                "location": 0.0021037710130430124,
+                "scale": 0.9866816210992628,
+                "shape": 0.011214607887694015
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.16147338502230954,
+                    "scale": 0.28645486877853676,
+                    "shape": 0.5520717461991537
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.08074920780242516,
+                      0.09174682333286215
+                    ],
+                    "mean": 0.08707714464445795,
+                    "n": 208
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.03190047435738579,
+                      0.0401211601842598
+                    ],
+                    "mean": 0.03594608633733502,
+                    "n": 208
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.004616210486788873,
+                      0.014563570438734394
+                    ],
+                    "mean": 0.006578447893627642,
+                    "n": 208
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.11715340647582136,
+                      0.13246537880748188
+                    ],
+                    "mean": 0.1254049664459018,
+                    "n": 208
+                  },
+                  "n": 208,
+                  "occupancy": 0.343801652892562,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.12867050395874743,
+                    "scale": 0.5259458037340038,
+                    "shape": 0.3453836923072488
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.06654551737595503,
+                      0.0961137159473612
+                    ],
+                    "mean": 0.08016585331975017,
+                    "n": 376
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.026076573059607564,
+                      0.040606819928717404
+                    ],
+                    "mean": 0.031904293649972215,
+                    "n": 376
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.010972952169783766,
+                      0.006943124591778772
+                    ],
+                    "mean": -0.0026655253337429536,
+                    "n": 376
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.09455165711839728,
+                      0.12676601606308896
+                    ],
+                    "mean": 0.1092301232235729,
+                    "n": 376
+                  },
+                  "n": 397,
+                  "occupancy": 0.656198347107438,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": 0.009543252933710574,
+                "between_pairs": 3,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.01255687628969234,
+                "within_pairs": 6
+              },
+              "n": 605,
+              "occupancy": [
+                0.343801652892562,
+                0.656198347107438
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 604,
+                "dwell_times": [
+                  21,
+                  25,
+                  77,
+                  16,
+                  1,
+                  26,
+                  2,
+                  8,
+                  38,
+                  11,
+                  2,
+                  2,
+                  1,
+                  23,
+                  66,
+                  286
+                ],
+                "mean_dwell": 37.8125,
+                "median_dwell": 18.5,
+                "switching_frequency": 0.024834437086092714,
+                "transitions": [
+                  [
+                    200,
+                    8
+                  ],
+                  [
+                    7,
+                    389
+                  ]
+                ]
+              },
+              "within_w2": 0.0018060124693750198
+            }
+          },
+          "w2": {
+            "converged": true,
+            "distance_geometry": "w2",
+            "effective_clusters": 2,
+            "operational": {
+              "assignment_decomposition": {
+                "location": 0.10577984403312601,
+                "scale": 0.5969965445822268,
+                "shape": 0.2972236113846471
+              },
+              "between_centroid_w2_mean": 0.008633570910625771,
+              "centroid_decomposition": {
+                "location": 0.013026274536688592,
+                "scale": 0.967585911644094,
+                "shape": 0.019387813819217437
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.03212946051962389,
+                    "scale": 0.5356737426428504,
+                    "shape": 0.4321967968375256
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.1287284799889237,
+                      0.13339008568873534
+                    ],
+                    "mean": 0.13142529182721724,
+                    "n": 16
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.05337794447706811,
+                      0.061685585633095084
+                    ],
+                    "mean": 0.05320378206635401,
+                    "n": 16
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.017542376778558227,
+                      -0.0008189791044501682
+                    ],
+                    "mean": -0.016795816101104755,
+                    "n": 16
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.16752972948259323,
+                      0.16901807561563983
+                    ],
+                    "mean": 0.16750140680667647,
+                    "n": 16
+                  },
+                  "n": 16,
+                  "occupancy": 0.023952095808383235,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.11333806969857081,
+                    "scale": 0.6032896764490856,
+                    "shape": 0.2833722538523435
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07331747906930129,
+                      0.09440343388660243
+                    ],
+                    "mean": 0.08431138883266193,
+                    "n": 631
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.02906781345490204,
+                      0.039017942489303306
+                    ],
+                    "mean": 0.03432633848143527,
+                    "n": 631
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.007454963658588289,
+                      0.008902431538308865
+                    ],
+                    "mean": -0.0008126214276095588,
+                    "n": 631
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.10267394799310356,
+                      0.1276686046931441
+                    ],
+                    "mean": 0.11616530755044686,
+                    "n": 631
+                  },
+                  "n": 652,
+                  "occupancy": 0.9760479041916168,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": 0.08175745601970918,
+                "between_pairs": 1,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.011846834143386213,
+                "within_pairs": 9
+              },
+              "n": 668,
+              "occupancy": [
+                0.023952095808383235,
+                0.9760479041916168
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 667,
+                "dwell_times": [
+                  16,
+                  652
+                ],
+                "mean_dwell": 334.0,
+                "median_dwell": 334.0,
+                "switching_frequency": 0.0014992503748125937,
+                "transitions": [
+                  [
+                    15,
+                    1
+                  ],
+                  [
+                    0,
+                    651
+                  ]
+                ]
+              },
+              "within_w2": 0.002165980617039333
+            },
+            "shape_standardized": false,
+            "strict": {
+              "assignment_decomposition": {
+                "location": 0.11821199470610612,
+                "scale": 0.5660475080105545,
+                "shape": 0.31574049728333947
+              },
+              "between_centroid_w2_mean": 0.008633570910625771,
+              "centroid_decomposition": {
+                "location": 0.013026274536688592,
+                "scale": 0.967585911644094,
+                "shape": 0.019387813819217437
+              },
+              "conditional_outcomes": [
+                {
+                  "decomposition": {
+                    "location": 0.0,
+                    "scale": 0.0,
+                    "shape": 0.0
+                  },
+                  "forward_downside": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_drawdown": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_log_return": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "forward_volatility": {
+                    "block_interval": null,
+                    "mean": null,
+                    "n": 0
+                  },
+                  "n": 0,
+                  "occupancy": 0.0,
+                  "regime": 0
+                },
+                {
+                  "decomposition": {
+                    "location": 0.11821199470610612,
+                    "scale": 0.5660475080105545,
+                    "shape": 0.31574049728333947
+                  },
+                  "forward_downside": {
+                    "block_interval": [
+                      0.07040389139052022,
+                      0.09171039062549306
+                    ],
+                    "mean": 0.08262740913402966,
+                    "n": 584
+                  },
+                  "forward_drawdown": {
+                    "block_interval": [
+                      0.027441378177594577,
+                      0.03876774789349748
+                    ],
+                    "mean": 0.03334383625095074,
+                    "n": 584
+                  },
+                  "forward_log_return": {
+                    "block_interval": [
+                      -0.005976574264743088,
+                      0.008052368967306225
+                    ],
+                    "mean": 0.0006268486924438339,
+                    "n": 584
+                  },
+                  "forward_volatility": {
+                    "block_interval": [
+                      0.09983402591244886,
+                      0.1260581081375893
+                    ],
+                    "mean": 0.11499102628905988,
+                    "n": 584
+                  },
+                  "n": 605,
+                  "occupancy": 1.0,
+                  "regime": 1
+                }
+              ],
+              "mmd": {
+                "bandwidth": 0.008742454476049358,
+                "between_mean": null,
+                "between_pairs": 0,
+                "estimator": "biased Gaussian squared MMD; consecutive separated windows",
+                "within_mean": 0.01155233517103175,
+                "within_pairs": 9
+              },
+              "n": 605,
+              "occupancy": [
+                0.0,
+                1.0
+              ],
+              "ood_rate": 0.0,
+              "temporal": {
+                "adjacent_pairs": 604,
+                "dwell_times": [
+                  605
+                ],
+                "mean_dwell": 605.0,
+                "median_dwell": 605.0,
+                "switching_frequency": 0.0,
+                "transitions": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    604
+                  ]
+                ]
+              },
+              "within_w2": 0.002010921565984044
+            }
+          }
+        },
+        "selection": [
+          {
+            "converged": true,
+            "k": 2,
+            "validation_silhouette": 0.33279247274233736
+          },
+          {
+            "converged": true,
+            "k": 3,
+            "validation_silhouette": 0.12514975102203565
+          },
+          {
+            "converged": true,
+            "k": 4,
+            "validation_silhouette": 0.14412322874439573
+          },
+          {
+            "converged": true,
+            "k": 5,
+            "validation_silhouette": 0.1454809426218197
+          }
+        ],
+        "training_windows": 916,
+        "validation_windows": 690,
+        "year": 2024
+      }
+    ],
+    "overlap": {
+      "n_init_null": 20,
+      "n_init_observed": 20,
+      "null": "IID resampling of development marginal; overlapping windows retained",
+      "period": "validation only",
+      "repetitions": 20,
+      "rows": [
+        {
+          "ari_vs_primary": 0.9884091564112703,
+          "excess_mean_dwell": -141.43361860361858,
+          "fit_stride": 1,
+          "null_draws": [
+            690.0,
+            26.53846153846154,
+            690.0,
+            690.0,
+            230.0,
+            49.285714285714285,
+            46.0,
+            230.0,
+            28.75,
+            76.66666666666667,
+            690.0,
+            25.555555555555557,
+            27.6,
+            86.25,
+            31.363636363636363,
+            62.72727272727273,
+            31.363636363636363,
+            98.57142857142857,
+            30.0,
+            138.0
+          ],
+          "null_interval": [
+            26.022435897435898,
+            690.0
+          ],
+          "null_mean_dwell": 198.93361860361858,
+          "observed_mean_dwell": 57.5,
+          "score_stride": 1
+        },
+        {
+          "ari_vs_primary": 1.0,
+          "excess_mean_dwell": -170.0141319374788,
+          "fit_stride": 5,
+          "null_draws": [
+            690.0,
+            26.53846153846154,
+            690.0,
+            690.0,
+            230.0,
+            49.285714285714285,
+            40.588235294117645,
+            230.0,
+            28.75,
+            40.588235294117645,
+            690.0,
+            27.6,
+            23.79310344827586,
+            86.25,
+            38.333333333333336,
+            690.0,
+            38.333333333333336,
+            76.66666666666667,
+            25.555555555555557,
+            138.0
+          ],
+          "null_interval": [
+            24.63026819923372,
+            690.0
+          ],
+          "null_mean_dwell": 227.5141319374788,
+          "observed_mean_dwell": 57.5,
+          "score_stride": 1
+        },
+        {
+          "ari_vs_primary": 0.9826383632491325,
+          "excess_mean_dwell": -183.79678030303035,
+          "fit_stride": 21,
+          "null_draws": [
+            690.0,
+            23.0,
+            690.0,
+            690.0,
+            230.0,
+            57.5,
+            98.57142857142857,
+            230.0,
+            43.125,
+            62.72727272727273,
+            690.0,
+            32.857142857142854,
+            86.25,
+            86.25,
+            28.75,
+            230.0,
+            38.333333333333336,
+            98.57142857142857,
+            30.0,
+            690.0
+          ],
+          "null_interval": [
+            25.73125,
+            690.0
+          ],
+          "null_mean_dwell": 241.29678030303035,
+          "observed_mean_dwell": 57.5,
+          "score_stride": 1
+        },
+        {
+          "ari_vs_primary": 0.9203203792408025,
+          "excess_mean_dwell": -181.80917837644813,
+          "fit_stride": 63,
+          "null_draws": [
+            690.0,
+            76.66666666666667,
+            690.0,
+            62.72727272727273,
+            230.0,
+            69.0,
+            98.57142857142857,
+            230.0,
+            31.363636363636363,
+            53.07692307692308,
+            690.0,
+            36.31578947368421,
+            69.0,
+            86.25,
+            21.5625,
+            690.0,
+            46.0,
+            30.0,
+            31.363636363636363,
+            690.0
+          ],
+          "null_interval": [
+            25.5703125,
+            690.0
+          ],
+          "null_mean_dwell": 231.0948926621624,
+          "observed_mean_dwell": 49.285714285714285,
+          "score_stride": 1
+        }
+      ]
+    },
+    "stability": {
+      "block_length": 126,
+      "models": {
+        "moments": {
+          "block_bootstrap": {
+            "ari_mean": 0.55,
+            "ari_range": [
+              0.0,
+              1.0
+            ],
+            "draws": [
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.002888049597528355,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.0033067498997328758,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.817391304347826
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.002801835183408981,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.002623029956494304,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.03478260869565218
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.0013116888049469178,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.2115942028985507
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.001709130286819377,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.5884057971014494
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0027709075911837686,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.0015981350290016237,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.37391304347826093
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0030604890753398364,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.00272017731487958,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.003840082648762503,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.0017616383318772924,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.208695652173913
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0006156740753482538,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0030479024760607498,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0027931384985675376,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.0014954967115427004,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.5159420289855072
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.002996830901742175,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.0020181531955621728,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.7362318840579709
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0008959551900518679,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.0015576454636441867,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.14202898550724635
+              }
+            ],
+            "reference_effective_clusters": 2,
+            "repetitions": 20
+          },
+          "seed": {
+            "ari_mean": 1.0,
+            "ari_range": [
+              1.0,
+              1.0
+            ],
+            "draws": [
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.00021508794434160303,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.00014492491673142436,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              }
+            ],
+            "reference_effective_clusters": 2,
+            "repetitions": 5
+          }
+        },
+        "shape_w2": {
+          "block_bootstrap": {
+            "ari_mean": 0.2538662736145277,
+            "ari_range": [
+              -0.03591684498006588,
+              1.0
+            ],
+            "draws": [
+              {
+                "ari": 0.974488902701893,
+                "centroid_displacement": 0.02824265975832123,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.002898550724637596
+              },
+              {
+                "ari": -0.016518582400026835,
+                "centroid_displacement": 0.08103040223822858,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.7449275362318841
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.0539006164523492,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.06376811594202894
+              },
+              {
+                "ari": 0.7971492555342623,
+                "centroid_displacement": 0.03194262882266681,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.020289855072463746
+              },
+              {
+                "ari": -0.006932000355786925,
+                "centroid_displacement": 0.10110342215787035,
+                "effective_clusters": 2,
+                "occupancy_l1": 1.028985507246377
+              },
+              {
+                "ari": 0.017811662061645576,
+                "centroid_displacement": 0.09615547905292847,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.83768115942029
+              },
+              {
+                "ari": 0.15733122204550012,
+                "centroid_displacement": 0.04013881014738394,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.05797101449275364
+              },
+              {
+                "ari": -0.029300992884723202,
+                "centroid_displacement": 0.10609523306839075,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.5768115942028986
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.022126969007097604,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.03991109631244062,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.05326788778711748,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.06376811594202894
+              },
+              {
+                "ari": 0.16858597055385127,
+                "centroid_displacement": 0.04547548951109298,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.24927536231884062
+              },
+              {
+                "ari": 0.6884448488575358,
+                "centroid_displacement": 0.017942803535405595,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.028985507246376763
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.044284146587209305,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.06376811594202894
+              },
+              {
+                "ari": 0.45356117282136177,
+                "centroid_displacement": 0.042250245571811104,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.1217391304347826
+              },
+              {
+                "ari": -0.03591684498006588,
+                "centroid_displacement": 0.09047082533889866,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.4608695652173913
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.07405593862870334,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.06376811594202894
+              },
+              {
+                "ari": -0.03058144369634194,
+                "centroid_displacement": 0.08658396511395149,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.5565217391304349
+              },
+              {
+                "ari": -0.03442133786174577,
+                "centroid_displacement": 0.08804296478491926,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.48985507246376814
+              },
+              {
+                "ari": -0.026376360106806593,
+                "centroid_displacement": 0.10407603124997329,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.6202898550724638
+              }
+            ],
+            "reference_effective_clusters": 2,
+            "repetitions": 20
+          },
+          "seed": {
+            "ari_mean": 0.9948977805403786,
+            "ari_range": [
+              0.974488902701893,
+              1.0
+            ],
+            "draws": [
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0013224972114091467,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 0.974488902701893,
+                "centroid_displacement": 0.0029313764643487516,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.002898550724637596
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0018088938916118885,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              }
+            ],
+            "reference_effective_clusters": 2,
+            "repetitions": 5
+          }
+        },
+        "volatility": {
+          "block_bootstrap": {
+            "ari_mean": 0.3364133701104705,
+            "ari_range": [
+              0.006795192520088653,
+              0.8071139983516847
+            ],
+            "draws": [
+              {
+                "ari": 0.5285678938916718,
+                "centroid_displacement": 0.0017899217943556345,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.27246376811594203
+              },
+              {
+                "ari": 0.024159802577289186,
+                "centroid_displacement": 0.0036078110375695267,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.8347826086956522
+              },
+              {
+                "ari": 0.06241344938049771,
+                "centroid_displacement": 0.0033530356842033323,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.7449275362318841
+              },
+              {
+                "ari": 0.6867541227574754,
+                "centroid_displacement": 0.001623878213156653,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.17101449275362318
+              },
+              {
+                "ari": 0.7557878195285794,
+                "centroid_displacement": 0.0011827002756466239,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.13043478260869562
+              },
+              {
+                "ari": 0.2053976353732258,
+                "centroid_displacement": 0.0024380299913646375,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.544927536231884
+              },
+              {
+                "ari": 0.5848446269039205,
+                "centroid_displacement": 0.0012419941238028642,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.23478260869565215
+              },
+              {
+                "ari": 0.26175574542115604,
+                "centroid_displacement": 0.002089054500266516,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.48695652173913045
+              },
+              {
+                "ari": 0.5983303949573352,
+                "centroid_displacement": 0.0015436937540252887,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.22608695652173916
+              },
+              {
+                "ari": 0.006795192520088653,
+                "centroid_displacement": 0.0038104949640596552,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.8985507246376812
+              },
+              {
+                "ari": 0.12244303690186083,
+                "centroid_displacement": 0.0024381995584323297,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.646376811594203
+              },
+              {
+                "ari": 0.39806640571329366,
+                "centroid_displacement": 0.001137978275015741,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.3681159420289855
+              },
+              {
+                "ari": 0.8071139983516847,
+                "centroid_displacement": 0.001085075203365987,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.10144927536231885
+              },
+              {
+                "ari": 0.06391579230316641,
+                "centroid_displacement": 0.003322817579298149,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.7420289855072464
+              },
+              {
+                "ari": 0.02818983881793333,
+                "centroid_displacement": 0.0035916789501664677,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.8231884057971015
+              },
+              {
+                "ari": 0.372946723167086,
+                "centroid_displacement": 0.0020078858926554193,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.38840579710144923
+              },
+              {
+                "ari": 0.7061420623121336,
+                "centroid_displacement": 0.001288540345643878,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.15942028985507245
+              },
+              {
+                "ari": 0.07328195906646674,
+                "centroid_displacement": 0.003125332294729138,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.7246376811594202
+              },
+              {
+                "ari": 0.19752196001184358,
+                "centroid_displacement": 0.002593752188688367,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.5536231884057972
+              },
+              {
+                "ari": 0.24383894225270217,
+                "centroid_displacement": 0.0013490226180746777,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.5043478260869565
+              }
+            ],
+            "reference_effective_clusters": 2,
+            "repetitions": 20
+          },
+          "seed": {
+            "ari_mean": 1.0,
+            "ari_range": [
+              1.0,
+              1.0
+            ],
+            "draws": [
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              }
+            ],
+            "reference_effective_clusters": 2,
+            "repetitions": 5
+          }
+        },
+        "w2": {
+          "block_bootstrap": {
+            "ari_mean": 0.23466615838207922,
+            "ari_range": [
+              -0.02257874077414484,
+              0.8762412338325878
+            ],
+            "draws": [
+              {
+                "ari": 0.31711288939707977,
+                "centroid_displacement": 0.0018425029692026409,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.43478260869565216
+              },
+              {
+                "ari": -0.01869100518921553,
+                "centroid_displacement": 0.003696695217513495,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.9507246376811593
+              },
+              {
+                "ari": -0.003311209597603584,
+                "centroid_displacement": 0.003421243134790584,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.8811594202898549
+              },
+              {
+                "ari": 0.4951962415731387,
+                "centroid_displacement": 0.0016936398577080479,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.2956521739130434
+              },
+              {
+                "ari": 0.5243063284083194,
+                "centroid_displacement": 0.001359889798830677,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.27536231884057966
+              },
+              {
+                "ari": 0.11977975704623506,
+                "centroid_displacement": 0.0024689900696782726,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.643478260869565
+              },
+              {
+                "ari": 0.18063153652304936,
+                "centroid_displacement": 0.0011548459977452873,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.5565217391304349
+              },
+              {
+                "ari": 0.8762412338325878,
+                "centroid_displacement": 0.0011316192761242473,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.017391304347826042
+              },
+              {
+                "ari": 0.4471594867358469,
+                "centroid_displacement": 0.0015950761591800606,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.3304347826086956
+              },
+              {
+                "ari": -0.02257874077414484,
+                "centroid_displacement": 0.003909188829483581,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.9826086956521738
+              },
+              {
+                "ari": 0.0,
+                "centroid_displacement": 0.003117264345648474,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.8144927536231885
+              },
+              {
+                "ari": 0.1566068947782119,
+                "centroid_displacement": 0.0011013283622399945,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.582608695652174
+              },
+              {
+                "ari": 0.6535026808027647,
+                "centroid_displacement": 0.000951793608463058,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.19130434782608685
+              },
+              {
+                "ari": 0.011076204226382655,
+                "centroid_displacement": 0.0033361769188363626,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.8376811594202898
+              },
+              {
+                "ari": -0.015180113093390285,
+                "centroid_displacement": 0.003625013007078754,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.9304347826086956
+              },
+              {
+                "ari": 0.16623194281312176,
+                "centroid_displacement": 0.002169613951413205,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.5855072463768115
+              },
+              {
+                "ari": 0.5672885688023267,
+                "centroid_displacement": 0.0013356332595977,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.24637681159420288
+              },
+              {
+                "ari": 0.010003224517103003,
+                "centroid_displacement": 0.00320049178435585,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.8405797101449275
+              },
+              {
+                "ari": 0.08160458729283128,
+                "centroid_displacement": 0.0027382532367410273,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.698550724637681
+              },
+              {
+                "ari": 0.1463426595469391,
+                "centroid_displacement": 0.0012648812832621137,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.5942028985507247
+              }
+            ],
+            "reference_effective_clusters": 2,
+            "repetitions": 20
+          },
+          "seed": {
+            "ari_mean": 1.0,
+            "ari_range": [
+              1.0,
+              1.0
+            ],
+            "draws": [
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              },
+              {
+                "ari": 1.0,
+                "centroid_displacement": 0.0,
+                "effective_clusters": 2,
+                "occupancy_l1": 0.0
+              }
+            ],
+            "reference_effective_clusters": 2,
+            "repetitions": 5
+          }
+        }
+      },
+      "scoring_period": "validation only"
+    }
+  }
+}
