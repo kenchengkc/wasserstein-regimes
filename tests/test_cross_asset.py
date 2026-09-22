@@ -63,3 +63,33 @@ def test_holdout_requires_verified_development_before_execution(tmp_path,monkeyp
     monkeypatch.setattr(m,'run',lambda *a,**k:pytest.fail('holdout opened before development validation'))
     with pytest.raises(ValueError,match='development'):
         m.run_cross_asset(study,output_root=tmp_path,stage='holdout')
+
+
+def test_default_stage_is_development(tmp_path, monkeypatch):
+    import json
+    import sys
+    from wasserstein_regimes.cli import main
+    m = module()
+    observed = []
+    monkeypatch.setattr(m, 'run_cross_asset', lambda *a, **k: observed.append(k['stage']))
+    monkeypatch.setattr(sys, 'argv', ['regimes', 'cross-asset', '--config', 'study.yaml'])
+    main()
+    assert observed == ['development']
+
+
+def test_acquisition_metadata_checks_identity(tmp_path):
+    import hashlib
+    import json
+    m = module()
+    source = tmp_path/'prices.csv'
+    source.write_text('date,close')
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()
+    metadata = dict(symbol='QQQ', sha256=digest, first_date='1999-03-10', retrieved_at='2026-09-21')
+    source.with_suffix('.json').write_text(json.dumps(metadata))
+    config = dict(dataset=str(source), symbol='QQQ', dataset_sha256=digest)
+    assert m.acquisition_metadata(config) == metadata
+    with pytest.raises(ValueError, match='Acquisition'):
+        m.acquisition_metadata(dict(config, symbol='TLT'))
+    source.write_text('changed')
+    with pytest.raises(ValueError, match='Acquisition'):
+        m.acquisition_metadata(config)
