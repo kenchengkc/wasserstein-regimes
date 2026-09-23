@@ -4,7 +4,7 @@
 
 Build a reproducible Python research package that discovers recurring market conditions from empirical return distributions, assigns newly completed windows to frozen centroids, and explains differences through quantile curves and distribution diagnostics.
 
-The first release handles one asset's distribution through time. The reference implementation in this repository is deliberately smaller than this target design; the status and remaining milestones are in [the implementation plan](implementation-plan.md).
+The first release handles one asset's distribution through time. The daily univariate release and cross-asset replication are complete. The [research roadmap](research-roadmap.md) distinguishes delivered components from planned operational, joint empirical and predictive work.
 
 Three modes have different temporal contracts:
 

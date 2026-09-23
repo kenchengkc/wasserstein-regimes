@@ -4,7 +4,7 @@
 
 Build a local, reproducible research tool before adding scheduled services or joint-distribution machinery. The critical path is data conventions -> exact distribution geometry -> chronological validation -> evidence of value. The plan is complete enough to execute; completing it does not imply the target system already exists.
 
-Current repository deliverables: documentation, GPL-3.0-only license, Python packaging, exact equal-size W1/W2 reference functions and clustering, rolling windows, synthetic smoke example, and numerical tests with CI. The milestones below describe the remaining production research implementation. The reference code is a correctness seed, not the whole M1–M7 release.
+Status updated September 23, 2026: the univariate daily research release and four-asset replication are complete. The milestone estimates below describe the original target, not the remaining workload. See the [research roadmap](research-roadmap.md) for the current gaps, academic comparisons and priorities, and the [joint engine design](joint-design.md) for the next implemented research subsystem.
 
 Effort estimates assume one experienced quantitative Python developer, existing data entitlement where needed, and part-time domain review. They are planning estimates, not commitments. First daily research release: approximately 4–6 weeks. The hourly reproduction and advanced extensions add approximately 2–4 weeks depending on data cleanup.
 
@@ -51,7 +51,7 @@ No need to wait for paid hourly data to execute M1–M5. Use synthetic and appro
 
 ### M5–M7: User workflow
 
-Target CLI commands (planned, not available in the reference package):
+Original target CLI (run/report now exist; fetch/validate/reproduce/score remain planned):
 
 ```text
 regimes fetch --config configs/data_spy_daily.yaml
@@ -118,4 +118,4 @@ For operational use, additionally require frozen preprocessing, an auditable mod
 | Multivariate scaling/projections alter answers | Training-only scaling, stored projections, projection-count sensitivity, medoids first |
 | Data entitlement blocks reproduction | Continue daily/synthetic work; report unavailable hourly evidence without fabricating results |
 
-Default decisions: private repository, daily SPY first, GPL-3.0-only, W1 plus squared W2, exact full atoms, local CPU/Parquet, no order routing, and a separate licensed hourly reproduction. Provider purchase and eventual publication of licensed-data outputs require an actual source choice and its terms; neither is necessary to begin implementation.
+Default decisions: public repository (created and published), daily SPY first, GPL-3.0-only, W1 plus squared W2, exact full atoms, local CPU/Parquet, no order routing, and a separate licensed hourly reproduction. Provider purchase and eventual publication of licensed-data outputs require an actual source choice and its terms; neither is necessary to begin implementation.

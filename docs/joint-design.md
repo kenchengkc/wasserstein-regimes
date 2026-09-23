@@ -15,7 +15,7 @@ Normalize only by an explicitly supplied positive per-asset scale vector (defaul
 SlicedWassersteinKMedoids uses sampled candidate windows, with n_init reproducible samples. Compute only a candidate-by-candidate squared-distance matrix. Alternate assignment and within-cluster medoid selection on candidates, retaining the old medoid on a tie. Select the restart with lowest full-training objective using streamed chunk-to-medoid scoring. Return actual observed joint windows as prototypes and save their original indices. This is an approximate sampled optimizer for squared sliced-W2 medoids, not PAM/SDP or a barycenter solver. Candidate sampling can miss rare states; disclose the budget and sample indices.
 
 For N windows, L atoms, D assets, R projections, M candidates, K prototypes and B scoring batch:
-resident input O(NLD), candidate features O(MLR), candidate distances O(M²), scoring workspace O(BLR + BK), saved medoids O(KLD + KLR). Fit stores labels O(N); transform necessarily returns O(NK). No O(N²) matrix when M is fixed. Use direct differences to avoid cancellation in norm-expansion distance formulas.
+resident input O(NLD), candidate features O(MLR), candidate distances O(M²), scoring workspace O(BL(D+R) + BK), saved medoids O(KLD + KLR). Coercing non-float64 inputs may copy O(NLD) additional input memory. Fit stores labels O(N); transform necessarily returns O(NK). No O(N²) matrix when M is fixed. Use direct differences to avoid cancellation in norm-expansion distance formulas.
 
 ## API and persistence
 

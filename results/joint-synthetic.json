@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "settings": {
+    "seeds": [
+      17,
+      42,
+      83
+    ],
+    "projection_counts": [
+      8,
+      32,
+      128
+    ],
+    "n_train": 120,
+    "n_test": 120,
+    "atoms_by_case": {
+      "correlation": 63,
+      "parity": 64
+    },
+    "candidate_size": 64,
+    "n_init": 3,
+    "n_clusters": 2,
+    "max_iter": 100
+  },
+  "deterministic_control": {
+    "marginal_embedding_distance": 0.0,
+    "joint_sliced_distance": 1.414213562373095,
+    "projections": [
+      [
+        0.7071067811865475,
+        0.7071067811865475
+      ],
+      [
+        0.7071067811865475,
+        -0.7071067811865475
+      ]
+    ]
+  },
+  "synthetic_rows": [
+    {
+      "case": "correlation",
+      "seed": 17,
+      "projections": 8,
+      "atoms": 63,
+      "assets": 2,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 6.8356348650226035,
+      "marginal_ari": -0.007316108621144213,
+      "covariance_ari": 1.0
+    },
+    {
+      "case": "correlation",
+      "seed": 17,
+      "projections": 32,
+      "atoms": 63,
+      "assets": 2,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 6.736487805352169,
+      "marginal_ari": -0.007316108621144213,
+      "covariance_ari": 1.0
+    },
+    {
+      "case": "correlation",
+      "seed": 17,
+      "projections": 128,
+      "atoms": 63,
+      "assets": 2,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 6.799679679533321,
+      "marginal_ari": -0.007316108621144213,
+      "covariance_ari": 1.0
+    },
+    {
+      "case": "correlation",
+      "seed": 42,
+      "projections": 8,
+      "atoms": 63,
+      "assets": 2,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 6.624821925268114,
+      "marginal_ari": -0.008173084845189249,
+      "covariance_ari": 1.0
+    },
+    {
+      "case": "correlation",
+      "seed": 42,
+      "projections": 32,
+      "atoms": 63,
+      "assets": 2,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 6.572186788890946,
+      "marginal_ari": -0.008173084845189249,
+      "covariance_ari": 1.0
+    },
+    {
+      "case": "correlation",
+      "seed": 42,
+      "projections": 128,
+      "atoms": 63,
+      "assets": 2,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 6.576681522076701,
+      "marginal_ari": -0.008173084845189249,
+      "covariance_ari": 1.0
+    },
+    {
+      "case": "correlation",
+      "seed": 83,
+      "projections": 8,
+      "atoms": 63,
+      "assets": 2,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 6.698346438795391,
+      "marginal_ari": -0.0036522459429948416,
+      "covariance_ari": 1.0
+    },
+    {
+      "case": "correlation",
+      "seed": 83,
+      "projections": 32,
+      "atoms": 63,
+      "assets": 2,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 6.699532085003678,
+      "marginal_ari": -0.0036522459429948416,
+      "covariance_ari": 1.0
+    },
+    {
+      "case": "correlation",
+      "seed": 83,
+      "projections": 128,
+      "atoms": 63,
+      "assets": 2,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 6.7127872374085875,
+      "marginal_ari": -0.0036522459429948416,
+      "covariance_ari": 1.0
+    },
+    {
+      "case": "parity",
+      "seed": 17,
+      "projections": 8,
+      "atoms": 64,
+      "assets": 3,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 15.961103703457939,
+      "marginal_ari": 0.04646717637753757,
+      "covariance_ari": -0.006586313640255549
+    },
+    {
+      "case": "parity",
+      "seed": 17,
+      "projections": 32,
+      "atoms": 64,
+      "assets": 3,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 17.16430133001723,
+      "marginal_ari": 0.04646717637753757,
+      "covariance_ari": -0.006586313640255549
+    },
+    {
+      "case": "parity",
+      "seed": 17,
+      "projections": 128,
+      "atoms": 64,
+      "assets": 3,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 16.45734806495863,
+      "marginal_ari": 0.04646717637753757,
+      "covariance_ari": -0.006586313640255549
+    },
+    {
+      "case": "parity",
+      "seed": 42,
+      "projections": 8,
+      "atoms": 64,
+      "assets": 3,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 17.891781163807963,
+      "marginal_ari": -0.007354048964218456,
+      "covariance_ari": -0.0068894766068386525
+    },
+    {
+      "case": "parity",
+      "seed": 42,
+      "projections": 32,
+      "atoms": 64,
+      "assets": 3,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 18.808896330369155,
+      "marginal_ari": -0.007354048964218456,
+      "covariance_ari": -0.0068894766068386525
+    },
+    {
+      "case": "parity",
+      "seed": 42,
+      "projections": 128,
+      "atoms": 64,
+      "assets": 3,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 17.607468658006436,
+      "marginal_ari": -0.007354048964218456,
+      "covariance_ari": -0.0068894766068386525
+    },
+    {
+      "case": "parity",
+      "seed": 83,
+      "projections": 8,
+      "atoms": 64,
+      "assets": 3,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 18.945629499079608,
+      "marginal_ari": -0.0039830133426238925,
+      "covariance_ari": 0.014737956590788777
+    },
+    {
+      "case": "parity",
+      "seed": 83,
+      "projections": 32,
+      "atoms": 64,
+      "assets": 3,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 18.708183438924145,
+      "marginal_ari": -0.0039830133426238925,
+      "covariance_ari": 0.014737956590788777
+    },
+    {
+      "case": "parity",
+      "seed": 83,
+      "projections": 128,
+      "atoms": 64,
+      "assets": 3,
+      "sliced_ari": 1.0,
+      "occupied_states": 2,
+      "training_objective": 18.608799972874177,
+      "marginal_ari": -0.0039830133426238925,
+      "covariance_ari": 0.014737956590788777
+    }
+  ],
+  "benchmark": [
+    {
+      "n": 1000,
+      "atoms": 63,
+      "assets": 5,
+      "parameters": {
+        "n_clusters": 3,
+        "n_projections": 32,
+        "candidate_size": 64,
+        "n_init": 2,
+        "random_state": 42,
+        "chunk_size": 32
+      },
+      "fit_seconds": 0.06753712496720254,
+      "score_1000_seconds": 0.022434084210544825,
+      "peak_traced_fit_bytes": 5319804,
+      "input_bytes": 2520000
+    },
+    {
+      "n": 10000,
+      "atoms": 63,
+      "assets": 5,
+      "parameters": {
+        "n_clusters": 3,
+        "n_projections": 32,
+        "candidate_size": 64,
+        "n_init": 2,
+        "random_state": 42,
+        "chunk_size": 32
+      },
+      "fit_seconds": 0.47526249988004565,
+      "score_1000_seconds": 0.023256917018443346,
+      "peak_traced_fit_bytes": 5392236,
+      "input_bytes": 25200000
+    }
+  ],
+  "limitations": [
+    "Synthetic distribution classification, not time-series change-point delay or market prediction.",
+    "A covariance baseline solves the correlation control; parity adds higher-order structure. Neither is market evidence.",
+    "Data seeds and projection seeds vary together; a crossed sensitivity study is future work.",
+    "Only three seeds; descriptive results, no confidence interval or power claim.",
+    "Memory is peak traced allocations during fit, excluding preallocated input; not process RSS.",
+    "Timing excludes input generation, is single-run after warmup, with no tracemalloc active.",
+    "Finite-projection sliced W2 differs from full multivariate W2; medoid optimization is sampled."
+  ],
+  "provenance": {
+    "git_commit": "c61b6b190e9ffa15a6d12b5f92954e23080c7a58",
+    "example_sha256": "7f5e76671bfe31009cdc118c9a6e56546c030aa163806b403a8aa6a23add5fe2",
+    "numpy": "2.4.1",
+    "sklearn": "1.8.0",
+    "python": "3.11.5",
+    "machine": {
+      "platform": "macOS-26.4-arm64-arm-64bit",
+      "cpu": "Apple M5",
+      "logical_cpus": 10,
+      "ram_bytes": 25769803776,
+      "threadpools": [
+        {
+          "user_api": "openmp",
+          "internal_api": "openmp",
+          "num_threads": 1,
+          "prefix": "libomp",
+          "filepath": "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sklearn/.dylibs/libomp.dylib",
+          "version": null
+        }
+      ],
+      "blas": "accelerate"
+    },
+    "blas_threads_requested": 1
+  }
+}

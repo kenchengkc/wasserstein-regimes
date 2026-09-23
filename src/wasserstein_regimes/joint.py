@@ -6,7 +6,7 @@ from collections.abc import Mapping
 import numpy as np
 import pandas as pd
 
-from .data import ReturnSeries
+from .data import ReturnSeries, _session_index, _utc_index
 from .windows import _positive_integer
 
 
@@ -20,18 +20,28 @@ class JointWindowBatch:
     price_end: pd.DatetimeIndex
 
     def __post_init__(self):
+        if np.iscomplexobj(self.samples):
+            raise ValueError("joint samples must be real")
         x = np.array(self.samples, dtype=np.float64, copy=True)
-        if (x.ndim != 3 or x.shape[1] < 1 or x.shape[2] != len(self.symbols)
-                or not self.symbols or len(set(self.symbols)) != len(self.symbols)
-                or not np.isfinite(x).all()):
+        symbols = tuple(self.symbols)
+        if (x.ndim != 3 or x.shape[1] < 1 or x.shape[2] != len(symbols)
+                or not symbols or any(not isinstance(s, str) or not s for s in symbols)
+                or len(set(symbols)) != len(symbols) or not np.isfinite(x).all()):
             raise ValueError("invalid joint samples or symbols")
-        if any(len(field) != len(x) for field in (
-                self.dates, self.available_at, self.price_start, self.price_end)):
+        dates = _session_index(self.dates, "dates").copy(deep=True)
+        start = _session_index(self.price_start, "price_start").copy(deep=True)
+        end = _session_index(self.price_end, "price_end").copy(deep=True)
+        ready = _utc_index(self.available_at, "available_at").copy(deep=True)
+        if any(len(field) != len(x) for field in (dates, ready, start, end)):
             raise ValueError("joint metadata length mismatch")
-        if not self.dates.equals(self.price_end):
-            raise ValueError("joint dates must equal price_end")
+        if not dates.equals(end) or dates.has_duplicates or not dates.is_monotonic_increasing:
+            raise ValueError("joint dates must be unique, increasing and equal price_end")
+        if len(x) and (not np.all(start < end) or not np.all(ready >= end.tz_localize("UTC"))):
+            raise ValueError("invalid price intervals or observation availability")
         x.setflags(write=False)
-        object.__setattr__(self, "samples", x)
+        for name, value in dict(samples=x, symbols=symbols, dates=dates, price_start=start,
+                                price_end=end, available_at=ready).items():
+            object.__setattr__(self, name, value)
 
 
 def joint_windows(series: Mapping[str, ReturnSeries], length=63, stride=1):

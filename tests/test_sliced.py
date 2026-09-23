@@ -152,3 +152,18 @@ def test_third_order_dependence_with_identical_covariance():
     x = np.stack([a, b])
     model = SlicedWassersteinKMedoids(candidate_size=2).fit(x)
     assert model.transform(x)[0, 1-model.labels_[0]] > 0
+
+
+def test_complex_archive_and_underflow_edge(tmp_path):
+    path = tmp_path/'model.npz'
+    SlicedWassersteinKMedoids().fit(control()).save(path)
+    with np.load(path, allow_pickle=False) as f:
+        contents = {key:f[key].copy() for key in f.files}
+    contents['projections'] = contents['projections'].astype(complex)
+    contents['projections'].imag = np.nan
+    np.savez(path, **contents)
+    with pytest.raises(ValueError):
+        SlicedWassersteinKMedoids.load(path)
+    tiny = np.array([0., 1e-200, 2e-200, 3e-200]).reshape(4, 1, 1)
+    model = SlicedWassersteinKMedoids(candidate_size=4).fit(tiny)
+    assert np.isfinite(model.transform(tiny)).all()
