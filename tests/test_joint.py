@@ -79,3 +79,18 @@ def test_shared_broken_chain_excludes_window():
     a = replace(a, price_start=pd.DatetimeIndex(starts))
     result = joint_windows({'A':a}, length=3)
     assert result.dates.equals(a.dates[[4]])
+
+
+def test_batch_constructor_validates_and_freezes_metadata():
+    from wasserstein_regimes.joint import JointWindowBatch
+    good = joint_windows({'A':series(np.arange(5.))}, length=3)
+    symbols = ['A']
+    copy = replace(good, symbols=symbols)
+    symbols.append('B')
+    assert copy.symbols == ('A',)
+    with pytest.raises(ValueError):
+        replace(good, available_at=pd.DatetimeIndex([pd.NaT]*3))
+    with pytest.raises(ValueError):
+        replace(good, price_start=good.price_end)
+    with pytest.raises(ValueError):
+        replace(good, dates=pd.DatetimeIndex([good.dates[0]]*3))

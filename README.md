@@ -16,6 +16,8 @@ Exact one-dimensional W2 clustering of equal-size empirical distributions is Euc
 
 **Cross-asset replication:** QQQ, TLT, GLD and HYG show 95.27–97.53% scale contribution to raw centroid separation. Shape stability is mixed; TLT and HYG occupy only one raw holdout state. Read the [cross-asset results](docs/cross-asset-results.md).
 
+**Joint research extension:** Fixed-projection sliced W2 and sampled medoids detect dependence that marginals miss, with a fixed candidate memory budget. Read the [academic comparison and roadmap](docs/research-roadmap.md) and [measured synthetic results](docs/joint-results.md).
+
 ## Why this is interesting
 
 Moment-based representations can discard differences in skew, tails and multimodality. For equal-length sorted samples `x` and `y`:
