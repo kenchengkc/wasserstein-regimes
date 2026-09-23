@@ -118,3 +118,37 @@ def test_candidate_memory_budget(monkeypatch):
     assert all(a <= 16 and b <= 16 for a,b in shapes)
     assert m.inertia_ == pytest.approx(np.sum(m.transform(x).min(axis=1)**2))
     assert all(np.all(np.diff(run['objective_history']) <= 1e-12) for run in m.candidate_runs_)
+
+
+def test_validation_memory_is_chunked(monkeypatch):
+    import wasserstein_regimes.sliced as module
+    original = module.np.isfinite
+    sizes = []
+    def observed(x):
+        if isinstance(x, np.ndarray) and x.ndim == 3:
+            sizes.append(len(x))
+        return original(x)
+    monkeypatch.setattr(module.np, 'isfinite', observed)
+    x = np.random.default_rng(3).normal(size=(1000, 9, 2))
+    model = SlicedWassersteinKMedoids(candidate_size=16, chunk_size=7).fit(x)
+    model.predict(x)
+    assert max(sizes) <= 16  # candidate validation plus smaller scoring chunks
+
+
+def test_complex_geometry_rejected_without_silent_cast():
+    for kwargs in [dict(projections=np.array([[1+1j, 0]])),
+                   dict(scales=np.array([1+1j, 1]))]:
+        with pytest.raises(ValueError, match='real'):
+            SlicedWassersteinKMedoids(**kwargs)
+    with pytest.raises(ValueError, match='real'):
+        sliced_w2(control(), control(), np.array([[1+1j, 0]]))
+
+
+def test_third_order_dependence_with_identical_covariance():
+    a = np.array([[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]], float)
+    b = -a
+    np.testing.assert_array_equal(np.sort(a, axis=0), np.sort(b, axis=0))
+    np.testing.assert_array_equal(np.cov(a.T), np.cov(b.T))
+    x = np.stack([a, b])
+    model = SlicedWassersteinKMedoids(candidate_size=2).fit(x)
+    assert model.transform(x)[0, 1-model.labels_[0]] > 0

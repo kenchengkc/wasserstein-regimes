@@ -15,16 +15,21 @@ import numpy as np
 from .transport import _pairwise_sorted_costs, _positive_int
 
 
-def _joint(values):
+def _joint(values, chunk_size=32):
     if np.iscomplexobj(values):
         raise ValueError("samples must be real")
     x = np.asarray(values, dtype=np.float64)
-    if x.ndim != 3 or 0 in x.shape or not np.isfinite(x).all():
+    if x.ndim != 3 or 0 in x.shape:
         raise ValueError("samples must be finite nonempty (windows, atoms, assets)")
+    for start in range(0, len(x), chunk_size):
+        if not np.isfinite(x[start:start+chunk_size]).all():
+            raise ValueError("samples must be finite")
     return x
 
 
 def _geometry(dimension, projections, scales):
+    if np.iscomplexobj(projections) or np.iscomplexobj(scales):
+        raise ValueError("projections and scales must be real")
     directions = np.array(projections, dtype=np.float64, copy=True)
     scale = np.ones(dimension) if scales is None else np.array(scales, dtype=np.float64, copy=True)
     if (directions.ndim != 2 or len(directions) == 0 or directions.shape[1] != dimension
@@ -59,7 +64,8 @@ def sliced_w2(samples, centers, projections, *, scales=None, chunk_size=32):
     Uses only block-sized projected samples; output itself has shape (N, K).
     Explicit scales must come from historical training data, if used.
     """
-    x, y = _joint(samples), _joint(centers)
+    size = _positive_int(chunk_size, "chunk_size")
+    x, y = _joint(samples, size), _joint(centers, size)
     if x.shape[1:] != y.shape[1:]:
         raise ValueError("samples and centers must have identical atom and asset dimensions")
     size = _positive_int(chunk_size, "chunk_size")
@@ -107,11 +113,13 @@ class SlicedWassersteinKMedoids:
         if isinstance(random_state, bool) or not isinstance(random_state, Integral) or random_state < 0:
             raise ValueError("random_state must be a nonnegative integer")
         self.random_state = int(random_state)
+        if np.iscomplexobj(scales) or np.iscomplexobj(projections):
+            raise ValueError("projections and scales must be real")
         self.scales = None if scales is None else np.array(scales, dtype=np.float64, copy=True)
         self.projections = None if projections is None else np.array(projections, dtype=np.float64, copy=True)
 
     def fit(self, samples):
-        x = _joint(samples)
+        x = _joint(samples, self.chunk_size)
         if len(x) < self.n_clusters:
             raise ValueError("not enough distinct candidate distributions")
         rng = np.random.default_rng(self.random_state)
@@ -137,6 +145,8 @@ class SlicedWassersteinKMedoids:
                 updated = medoids.copy()
                 for cluster in range(self.n_clusters):
                     members = np.flatnonzero(labels == cluster)
+                    if not len(members):
+                        continue
                     # Distinct projected medoids each own at least their own point.
                     sums = matrix[np.ix_(members, members)].sum(axis=0)
                     choice = members[sums.argmin()]
@@ -170,7 +180,7 @@ class SlicedWassersteinKMedoids:
     def _check(self, samples):
         if not hasattr(self, "medoids_"):
             raise ValueError("model must be fitted")
-        x = _joint(samples)
+        x = _joint(samples, self.chunk_size)
         if x.shape[1:] != self.medoids_.shape[1:]:
             raise ValueError("prediction atom/asset dimensions differ from fitted model")
         return x
@@ -185,6 +195,8 @@ class SlicedWassersteinKMedoids:
         return _assign(x, centers, self.projections_, self.scales_, self.chunk_size)[0]
 
     def save(self, path):
+        if not hasattr(self, "medoids_"):
+            raise ValueError("model must be fitted")
         self._check(self.medoids_)
         params = {name:getattr(self, name) for name in (
             "n_clusters", "n_projections", "candidate_size", "n_init", "max_iter", "chunk_size", "random_state")}

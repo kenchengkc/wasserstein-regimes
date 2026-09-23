@@ -33,6 +33,18 @@ def correlated_windows(seed, n=120, length=63):
     return np.stack([first, second], axis=2), labels
 
 
+
+def parity_windows(seed, n=120, length=64):
+    """Identical marginal laws/covariance, differing third-order dependence."""
+    rng = np.random.default_rng(seed)
+    labels = np.arange(n) % 2
+    rng.shuffle(labels)
+    support = np.array([[1,1,1], [1,-1,-1], [-1,1,-1], [-1,-1,1]], float)
+    x = support[rng.integers(0, 4, size=(n, length))]
+    x[labels == 1] *= -1
+    return x, labels
+
+
 def marginal_features(x):
     # Sorting is within each asset, not across the concatenated vector.
     return np.sort(x, axis=1).reshape(len(x), -1) / np.sqrt(x.shape[1]*x.shape[2])
@@ -40,14 +52,15 @@ def marginal_features(x):
 
 def covariance_features(x):
     centered = x - x.mean(axis=1, keepdims=True)
-    return np.stack([(centered[:,:,0]**2).mean(axis=1),
-                     (centered[:,:,1]**2).mean(axis=1),
-                     (centered[:,:,0]*centered[:,:,1]).mean(axis=1)], axis=1)
+    covariance = np.einsum('nld,nle->nde', centered, centered) / x.shape[1]
+    i, j = np.triu_indices(x.shape[2])
+    return covariance[:, i, j]
+
 
 
 def run():
     settings = dict(seeds=[17, 42, 83], projection_counts=[8, 32, 128],
-                    n_train=120, n_test=120, atoms=63, candidate_size=64,
+                    n_train=120, n_test=120, atoms_by_case=dict(correlation=63, parity=64), candidate_size=64,
                     n_init=3, n_clusters=2, max_iter=100)
     a = np.array([[-1., -1.], [1., 1.]])
     b = np.array([[-1., 1.], [1., -1.]])
@@ -57,21 +70,22 @@ def run():
                    joint_sliced_distance=float(sliced_w2(a[None], b[None], directions)[0,0]),
                    projections=directions.tolist())
     rows = []
-    for seed in settings["seeds"]:
-        train, _ = correlated_windows(seed)
-        test, truth = correlated_windows(seed+10000)
-        baselines = {}
-        for name, features in (("marginal", marginal_features), ("covariance", covariance_features)):
-            model = KMeans(n_clusters=2, n_init=20, random_state=seed).fit(features(train))
-            baselines[name+"_ari"] = float(adjusted_rand_score(truth, model.predict(features(test))))
-        for count in settings["projection_counts"]:
-            model = SlicedWassersteinKMedoids(n_clusters=2, n_projections=count, candidate_size=64,
-                                             n_init=3, random_state=seed).fit(train)
-            prediction = model.predict(test)
-            rows.append(dict(seed=seed, projections=count,
-                             sliced_ari=float(adjusted_rand_score(truth, prediction)),
-                             occupied_states=int(len(np.unique(prediction))),
-                             training_objective=model.inertia_, **baselines))
+    for case, generator in (("correlation", correlated_windows), ("parity", parity_windows)):
+        for seed in settings["seeds"]:
+            train, _ = generator(seed)
+            test, truth = generator(seed+10000)
+            baselines = {}
+            for name, features in (("marginal", marginal_features), ("covariance", covariance_features)):
+                model = KMeans(n_clusters=2, n_init=20, random_state=seed).fit(features(train))
+                baselines[name+"_ari"] = float(adjusted_rand_score(truth, model.predict(features(test))))
+            for count in settings["projection_counts"]:
+                model = SlicedWassersteinKMedoids(n_clusters=2, n_projections=count, candidate_size=64,
+                                                 n_init=3, random_state=seed).fit(train)
+                prediction = model.predict(test)
+                rows.append(dict(case=case, seed=seed, projections=count, atoms=train.shape[1], assets=train.shape[2],
+                                 sliced_ari=float(adjusted_rand_score(truth, prediction)),
+                                 occupied_states=int(len(np.unique(prediction))),
+                                 training_objective=model.inertia_, **baselines))
     benchmark = []
     for n in [1000, 10000]:
         x = np.random.default_rng(91).normal(size=(n, 63, 5))
@@ -97,7 +111,7 @@ def run():
                 synthetic_rows=rows, benchmark=benchmark,
                 limitations=[
                     "Synthetic distribution classification, not time-series change-point delay or market prediction.",
-                    "A covariance baseline can solve this control; no incremental advantage is asserted.",
+                    "A covariance baseline solves the correlation control; parity adds higher-order structure. Neither is market evidence.",
                     "Data seeds and projection seeds vary together; a crossed sensitivity study is future work.",
                     "Only three seeds; descriptive results, no confidence interval or power claim.",
                     "Memory is peak traced allocations during fit, excluding preallocated input; not process RSS.",
