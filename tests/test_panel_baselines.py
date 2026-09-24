@@ -49,3 +49,13 @@ def test_invalid_inputs_fail():
         PanelKMeans('marginal',2,scales=[0,1]).fit(x)
     with pytest.raises(ValueError):
         PanelGaussianHMM(2).fit(np.full((100,2),np.nan))
+
+
+def test_near_collinear_hmm_fit_remains_filterable():
+    rng=np.random.default_rng(30)
+    common=rng.normal(size=(300,1))
+    x=np.c_[common,common+rng.normal(scale=1e-5,size=(300,1))]
+    model=PanelGaussianHMM(2,n_init=1,max_iter=10).fit(x)
+    probabilities=model.filter_proba(x)
+    assert np.isfinite(probabilities).all()
+    np.testing.assert_allclose(probabilities.sum(axis=1),1)

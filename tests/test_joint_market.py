@@ -84,14 +84,19 @@ def test_assessment_only_reloads_frozen_models(tmp_path,monkeypatch):
     scale=np.where(np.arange(len(base.returns))//60%2,3.,.5)
     all_series={symbol:replace(base,returns=rng.normal(size=len(scale))*scale)
                 for symbol in ['SPY','QQQ']}
+    source_meta={'synthetic':True}
     def fake_load(config,cutoff):
         panel,batch,masks=prepare_panel(all_series,config,cutoff)
-        return panel,batch,masks,{'synthetic':True}
+        return panel,batch,masks,source_meta
     monkeypatch.setattr(module,'load_panel',fake_load)
     cfg=tmp_path/'config.yaml'
     cfg.write_text(yaml.safe_dump(c))
     dev=run_joint_market(cfg,output_root=tmp_path).parent
     verify_artifact(dev)
+    development_metrics=json.loads((dev/'metrics.json').read_text())
+    for row in development_metrics['sensitivity']['projections']:
+        assert sum(row['counts'])==sum(row['reference_counts'])
+        assert sum(row['occupancy'])==pytest.approx(1.)
     monkeypatch.setattr(module,'_fit_models',lambda *a,**k:pytest.fail('assessment refitted models'))
     assessment=run_joint_market(cfg,stage='assessment',development=dev).parent
     verify_artifact(assessment)
@@ -99,7 +104,24 @@ def test_assessment_only_reloads_frozen_models(tmp_path,monkeypatch):
     assert data['stage']=='assessment'
     assert len({m['n'] for m in data['models'].values()})==1
     assert data['sensitivity'] is None
+    source_meta['revision']=2
+    with pytest.raises(ValueError,match='acquisition'):
+        run_joint_market(cfg,stage='assessment',development=dev)
+    del source_meta['revision']
+    from wasserstein_regimes.experiments import seal_artifact
+    (dev/'audit.json').write_text('different sealed development evidence')
+    seal_artifact(dev)
+    with pytest.raises(ValueError,match='development.*digest'):
+        run_joint_market(cfg,stage='assessment',development=dev)
     c['fit_stride']=6
     cfg.write_text(yaml.safe_dump(c))
     with pytest.raises(ValueError,match='protocol'):
         run_joint_market(cfg,stage='assessment',development=dev)
+
+
+def test_legacy_spy_acquisition_hash_and_conflicts():
+    from wasserstein_regimes.joint_market import check_acquisition
+    check_acquisition({'symbol':'SPY','dataset_sha256':'abc'},'SPY','abc')
+    check_acquisition({'symbol':'SPY','sha256':'abc'},'SPY','abc')
+    with pytest.raises(ValueError):
+        check_acquisition({'symbol':'SPY','sha256':'abc','dataset_sha256':'different'},'SPY','abc')

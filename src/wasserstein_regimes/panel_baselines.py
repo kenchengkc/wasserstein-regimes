@@ -148,6 +148,16 @@ class PanelGaussianHMM:
             try:
                 candidate=GaussianHMM(n_components=self.n_clusters,covariance_type='full',
                                       min_covar=1e-6,n_iter=self.max_iter,random_state=int(seed)).fit(z)
+                regularized=[]
+                adjustment=0.
+                for covariance in candidate.covars_:
+                    eigenvalues,eigenvectors=np.linalg.eigh(covariance)
+                    floor=max(1e-6,float(eigenvalues.max())*1e-8)
+                    corrected=(eigenvectors*np.maximum(eigenvalues,floor))@eigenvectors.T
+                    regularized.append((corrected+corrected.T)/2)
+                    adjustment=max(adjustment,float(np.max(np.abs(corrected-covariance))))
+                candidate.covars_=np.asarray(regularized)
+                row['max_covariance_adjustment']=adjustment
                 score=float(candidate.score(z))
                 valid=(np.isfinite(score) and np.isfinite(candidate.means_).all()
                        and np.isfinite(candidate.covars_).all()
