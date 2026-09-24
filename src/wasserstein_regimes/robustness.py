@@ -78,7 +78,7 @@ def control_stream(kind, seed):
     elif kind == 'gradual':
         for start, end in ((0, 1500), (1500, 2250), (2250, 3000)):
             mid = (start+end)//2
-            rho[mid-125:mid+125] = np.linspace(.2, .8, 250)
+            rho[mid-125:mid+125] = np.linspace(.2, .8, 252)[1:-1]
             rho[mid+125:end] = .8
     else:
         raise ValueError('unknown synthetic control')
