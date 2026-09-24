@@ -15,6 +15,7 @@ theme:
 nav:
   - Overview: index.md
   - Research roadmap: research-roadmap.md
+  - Robustness results: joint-validation-results.md
   - Robustness protocol: joint-validation-protocol.md
   - Robustness implementation: joint-validation-plan.md
   - Joint market results: joint-market-results.md
