@@ -47,7 +47,7 @@ regimes joint-study --config configs/joint_market.yaml --stage development
 regimes joint-study --config configs/joint_market.yaml --stage assessment   --development artifacts/joint-market-<run-id>/development
 ```
 
-Use the parent directory of the report.html path printed by the first command. Omitted stage defaults to development. Later code, dependency or snapshot changes produce different identities or fail compatibility checks. Raw prices, learned observed-window medoids and per-window assignments stay local; [public aggregate evidence](https://github.com/kenchengkc/wasserstein-regimes/tree/feat/scalable-joint-regimes/results/joint_market) includes configurations, source metadata, all model diagnostics, all sensitivity rows and checksum inventories.
+Use the parent directory of the report.html path printed by the first command. Omitted stage defaults to development. Later code, dependency or snapshot changes produce different identities or fail compatibility checks. Raw prices, learned observed-window medoids and per-window assignments stay local; [public aggregate evidence](https://github.com/kenchengkc/wasserstein-regimes/tree/94502d2d7e0f5b9e21df989443b2f7c3b10ca01b/results/joint_market) includes configurations, source metadata, all model diagnostics, all sensitivity rows and checksum inventories.
 
 ## Remaining limitations and next work
 

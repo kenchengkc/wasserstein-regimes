@@ -69,7 +69,7 @@ Run the complete synthetic and scaling example:
 PYTHONPATH=src VECLIB_MAXIMUM_THREADS=1 python examples/joint_study.py   --output artifacts/joint-synthetic.json
 ```
 
-Published measurements are in [results/joint-synthetic.json](https://github.com/kenchengkc/wasserstein-regimes/blob/feat/scalable-joint-regimes/results/joint-synthetic.json), including every run, configuration, source commit, example hash and machine description. The [design](joint-design.md) describes interfaces and memory costs; the [roadmap](research-roadmap.md) gives academic sources and the next empirical gates.
+Published measurements are in [results/joint-synthetic.json](https://github.com/kenchengkc/wasserstein-regimes/blob/a3202051c8a718f947e51cdef51199f20a1a79a8/results/joint-synthetic.json), including every run, configuration, source commit, example hash and machine description. The [design](joint-design.md) describes interfaces and memory costs; the [roadmap](research-roadmap.md) gives academic sources and the next empirical gates.
 
 ## Exploratory empirical follow-up
 
