@@ -22,7 +22,7 @@ Exact one-dimensional W2 clustering of equal-size empirical distributions is Euc
 - Raw W2, W1 and shape-only W2; volatility, mean/volatility, moments, rich features, GMM and causal HMM baselines.
 - Exact location/scale/shape decomposition, seed/block/refit stability, overlap-null persistence, validation-calibrated novelty and evaluation-only future outcomes.
 - Five synthetic controls, window-length power/delay studies, measured kernels, immutable artifacts and saved-artifact HTML reports.
-- 142 tests, including independent numerical oracles and a full price-prefix leakage regression.
+- Numerical oracles, temporal leakage checks, saved-model round trips and artifact-integrity tests.
 
 Read the [measured results](research-results.md), [reproduction workflow](research-workflow.md), [data sourcing](data.md), [paper review](paper-review.md), [design](design.md) and [future implementation roadmap](implementation-plan.md). Aggregate evidence is saved in [results](https://github.com/kenchengkc/wasserstein-regimes/tree/feat/distributional-evidence/results).
 
@@ -51,7 +51,7 @@ labels = model.predict(test_windows)
 distances = model.transform(test_windows)  # true W2 distances
 ```
 
-The base estimator remains NumPy-only. Research commands require the `research` extra. Multivariate OT, live inference and trading remain outside this release.
+The base estimator remains NumPy-only. Research commands require the `research` extra. Joint sliced-W2 medoids are available; full multivariate OT solvers, live inference and trading remain future work.
 
 ## Paper and license
 
