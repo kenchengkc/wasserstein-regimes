@@ -25,6 +25,10 @@ def main():
     joint.add_argument('--stage',choices=['development','assessment'],default='development')
     joint.add_argument('--development',help='Sealed development directory; required for assessment')
     joint.add_argument('--output-root',default='artifacts')
+    validation=sub.add_parser('joint-validate',help='Run joint regime robustness checks on validation only')
+    validation.add_argument('--config',required=True)
+    validation.add_argument('--development',required=True,help='Sealed joint-market development directory')
+    validation.add_argument('--output-root',default='artifacts')
     args=parser.parse_args()
     if args.command=='run':
         from .experiments import run
@@ -35,6 +39,9 @@ def main():
     elif args.command=='joint-study':
         from .joint_market import run_joint_market
         print(run_joint_market(args.config,output_root=args.output_root,stage=args.stage,development=args.development))
+    elif args.command=='joint-validate':
+        from .joint_validation import run_joint_validation
+        print(run_joint_validation(args.config,development=args.development,output_root=args.output_root))
     elif args.command=='report':
         from .reporting import report
         path=Path(args.run)
