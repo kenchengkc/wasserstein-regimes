@@ -56,7 +56,7 @@ def run_controls(c):
                             model = SlicedWassersteinKMedoids(n_clusters=k, candidate_size=budget, n_init=5,
                                 random_state=seed, scales=scales, projections=directions).fit(train)
                         else:
-                            model = PanelKMeans('covariance', k, scales=scales, n_init=20, seed=seed).fit(train)
+                            model = PanelKMeans('covariance', k, scales=scales, n_init=5, seed=seed).fit(train)
                         labels = model.predict(test)
                         row = dict(control=kind, seed=seed, candidates=budget, method=method, forced_k=k,
                                    training_windows=len(train), calibration_windows=len(calibration),

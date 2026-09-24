@@ -34,10 +34,17 @@ def test_refit_recomputes_unique_return_scales_and_does_not_fit_anchors():
     assert len(model.labels_) == 38
 
 
-def test_synthetic_suite_uses_disjoint_segments_and_reports_every_cell():
-    from wasserstein_regimes.joint_controls import run_controls
+def test_synthetic_suite_uses_disjoint_segments_and_reports_every_cell(monkeypatch):
+    from wasserstein_regimes.joint_controls import run_controls, PanelKMeans
+    actual_fit = PanelKMeans.fit
+    restarts = []
+    def checked_fit(self, samples):
+        restarts.append(self.n_init)
+        return actual_fit(self, samples)
+    monkeypatch.setattr(PanelKMeans, 'fit', checked_fit)
     c = dict(config(), synthetic_seeds=[17], candidate_sizes=[64])
     result = run_controls(c)
+    assert restarts == [5, 5, 5, 5]
     assert len(result) == 8  # two methods x (two nulls + rare + gradual)
     assert all(row['test']['n'] == 688 for row in result)
     assert all(row['training_windows'] == 288 for row in result)

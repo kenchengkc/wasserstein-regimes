@@ -61,7 +61,7 @@ def test_controls_fixed_parameters_reproducible_and_pure_truth(kind):
     else:
         truth = pure_truth(rho[2250:], 63)
         assert set(truth) == {-1, 0, 1}
-        assert (truth == -1).sum() > 250
+        assert (truth == -1).sum() == 312
 
 
 def test_diagnostics_flag_collapsed_agreement():
