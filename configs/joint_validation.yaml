@@ -1,0 +1,11 @@
+schema_version: 1
+market_config: configs/joint_market.yaml
+block_lengths: [63, 126, 252]
+bootstrap_repeats: 10
+chronological_ends: ['2015-12-31', '2017-12-31', '2020-12-31']
+candidate_sizes: [64, 128, 256]
+optimizer_seeds: [17, 42, 83]
+synthetic_seeds: [17, 42, 83, 101, 211]
+outlier_fractions: [0.001, 0.01]
+outlier_magnitude: 10.0
+seed: 42
