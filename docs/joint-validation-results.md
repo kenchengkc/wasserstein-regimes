@@ -84,7 +84,7 @@ with open("configs/joint_validation.yaml") as handle:
     results = run_controls(yaml.safe_load(handle))
 ```
 
-[Public aggregate evidence](https://github.com/kenchengkc/wasserstein-regimes/tree/feat/joint-robustness/results/joint_validation) contains every row, configuration, manifest and checksum inventory. Source snapshots, observed medoids and per-window market assignments remain local. Code and documentation remain GPL-3.0-only. See the [implementation plan](joint-validation-plan.md).
+[Public aggregate evidence](https://github.com/kenchengkc/wasserstein-regimes/tree/e2043b0122fd2e39f03e42df7c31540b27d28cbc/results/joint_validation) contains every row, configuration, manifest and checksum inventory. Source snapshots, observed medoids and per-window market assignments remain local. Code and documentation remain GPL-3.0-only. See the [implementation plan](joint-validation-plan.md).
 
 ## Consequences for the next phase
 
