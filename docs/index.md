@@ -14,6 +14,8 @@ Exact one-dimensional W2 clustering of equal-size empirical distributions is Euc
 
 **Exploratory joint market study:** Six models scored the same 605 synchronized five-asset windows. Joint states remain sensitive to resampling (mean validation ARI 0.521); predictive value is untested. Read the [market results](joint-market-results.md).
 
+**Joint robustness:** Return-level resampling averages ARI 0.518; 1% extreme training contamination collapses validation to one state. Stationary nulls also produce persistent clusters. Read the [robustness results](joint-validation-results.md).
+
 **Joint research extension:** Fixed-projection sliced W2 and sampled medoids detect dependence that marginals miss, with a fixed candidate memory budget. Read the [academic comparison and roadmap](research-roadmap.md) and [measured synthetic results](joint-results.md).
 
 ## Completed research release
