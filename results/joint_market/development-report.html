@@ -1,0 +1,1273 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Exploratory joint market study</title><style>body{font:16px system-ui;max-width:1100px;margin:40px auto;padding:20px}td,th{padding:8px}pre{white-space:pre-wrap}</style><h1>Exploratory joint market study</h1><p>Previously inspected market period; no confirmatory or predictive claim. All models score common strict windows. Single-state agreement is flagged.</p><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>occupied</th>
+      <th>windows</th>
+      <th>ARI_vs_scaled_joint</th>
+      <th>both_single_state</th>
+      <th>counts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>correlation</td>
+      <td>2</td>
+      <td>690</td>
+      <td>0.011731</td>
+      <td>False</td>
+      <td>[0, 36, 654]</td>
+    </tr>
+    <tr>
+      <td>covariance</td>
+      <td>1</td>
+      <td>690</td>
+      <td>0.000000</td>
+      <td>False</td>
+      <td>[690, 0, 0]</td>
+    </tr>
+    <tr>
+      <td>hmm</td>
+      <td>3</td>
+      <td>690</td>
+      <td>0.223314</td>
+      <td>False</td>
+      <td>[281, 24, 385]</td>
+    </tr>
+    <tr>
+      <td>marginal</td>
+      <td>2</td>
+      <td>690</td>
+      <td>0.467850</td>
+      <td>False</td>
+      <td>[511, 0, 179]</td>
+    </tr>
+    <tr>
+      <td>raw_joint</td>
+      <td>2</td>
+      <td>690</td>
+      <td>0.865395</td>
+      <td>False</td>
+      <td>[0, 281, 409]</td>
+    </tr>
+    <tr>
+      <td>scaled_joint</td>
+      <td>2</td>
+      <td>690</td>
+      <td>1.000000</td>
+      <td>False</td>
+      <td>[0, 287, 403]</td>
+    </tr>
+  </tbody>
+</table><details><summary>Complete aggregate diagnostics</summary><pre>{
+  &quot;calibration&quot;: {
+    &quot;raw_joint&quot;: 0.006106365557965919,
+    &quot;scaled_joint&quot;: 0.570332091627392
+  },
+  &quot;fit&quot;: {
+    &quot;hmm_diagnostics&quot;: [
+      {
+        &quot;converged&quot;: true,
+        &quot;loglikelihood&quot;: -15527.226904856348,
+        &quot;max_covariance_adjustment&quot;: 7.105427357601002e-15,
+        &quot;n_iter&quot;: 49,
+        &quot;reached_iteration_limit&quot;: false,
+        &quot;seed&quot;: 191664963
+      },
+      {
+        &quot;converged&quot;: true,
+        &quot;loglikelihood&quot;: -15527.230947940918,
+        &quot;max_covariance_adjustment&quot;: 8.881784197001252e-15,
+        &quot;n_iter&quot;: 34,
+        &quot;reached_iteration_limit&quot;: false,
+        &quot;seed&quot;: 1662057957
+      },
+      {
+        &quot;converged&quot;: true,
+        &quot;loglikelihood&quot;: -15527.226704901594,
+        &quot;max_covariance_adjustment&quot;: 5.329070518200751e-15,
+        &quot;n_iter&quot;: 36,
+        &quot;reached_iteration_limit&quot;: false,
+        &quot;seed&quot;: 1405681631
+      }
+    ],
+    &quot;hmm_selected_loglikelihood&quot;: -15527.226704901594,
+    &quot;k&quot;: 3,
+    &quot;scales&quot;: [
+      0.013085056793495859,
+      0.014013427871785836,
+      0.00942456452717373,
+      0.011420799799601573,
+      0.007558879793438516
+    ],
+    &quot;selection&quot;: [
+      {
+        &quot;k&quot;: 2,
+        &quot;occupied&quot;: 1,
+        &quot;silhouette&quot;: null
+      },
+      {
+        &quot;k&quot;: 3,
+        &quot;occupied&quot;: 2,
+        &quot;silhouette&quot;: 0.39269442112838854
+      },
+      {
+        &quot;k&quot;: 4,
+        &quot;occupied&quot;: 3,
+        &quot;silhouette&quot;: 0.23628046582711248
+      },
+      {
+        &quot;k&quot;: 5,
+        &quot;occupied&quot;: 3,
+        &quot;silhouette&quot;: 0.25318124975731005
+      }
+    ],
+    &quot;selection_indices&quot;: [
+      4,
+      20,
+      23,
+      24,
+      25,
+      36,
+      39,
+      45,
+      46,
+      47,
+      50,
+      51,
+      52,
+      59,
+      60,
+      70,
+      74,
+      78,
+      86,
+      88,
+      90,
+      94,
+      98,
+      100,
+      108,
+      113,
+      114,
+      126,
+      127,
+      137,
+      144,
+      150,
+      157,
+      158,
+      159,
+      177,
+      180,
+      186,
+      191,
+      193,
+      194,
+      200,
+      202,
+      203,
+      204,
+      212,
+      217,
+      221,
+      224,
+      231,
+      232,
+      234,
+      241,
+      244,
+      247,
+      248,
+      252,
+      257,
+      267,
+      270,
+      272,
+      275,
+      279,
+      280,
+      281,
+      284,
+      286,
+      288,
+      291,
+      292,
+      295,
+      297,
+      301,
+      304,
+      308,
+      312,
+      320,
+      326,
+      343,
+      347,
+      348,
+      357,
+      360,
+      366,
+      367,
+      370,
+      371,
+      373,
+      375,
+      378,
+      383,
+      387,
+      391,
+      392,
+      399,
+      400,
+      401,
+      402,
+      408,
+      411,
+      414,
+      415,
+      418,
+      424,
+      427,
+      428,
+      429,
+      431,
+      433,
+      435,
+      437,
+      440,
+      441,
+      451,
+      454,
+      459,
+      460,
+      461,
+      470,
+      475,
+      478,
+      486,
+      497,
+      500,
+      501,
+      503,
+      505,
+      509,
+      511,
+      513,
+      516,
+      524,
+      525,
+      528,
+      540,
+      545,
+      557,
+      559,
+      560,
+      561,
+      571,
+      574,
+      576,
+      582,
+      610,
+      619,
+      626,
+      635,
+      639,
+      641,
+      642,
+      647,
+      659,
+      664,
+      666,
+      670,
+      673,
+      679,
+      683,
+      689
+    ],
+    &quot;training_windows&quot;: 679
+  },
+  &quot;models&quot;: {
+    &quot;correlation&quot;: {
+      &quot;ari_vs_scaled_joint&quot;: 0.01173084646155022,
+      &quot;both_single_state_vs_scaled&quot;: false,
+      &quot;contemporaneous&quot;: [
+        {
+          &quot;mean_asset_daily_volatility&quot;: null,
+          &quot;mean_pair_correlation&quot;: null,
+          &quot;n&quot;: 0,
+          &quot;state&quot;: 0
+        },
+        {
+          &quot;mean_asset_daily_volatility&quot;: 0.01050966295389902,
+          &quot;mean_pair_correlation&quot;: 0.1734924854252191,
+          &quot;n&quot;: 36,
+          &quot;state&quot;: 1
+        },
+        {
+          &quot;mean_asset_daily_volatility&quot;: 0.00987774406621246,
+          &quot;mean_pair_correlation&quot;: 0.383594683180496,
+          &quot;n&quot;: 654,
+          &quot;state&quot;: 2
+        }
+      ],
+      &quot;counts&quot;: [
+        0,
+        36,
+        654
+      ],
+      &quot;n&quot;: 690,
+      &quot;occupancy&quot;: [
+        0.0,
+        0.05217391304347826,
+        0.9478260869565217
+      ],
+      &quot;occupied&quot;: 2,
+      &quot;temporal&quot;: {
+        &quot;adjacent_pairs&quot;: 689,
+        &quot;dwell_times&quot;: [
+          225,
+          2,
+          2,
+          12,
+          3,
+          9,
+          283,
+          13,
+          141
+        ],
+        &quot;mean_dwell&quot;: 76.66666666666667,
+        &quot;median_dwell&quot;: 12.0,
+        &quot;switching_frequency&quot;: 0.011611030478955007,
+        &quot;transitions&quot;: [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            32,
+            4
+          ],
+          [
+            0,
+            4,
+            649
+          ]
+        ]
+      }
+    },
+    &quot;covariance&quot;: {
+      &quot;ari_vs_scaled_joint&quot;: 0.0,
+      &quot;both_single_state_vs_scaled&quot;: false,
+      &quot;contemporaneous&quot;: [
+        {
+          &quot;mean_asset_daily_volatility&quot;: 0.009910713747309148,
+          &quot;mean_pair_correlation&quot;: 0.3726328293845685,
+          &quot;n&quot;: 690,
+          &quot;state&quot;: 0
+        },
+        {
+          &quot;mean_asset_daily_volatility&quot;: null,
+          &quot;mean_pair_correlation&quot;: null,
+          &quot;n&quot;: 0,
+          &quot;state&quot;: 1
+        },
+        {
+          &quot;mean_asset_daily_volatility&quot;: null,
+          &quot;mean_pair_correlation&quot;: null,
+          &quot;n&quot;: 0,
+          &quot;state&quot;: 2
+        }
+      ],
+      &quot;counts&quot;: [
+        690,
+        0,
+        0
+      ],
+      &quot;n&quot;: 690,
+      &quot;occupancy&quot;: [
+        1.0,
+        0.0,
+        0.0
+      ],
+      &quot;occupied&quot;: 1,
+      &quot;temporal&quot;: {
+        &quot;adjacent_pairs&quot;: 689,
+        &quot;dwell_times&quot;: [
+          690
+        ],
+        &quot;mean_dwell&quot;: 690.0,
+        &quot;median_dwell&quot;: 690.0,
+        &quot;switching_frequency&quot;: 0.0,
+        &quot;transitions&quot;: [
+          [
+            689,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    &quot;hmm&quot;: {
+      &quot;ari_vs_scaled_joint&quot;: 0.2233136133526385,
+      &quot;both_single_state_vs_scaled&quot;: false,
+      &quot;contemporaneous&quot;: [
+        {
+          &quot;mean_asset_daily_volatility&quot;: 0.008056857018044261,
+          &quot;mean_pair_correlation&quot;: 0.36282385554891305,
+          &quot;n&quot;: 281,
+          &quot;state&quot;: 0
+        },
+        {
+          &quot;mean_asset_daily_volatility&quot;: 0.012533140972625187,
+          &quot;mean_pair_correlation&quot;: 0.39631114303114173,
+          &quot;n&quot;: 24,
+          &quot;state&quot;: 1
+        },
+        {
+          &quot;mean_asset_daily_volatility&quot;: 0.01110031241618148,
+          &quot;mean_pair_correlation&quot;: 0.37831605567106563,
+          &quot;n&quot;: 385,
+          &quot;state&quot;: 2
+        }
+      ],
+      &quot;counts&quot;: [
+        281,
+        24,
+        385
+      ],
+      &quot;n&quot;: 690,
+      &quot;occupancy&quot;: [
+        0.4072463768115942,
+        0.034782608695652174,
+        0.5579710144927537
+      ],
+      &quot;occupied&quot;: 3,
+      &quot;temporal&quot;: {
+        &quot;adjacent_pairs&quot;: 689,
+        &quot;dwell_times&quot;: [
+          20,
+          1,
+          1,
+          1,
+          1,
+          6,
+          21,
+          3,
+          18,
+          2,
+          12,
+          1,
+          29,
+          1,
+          5,
+          1,
+          1,
+          4,
+          7,
+          1,
+          17,
+          1,
+          7,
+          2,
+          1,
+          10,
+          4,
+          5,
+          7,
+          3,
+          4,
+          13,
+          1,
+          3,
+          2,
+          21,
+          1,
+          1,
+          1,
+          2,
+          1,
+          10,
+          1,
+          7,
+          1,
+          8,
+          2,
+          2,
+          2,
+          24,
+          4,
+          17,
+          1,
+          24,
+          1,
+          3,
+          1,
+          11,
+          1,
+          1,
+          3,
+          1,
+          4,
+          4,
+          1,
+          2,
+          14,
+          1,
+          11,
+          1,
+          5,
+          2,
+          2,
+          1,
+          3,
+          1,
+          4,
+          1,
+          24,
+          1,
+          4,
+          4,
+          12,
+          1,
+          2,
+          1,
+          4,
+          3,
+          1,
+          1,
+          15,
+          1,
+          7,
+          3,
+          1,
+          7,
+          10,
+          1,
+          1,
+          3,
+          3,
+          3,
+          4,
+          2,
+          1,
+          2,
+          2,
+          1,
+          1,
+          10,
+          3,
+          2,
+          1,
+          3,
+          3,
+          3,
+          2,
+          3,
+          2,
+          2,
+          3,
+          1,
+          1,
+          10,
+          3,
+          1,
+          1,
+          3,
+          1,
+          11,
+          2,
+          1,
+          1,
+          3,
+          3,
+          2,
+          1,
+          2,
+          13,
+          1,
+          1,
+          1,
+          6,
+          1,
+          2,
+          8,
+          5,
+          5,
+          3,
+          2,
+          1,
+          6
+        ],
+        &quot;mean_dwell&quot;: 4.5394736842105265,
+        &quot;median_dwell&quot;: 2.0,
+        &quot;switching_frequency&quot;: 0.21915820029027577,
+        &quot;transitions&quot;: [
+          [
+            219,
+            1,
+            60
+          ],
+          [
+            0,
+            9,
+            15
+          ],
+          [
+            61,
+            14,
+            310
+          ]
+        ]
+      }
+    },
+    &quot;marginal&quot;: {
+      &quot;ari_vs_scaled_joint&quot;: 0.4678504922497713,
+      &quot;both_single_state_vs_scaled&quot;: false,
+      &quot;contemporaneous&quot;: [
+        {
+          &quot;mean_asset_daily_volatility&quot;: 0.008641334307455291,
+          &quot;mean_pair_correlation&quot;: 0.3419943988665705,
+          &quot;n&quot;: 511,
+          &quot;state&quot;: 0
+        },
+        {
+          &quot;mean_asset_daily_volatility&quot;: null,
+          &quot;mean_pair_correlation&quot;: null,
+          &quot;n&quot;: 0,
+          &quot;state&quot;: 1
+        },
+        {
+          &quot;mean_asset_daily_volatility&quot;: 0.013534472930355633,
+          &quot;mean_pair_correlation&quot;: 0.4600978461147191,
+          &quot;n&quot;: 179,
+          &quot;state&quot;: 2
+        }
+      ],
+      &quot;counts&quot;: [
+        511,
+        0,
+        179
+      ],
+      &quot;n&quot;: 690,
+      &quot;occupancy&quot;: [
+        0.7405797101449275,
+        0.0,
+        0.2594202898550725
+      ],
+      &quot;occupied&quot;: 2,
+      &quot;temporal&quot;: {
+        &quot;adjacent_pairs&quot;: 689,
+        &quot;dwell_times&quot;: [
+          273,
+          92,
+          12,
+          87,
+          226
+        ],
+        &quot;mean_dwell&quot;: 138.0,
+        &quot;median_dwell&quot;: 92.0,
+        &quot;switching_frequency&quot;: 0.005805515239477504,
+        &quot;transitions&quot;: [
+          [
+            508,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            177
+          ]
+        ]
+      }
+    },
+    &quot;raw_joint&quot;: {
+      &quot;ari_vs_scaled_joint&quot;: 0.8653946571570552,
+      &quot;both_single_state_vs_scaled&quot;: false,
+      &quot;contemporaneous&quot;: [
+        {
+          &quot;mean_asset_daily_volatility&quot;: null,
+          &quot;mean_pair_correlation&quot;: null,
+          &quot;n&quot;: 0,
+          &quot;state&quot;: 0
+        },
+        {
+          &quot;mean_asset_daily_volatility&quot;: 0.0127484184517067,
+          &quot;mean_pair_correlation&quot;: 0.40711100196209193,
+          &quot;n&quot;: 281,
+          &quot;state&quot;: 1
+        },
+        {
+          &quot;mean_asset_daily_volatility&quot;: 0.007961092666781733,
+          &quot;mean_pair_correlation&quot;: 0.3489448917457321,
+          &quot;n&quot;: 409,
+          &quot;state&quot;: 2
+        }
+      ],
+      &quot;counts&quot;: [
+        0,
+        281,
+        409
+      ],
+      &quot;n&quot;: 690,
+      &quot;novelty_fraction&quot;: 0.010144927536231883,
+      &quot;novelty_threshold&quot;: 0.006106365557965919,
+      &quot;occupancy&quot;: [
+        0.0,
+        0.4072463768115942,
+        0.5927536231884057
+      ],
+      &quot;occupied&quot;: 2,
+      &quot;temporal&quot;: {
+        &quot;adjacent_pairs&quot;: 689,
+        &quot;dwell_times&quot;: [
+          220,
+          262,
+          4,
+          19,
+          185
+        ],
+        &quot;mean_dwell&quot;: 138.0,
+        &quot;median_dwell&quot;: 185.0,
+        &quot;switching_frequency&quot;: 0.005805515239477504,
+        &quot;transitions&quot;: [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            279,
+            2
+          ],
+          [
+            0,
+            2,
+            406
+          ]
+        ]
+      }
+    },
+    &quot;scaled_joint&quot;: {
+      &quot;ari_vs_scaled_joint&quot;: 1.0,
+      &quot;both_single_state_vs_scaled&quot;: false,
+      &quot;contemporaneous&quot;: [
+        {
+          &quot;mean_asset_daily_volatility&quot;: null,
+          &quot;mean_pair_correlation&quot;: null,
+          &quot;n&quot;: 0,
+          &quot;state&quot;: 0
+        },
+        {
+          &quot;mean_asset_daily_volatility&quot;: 0.012704036791724053,
+          &quot;mean_pair_correlation&quot;: 0.40899394985186677,
+          &quot;n&quot;: 287,
+          &quot;state&quot;: 1
+        },
+        {
+          &quot;mean_asset_daily_volatility&quot;: 0.00792142413503352,
+          &quot;mean_pair_correlation&quot;: 0.34673793714110795,
+          &quot;n&quot;: 403,
+          &quot;state&quot;: 2
+        }
+      ],
+      &quot;counts&quot;: [
+        0,
+        287,
+        403
+      ],
+      &quot;n&quot;: 690,
+      &quot;novelty_fraction&quot;: 0.010144927536231883,
+      &quot;novelty_threshold&quot;: 0.570332091627392,
+      &quot;occupancy&quot;: [
+        0.0,
+        0.41594202898550725,
+        0.5840579710144927
+      ],
+      &quot;occupied&quot;: 2,
+      &quot;temporal&quot;: {
+        &quot;adjacent_pairs&quot;: 689,
+        &quot;dwell_times&quot;: [
+          229,
+          284,
+          8,
+          3,
+          166
+        ],
+        &quot;mean_dwell&quot;: 138.0,
+        &quot;median_dwell&quot;: 166.0,
+        &quot;switching_frequency&quot;: 0.005805515239477504,
+        &quot;transitions&quot;: [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            285,
+            2
+          ],
+          [
+            0,
+            2,
+            400
+          ]
+        ]
+      }
+    }
+  },
+  &quot;sensitivity&quot;: {
+    &quot;interpretation&quot;: &quot;Validation only; fixed K/scales; not confidence intervals&quot;,
+    &quot;projections&quot;: [
+      {
+        &quot;ari&quot;: 0.616458551785017,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          361,
+          329
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.5231884057971015,
+          0.47681159420289854
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;projections&quot;: 16,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;seed&quot;: 17
+      },
+      {
+        &quot;ari&quot;: 0.8384460816011217,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          258,
+          432
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.3739130434782609,
+          0.6260869565217392
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;projections&quot;: 16,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;seed&quot;: 42
+      },
+      {
+        &quot;ari&quot;: 0.9314722087475039,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          275,
+          415
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.39855072463768115,
+          0.6014492753623188
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;projections&quot;: 16,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;seed&quot;: 83
+      },
+      {
+        &quot;ari&quot;: 0.8384460816011217,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          258,
+          432
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.3739130434782609,
+          0.6260869565217392
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;projections&quot;: 64,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;seed&quot;: 17
+      },
+      {
+        &quot;ari&quot;: 1.0,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.41594202898550725,
+          0.5840579710144927
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;projections&quot;: 64,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;seed&quot;: 42
+      },
+      {
+        &quot;ari&quot;: 0.8437870419025293,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          259,
+          431
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.3753623188405797,
+          0.6246376811594203
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;projections&quot;: 64,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;seed&quot;: 83
+      },
+      {
+        &quot;ari&quot;: 0.8925928972978143,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          268,
+          422
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.3884057971014493,
+          0.6115942028985507
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;projections&quot;: 128,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;seed&quot;: 17
+      },
+      {
+        &quot;ari&quot;: 0.9036190950910881,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          270,
+          420
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.391304347826087,
+          0.6086956521739131
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;projections&quot;: 128,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;seed&quot;: 42
+      },
+      {
+        &quot;ari&quot;: 0.9258686916163573,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          274,
+          416
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.39710144927536234,
+          0.6028985507246377
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;projections&quot;: 128,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;seed&quot;: 83
+      }
+    ],
+    &quot;window_block_bootstrap&quot;: [
+      {
+        &quot;ari&quot;: 0.0,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          690,
+          0
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          1.0,
+          0.0
+        ],
+        &quot;occupied&quot;: 1,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;repeat&quot;: 0
+      },
+      {
+        &quot;ari&quot;: 0.9371284730988015,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          298,
+          392,
+          0
+        ],
+        &quot;occupancy&quot;: [
+          0.4318840579710145,
+          0.5681159420289855,
+          0.0
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;repeat&quot;: 1
+      },
+      {
+        &quot;ari&quot;: 0.7012881644979697,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          347,
+          343
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.5028985507246376,
+          0.4971014492753623
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;repeat&quot;: 2
+      },
+      {
+        &quot;ari&quot;: 0.9427286266655208,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          277,
+          0,
+          413
+        ],
+        &quot;occupancy&quot;: [
+          0.40144927536231884,
+          0.0,
+          0.5985507246376811
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;repeat&quot;: 3
+      },
+      {
+        &quot;ari&quot;: 0.4789017836785841,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          297,
+          393
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.43043478260869567,
+          0.5695652173913044
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;repeat&quot;: 4
+      },
+      {
+        &quot;ari&quot;: 0.5760614947534286,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          320,
+          370,
+          0
+        ],
+        &quot;occupancy&quot;: [
+          0.463768115942029,
+          0.5362318840579711,
+          0.0
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;repeat&quot;: 5
+      },
+      {
+        &quot;ari&quot;: 0.5983386656849444,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          365,
+          325,
+          0
+        ],
+        &quot;occupancy&quot;: [
+          0.5289855072463768,
+          0.47101449275362317,
+          0.0
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;repeat&quot;: 6
+      },
+      {
+        &quot;ari&quot;: 0.5285061361313759,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          309,
+          0,
+          381
+        ],
+        &quot;occupancy&quot;: [
+          0.44782608695652176,
+          0.0,
+          0.5521739130434783
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;repeat&quot;: 7
+      },
+      {
+        &quot;ari&quot;: 0.20563483362680576,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          216,
+          474
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.3130434782608696,
+          0.6869565217391305
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;repeat&quot;: 8
+      },
+      {
+        &quot;ari&quot;: 0.2393843800819073,
+        &quot;both_single_state&quot;: false,
+        &quot;counts&quot;: [
+          0,
+          228,
+          462
+        ],
+        &quot;occupancy&quot;: [
+          0.0,
+          0.33043478260869563,
+          0.6695652173913044
+        ],
+        &quot;occupied&quot;: 2,
+        &quot;reference_counts&quot;: [
+          0,
+          287,
+          403
+        ],
+        &quot;reference_occupied&quot;: 2,
+        &quot;repeat&quot;: 9
+      }
+    ]
+  },
+  &quot;stage&quot;: &quot;development&quot;
+}</pre></details></html>

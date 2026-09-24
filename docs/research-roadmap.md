@@ -6,7 +6,7 @@ Reviewed September 23, 2026. The original design remains the research contract; 
 
 Exact univariate W1/W2, chronological evaluation, nine baselines, synthetic controls, saved reports and independent QQQ/TLT/GLD/HYG replication are implemented. The old milestone document's opening description predates those releases. Raw centroid geometry is overwhelmingly scale-driven; shape stability is mixed. TLT and HYG occupy one raw holdout state. These findings motivate testing a different information source—joint dependence—before making economic claims.
 
-The daily provider, strict split machinery and market snapshots are reusable. Joint alignment, multivariate geometry, projection sensitivity, scalable prototype selection and a new empirical protocol are still distinct deliverables. Reusing an exposed holdout to select the next model would not constitute a new confirmatory test.
+The daily provider, strict split machinery and market snapshots are reusable. Joint alignment, finite-projection geometry, sampled prototype selection and the first [exploratory empirical panel](joint-market-results.md) are now delivered. Projection and conditional window-block diagnostics are available; broader null/refit/source validation remains outstanding. Reusing an exposed holdout to select the next model would not constitute a new confirmatory test.
 
 ## Academic projects and decisions
 
@@ -27,7 +27,7 @@ No third-party implementation is copied. References are methodological compariso
 2. Add joint sliced transport with observed prototypes: directly tests the next planned hypothesis and exposes an explicit computation budget. **Selected.**
 3. Add risk forecasts now: potentially useful, but requires a separate target, loss, baselines and untouched evaluation period. Defer the claim, while specifying its future gate.
 
-The first delivery is a tested joint-distribution engine plus reproducible synthetic and performance evidence. It does not automatically fit the already examined market holdout, select a trading strategy, or claim that synthetic accuracy transfers to markets.
+The first delivery is a tested joint-distribution engine plus reproducible synthetic and performance evidence. The subsequent panel study explicitly labels the previously inspected market period exploratory; it does not select a trading strategy or claim that synthetic accuracy transfers to markets.
 
 ## Staged implementation and acceptance gates
 
@@ -35,8 +35,8 @@ The first delivery is a tested joint-distribution engine plus reproducible synth
 | --- | --- | --- |
 | 1, this change | Fixed-projection sliced W2; bounded candidate medoids; aligned trailing joint windows; safe saved inference | Exact 1D reduction, row-permutation invariance, projection oracle, frozen scales/directions, deterministic seeds, round-trip predictions, no full N-by-N matrix for fixed candidate budget |
 | 2, this change | Dependence-only controls, covariance baseline, projection sweep, measured scaling example | Marginals provably identical in a deterministic control; independent train/test synthetic windows; all seeds/counts reported; memory metric labeled; no selective best-run result |
-| 3, next empirical study | Common-history, synchronized SPY/QQQ/TLT/GLD/HYG panel with raw and training-scaled ablations | Explicit session/availability contract; no fills; full interval purging; covariance/correlation, marginal and HMM baselines; projection/window/K choices frozen on development; source sensitivity |
-| 4 | Refit, null and perturbation validation | Return-block and projection-seed stability, occupancy including single-state flags, stationary dependence null, rare/gradual transitions, outlier sensitivity, chronological anchor sets |
+| 3, exploratory study delivered; cross-provider gate pending | Common-history, synchronized SPY/QQQ/TLT/GLD/HYG panel with raw and training-scaled ablations | Explicit session/availability contract; no fills; full interval purging; covariance/correlation, marginal and HMM baselines; projection/window/K choices frozen on development; source sensitivity |
+| 4, next | Refit, null and perturbation validation | Return-block and projection-seed stability, occupancy including single-state flags, stationary dependence null, rare/gradual transitions, outlier sensitivity, chronological anchor sets |
 | 5 | Frozen-model scoring and experiment scale | Atomic resumable jobs, isolated fold/seed workers, bounded worker count and BLAS threads, job identity independent of report-only files, validation against frozen schema, measured process RSS |
 | 6 | Risk forecasting | Prespecified horizon and proper loss; expanding-window historical, EWMA/GARCH or covariance shrinkage baselines; common information sets; dependence-aware uncertainty; genuinely untouched period or explicit exploratory label |
 | 7 | Path-aware or entropic extensions | Prove the blind spot with controls first; compare lag vectors/signatures or debiased Sinkhorn on cost, stability and benefit. GPU work follows profiling. |

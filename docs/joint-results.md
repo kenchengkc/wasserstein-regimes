@@ -71,6 +71,6 @@ PYTHONPATH=src VECLIB_MAXIMUM_THREADS=1 python examples/joint_study.py   --outpu
 
 Published measurements are in [results/joint-synthetic.json](https://github.com/kenchengkc/wasserstein-regimes/blob/feat/scalable-joint-regimes/results/joint-synthetic.json), including every run, configuration, source commit, example hash and machine description. The [design](joint-design.md) describes interfaces and memory costs; the [roadmap](research-roadmap.md) gives academic sources and the next empirical gates.
 
-## Next empirical study
+## Exploratory empirical follow-up
 
-Use a common-history aligned panel, explicit raw versus training-scaled ablations, covariance/correlation and marginal baselines, projection and block stability, and stationary dependence nulls. Freeze the protocol before examining a new evaluation period. The existing 2024–August 2026 holdout has already been inspected and cannot become untouched evidence for model selection. Risk forecasting remains a separate experiment.
+The [exploratory synchronized market study](joint-market-results.md) now implements a common-history panel and baseline comparison. Further validation still needs stationary dependence nulls, rare-transition/outlier controls, chronological refits and cross-provider replication. Freeze the protocol before examining a new evaluation period. The existing 2024–August 2026 holdout has already been inspected and cannot become untouched evidence for model selection. Risk forecasting remains a separate experiment.
