@@ -1,0 +1,49 @@
+schema_version: 1
+assets:
+- symbol: SPY
+  dataset: data/raw/spy_daily_2026-08-31.csv
+  sha256: aeb4a4356b6d34fc4c67d7f446e98e8e91d2fc57a48065616137dea379d21b7d
+- symbol: QQQ
+  dataset: data/raw/QQQ_daily_2026-08-31.csv
+  sha256: 07d0fd289438c0ac786e3f3daa5b3665ef803c49154a909325bbaeb6ee4c06c2
+- symbol: TLT
+  dataset: data/raw/TLT_daily_2026-08-31.csv
+  sha256: a953d148eb8c1e766bcbffb317e7b7656a37f706e1f4a6474bfae138fc21ebb9
+- symbol: GLD
+  dataset: data/raw/GLD_daily_2026-08-31.csv
+  sha256: b6cf5fdd605bb9b035e00fc692845ca6b1eb908d6fafcaa80f613ba668bb96e7
+- symbol: HYG
+  dataset: data/raw/HYG_daily_2026-08-31.csv
+  sha256: c21ed428b212de482f466411f4080248712ff58628054778764e2e08d81e1b4e
+provider: Yahoo Finance via yfinance
+price_column: Adj Close
+train_end: '2020-12-31'
+validation_end: '2023-12-31'
+assessment_end: '2026-08-31'
+window_length: 63
+fit_stride: 5
+k_candidates:
+- 2
+- 3
+- 4
+- 5
+seed: 42
+n_projections: 64
+candidate_size: 128
+n_init: 5
+chunk_size: 32
+selection_sample: 160
+baseline_n_init: 20
+hmm_n_init: 3
+hmm_max_iter: 200
+projection_counts:
+- 16
+- 64
+- 128
+projection_seeds:
+- 17
+- 42
+- 83
+bootstrap_repeats: 10
+bootstrap_block_windows: 26
+exposure: exploratory_previously_inspected
