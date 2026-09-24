@@ -17,7 +17,7 @@ from threadpoolctl import threadpool_limits
 
 from .data import load_csv
 from .evaluation import moving_block_indices, temporal_summary
-from .experiments import artifact_id, code_provenance, seal_artifact, split_masks, verify_artifact, write_json
+from .experiments import artifact_id, code_provenance, _json_safe, seal_artifact, split_masks, verify_artifact, write_json
 from .joint import joint_windows
 from .panel_baselines import PanelKMeans, PanelGaussianHMM, panel_features
 from .sliced import SlicedWassersteinKMedoids, sliced_w2
@@ -91,6 +91,12 @@ def training_scales(panel,train_end):
     return scales
 
 
+def check_acquisition(acquisition,symbol,digest):
+    hashes=[acquisition[key] for key in ('sha256','dataset_sha256') if key in acquisition]
+    if acquisition.get('symbol')!=symbol or not hashes or any(value!=digest for value in hashes):
+        raise ValueError('acquisition metadata mismatch')
+
+
 def load_panel(c,cutoff):
     series,provenance={},{}
     for item in c['assets']:
@@ -98,8 +104,7 @@ def load_panel(c,cutoff):
         if hashlib.sha256(path.read_bytes()).hexdigest()!=item['sha256']:
             raise ValueError('snapshot hash mismatch')
         acquisition=json.loads(path.with_suffix('.json').read_text())
-        if acquisition.get('symbol')!=item['symbol'] or acquisition.get('sha256')!=item['sha256']:
-            raise ValueError('acquisition metadata mismatch')
+        check_acquisition(acquisition,item['symbol'],item['sha256'])
         value=load_csv(path,provider=c['provider'],price_column=c['price_column'])
         series[item['symbol']]=value
         provenance[item['symbol']]=dict(acquisition=acquisition,quality=dict(value.quality))
@@ -184,7 +189,11 @@ def _sensitivity(c,batch,masks,model):
     reference=model.predict(validation)
     def diagnostic(labels):
         a,b=len(np.unique(reference)),len(np.unique(labels))
-        return dict(ari=float(adjusted_rand_score(reference,labels)),occupied=b,
+        counts=np.bincount(labels,minlength=model.n_clusters)
+        reference_counts=np.bincount(reference,minlength=model.n_clusters)
+        return dict(counts=counts.tolist(),occupancy=(counts/len(labels)).tolist(),
+                    reference_counts=reference_counts.tolist(),
+                    ari=float(adjusted_rand_score(reference,labels)),occupied=b,
                     reference_occupied=a,both_single_state=a==b==1)
     projections=[]
     for count in c['projection_counts']:
@@ -261,6 +270,10 @@ def run_joint_market(config_path,*,output_root='artifacts',stage='development',d
     validate_config(c)
     provenance=code_provenance()
     sources=source_identity()
+    cutoff=c['validation_end'] if stage=='development' else c['assessment_end']
+    panel,batch,masks,data=load_panel(c,cutoff)
+    data_identity=artifact_id(_json_safe(data),{})
+    development_digest=None
     if stage=='assessment':
         dev=Path(development)
         verify_artifact(dev)
@@ -270,14 +283,20 @@ def run_joint_market(config_path,*,output_root='artifacts',stage='development',d
             raise ValueError('development protocol or source differs from assessment')
         if manifest['dependency_versions']!=provenance['dependency_versions']:
             raise ValueError('development dependencies differ from assessment')
+        if manifest['data_identity']!=data_identity:
+            raise ValueError('development acquisition metadata differs from assessment')
+        development_digest=hashlib.sha256((dev/'checksums.json').read_bytes()).hexdigest()
         target=dev.parent/'assessment'
     else:
-        identity=artifact_id(c,dict(source_files=sources,dependencies=provenance['dependency_versions']))
+        identity=artifact_id(c,dict(source_files=sources,dependencies=provenance['dependency_versions'],data_identity=data_identity))
         target=Path(output_root)/f'joint-market-{identity}'/'development'
-    cutoff=c['validation_end'] if stage=='development' else c['assessment_end']
-    panel,batch,masks,data=load_panel(c,cutoff)
     if (target/'checksums.json').exists():
         verify_artifact(target)
+        cached=json.loads((target/'manifest.json').read_text())
+        if json.loads((target/'config.json').read_text())!=c or cached['stage']!=stage or cached['data_identity']!=data_identity:
+            raise ValueError('cached artifact protocol or acquisition differs')
+        if cached['development_digest']!=development_digest:
+            raise ValueError('cached development artifact digest differs')
         return _render(target)
     target.parent.mkdir(parents=True,exist_ok=True)
     temp=Path(tempfile.mkdtemp(prefix=stage+'-partial-',dir=target.parent))
@@ -300,6 +319,8 @@ def run_joint_market(config_path,*,output_root='artifacts',stage='development',d
     write_json(temp/'config.json',c)
     first=next(iter(panel.values()))
     manifest=dict(stage=stage,exposure=c['exposure'],symbol_order=list(panel),
+                  data_identity=data_identity,development_digest=development_digest,
+                  evaluation_period=[str(batch.dates[selected][0].date()),str(batch.dates[selected][-1].date())],
                   common_first_return=str(first.dates[0].date()),common_first_price=str(first.price_start[0].date()),
                   common_last_return=str(first.dates[-1].date()),return_count=len(first.returns),
                   source_files=sources,dependency_versions=provenance['dependency_versions'],
