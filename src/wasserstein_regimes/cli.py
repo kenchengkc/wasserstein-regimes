@@ -20,6 +20,11 @@ def main():
     cross.add_argument('--config',required=True)
     cross.add_argument('--stage',choices=['all','development','holdout'],default='development')
     cross.add_argument('--output-root',default='artifacts')
+    joint=sub.add_parser('joint-study',help='Run the frozen exploratory synchronized panel study')
+    joint.add_argument('--config',required=True)
+    joint.add_argument('--stage',choices=['development','assessment'],default='development')
+    joint.add_argument('--development',help='Sealed development directory; required for assessment')
+    joint.add_argument('--output-root',default='artifacts')
     args=parser.parse_args()
     if args.command=='run':
         from .experiments import run
@@ -27,6 +32,9 @@ def main():
     elif args.command=='cross-asset':
         from .cross_asset import run_cross_asset
         print(run_cross_asset(args.config,output_root=args.output_root,stage=args.stage))
+    elif args.command=='joint-study':
+        from .joint_market import run_joint_market
+        print(run_joint_market(args.config,output_root=args.output_root,stage=args.stage,development=args.development))
     elif args.command=='report':
         from .reporting import report
         path=Path(args.run)
