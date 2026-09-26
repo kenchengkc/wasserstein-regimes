@@ -29,6 +29,22 @@ def main():
     validation.add_argument('--config',required=True)
     validation.add_argument('--development',required=True,help='Sealed joint-market development directory')
     validation.add_argument('--output-root',default='artifacts')
+    freeze=sub.add_parser('freeze-joint',help='Export a verified frozen joint model')
+    freeze.add_argument('--development',required=True)
+    freeze.add_argument('--model',choices=['scaled_joint','raw_joint'],default='scaled_joint')
+    freeze.add_argument('--output-root',default='artifacts/bundles')
+    score=sub.add_parser('score-joint',help='Score snapshots using a frozen joint contract')
+    score.add_argument('--bundle',required=True)
+    score.add_argument('--config',required=True)
+    score.add_argument('--output-root',default='artifacts/jobs')
+    score.add_argument('--blas-threads',type=int,default=1)
+    score.add_argument('--timeout',type=float,default=3600)
+    jobs=sub.add_parser('run-jobs',help='Run or resume a bounded local experiment batch')
+    jobs.add_argument('--config',required=True)
+    jobs.add_argument('--output-root',default='artifacts/jobs')
+    jobs.add_argument('--workers',type=int,default=2)
+    jobs.add_argument('--blas-threads',type=int,default=1)
+    jobs.add_argument('--timeout',type=float,default=3600)
     args=parser.parse_args()
     if args.command=='run':
         from .experiments import run
@@ -42,6 +58,17 @@ def main():
     elif args.command=='joint-validate':
         from .joint_validation import run_joint_validation
         print(run_joint_validation(args.config,development=args.development,output_root=args.output_root))
+    elif args.command=='freeze-joint':
+        from .frozen import freeze_joint
+        print(freeze_joint(args.development,model=args.model,output_root=args.output_root))
+    elif args.command=='score-joint':
+        from .jobs import run_jobs
+        print(run_jobs([dict(name='frozen-score',type='score',bundle=args.bundle,config=args.config)],
+            output_root=args.output_root,workers=1,blas_threads=args.blas_threads,timeout=args.timeout))
+    elif args.command=='run-jobs':
+        from .jobs import run_job_file
+        print(run_job_file(args.config,output_root=args.output_root,workers=args.workers,
+            blas_threads=args.blas_threads,timeout=args.timeout))
     elif args.command=='report':
         from .reporting import report
         path=Path(args.run)

@@ -92,3 +92,20 @@ def test_contract_unknown_fields_and_basis_rejected(bundle):
     c,_=load_bundle(bundle[0])
     for change in [dict(extra=4),dict(return_basis='simple_returns'),dict(symbols=['A','A']),dict(schema_version=True)]:
         with pytest.raises(ValueError): validate_contract(dict(c,**change))
+
+
+def test_freeze_rejects_parent_changed_during_copy(bundle,tmp_path,monkeypatch):
+    from wasserstein_regimes import frozen
+    from wasserstein_regimes.artifact_store import seal
+    original=frozen.shutil.copyfile
+    dev=tmp_path/'development'
+    def changed(source,target):
+        result=original(source,target)
+        metrics=json.loads((dev/'metrics.json').read_text())
+        metrics['calibration']['scaled_joint']=3.
+        (dev/'metrics.json').write_text(json.dumps(metrics))
+        seal(dev)
+        return result
+    monkeypatch.setattr(frozen.shutil,'copyfile',changed)
+    with pytest.raises(ValueError,match='changed'):
+        frozen.freeze_joint(dev,output_root=tmp_path/'new')
