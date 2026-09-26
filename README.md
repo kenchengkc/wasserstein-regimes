@@ -20,6 +20,8 @@ Exact one-dimensional W2 clustering of equal-size empirical distributions is Euc
 
 **Joint robustness:** Return-level resampling averages ARI 0.518; 1% extreme training contamination collapses validation to one state. Stationary nulls also produce persistent clusters. Read the [robustness results](docs/joint-validation-results.md).
 
+**Execution infrastructure:** Frozen scoring reproduces all 690 validation labels; 11 isolated jobs resume from verified artifacts. Read the [execution measurements](docs/execution-results.md) and [workflow](docs/execution-workflow.md).
+
 **Joint research extension:** Fixed-projection sliced W2 and sampled medoids detect dependence that marginals miss, with a fixed candidate memory budget. Read the [academic comparison and roadmap](docs/research-roadmap.md) and [measured synthetic results](docs/joint-results.md).
 
 ## Why this is interesting

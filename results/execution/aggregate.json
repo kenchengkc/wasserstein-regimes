@@ -1,0 +1,1552 @@
+{
+  "batch": {
+    "jobs": [
+      {
+        "bundle": "artifacts/bundles/joint-bundle-605cdb225dc25b93457706f9",
+        "config": "configs/frozen_score.yaml",
+        "name": "saved-validation-score",
+        "type": "score"
+      },
+      {
+        "candidates": 128,
+        "development": "artifacts/joint-market-9277c7c4c48af92b2d83/development",
+        "market_config": "configs/joint_market.yaml",
+        "name": "refit-2017-42",
+        "seed": 42,
+        "train_end": "2017-12-31",
+        "type": "refit"
+      },
+      {
+        "candidates": 128,
+        "development": "artifacts/joint-market-9277c7c4c48af92b2d83/development",
+        "market_config": "configs/joint_market.yaml",
+        "name": "refit-2017-83",
+        "seed": 83,
+        "train_end": "2017-12-31",
+        "type": "refit"
+      },
+      {
+        "candidates": 128,
+        "development": "artifacts/joint-market-9277c7c4c48af92b2d83/development",
+        "market_config": "configs/joint_market.yaml",
+        "name": "refit-2020-42",
+        "seed": 42,
+        "train_end": "2020-12-31",
+        "type": "refit"
+      },
+      {
+        "candidates": 128,
+        "development": "artifacts/joint-market-9277c7c4c48af92b2d83/development",
+        "market_config": "configs/joint_market.yaml",
+        "name": "refit-2020-83",
+        "seed": 83,
+        "train_end": "2020-12-31",
+        "type": "refit"
+      },
+      {
+        "candidates": 128,
+        "dimensions": 5,
+        "k": 3,
+        "length": 63,
+        "n_init": 3,
+        "n_windows": 1000,
+        "name": "benchmark-1000-17",
+        "projections": 64,
+        "seed": 17,
+        "type": "benchmark"
+      },
+      {
+        "candidates": 128,
+        "dimensions": 5,
+        "k": 3,
+        "length": 63,
+        "n_init": 3,
+        "n_windows": 1000,
+        "name": "benchmark-1000-42",
+        "projections": 64,
+        "seed": 42,
+        "type": "benchmark"
+      },
+      {
+        "candidates": 128,
+        "dimensions": 5,
+        "k": 3,
+        "length": 63,
+        "n_init": 3,
+        "n_windows": 10000,
+        "name": "benchmark-10000-17",
+        "projections": 64,
+        "seed": 17,
+        "type": "benchmark"
+      },
+      {
+        "candidates": 128,
+        "dimensions": 5,
+        "k": 3,
+        "length": 63,
+        "n_init": 3,
+        "n_windows": 10000,
+        "name": "benchmark-10000-42",
+        "projections": 64,
+        "seed": 42,
+        "type": "benchmark"
+      },
+      {
+        "candidates": 128,
+        "dimensions": 5,
+        "k": 3,
+        "length": 63,
+        "n_init": 3,
+        "n_windows": 50000,
+        "name": "benchmark-50000-17",
+        "projections": 64,
+        "seed": 17,
+        "type": "benchmark"
+      },
+      {
+        "candidates": 128,
+        "dimensions": 5,
+        "k": 3,
+        "length": 63,
+        "n_init": 3,
+        "n_windows": 50000,
+        "name": "benchmark-50000-42",
+        "projections": 64,
+        "seed": 42,
+        "type": "benchmark"
+      }
+    ],
+    "schema_version": 1
+  },
+  "bundle_contract": {
+    "calendar": "XNYS",
+    "calibration_end": "2023-12-31",
+    "dependencies": {
+      "PyYAML": "6.0.3",
+      "exchange-calendars": "4.13.2",
+      "hmmlearn": "0.3.3",
+      "matplotlib": "3.10.8",
+      "numpy": "2.4.1",
+      "pandas": "3.0.2",
+      "pyarrow": "25.0.0",
+      "scikit-learn": "1.8.0",
+      "scipy": "1.17.0",
+      "threadpoolctl": "3.6.0"
+    },
+    "model": "scaled_joint",
+    "novelty_threshold": 0.570332091627392,
+    "numerical_sources": {
+      "data.py": "cb1d7ba44497c9c3fa26d657115d742a9bec539f331224dcc17f951b46eef7f4",
+      "joint.py": "3cac3de98a9f4feba3750bc420dfffa7b7d486b3200727e3bed894f25def43c1",
+      "sliced.py": "edf6a88f75a4c9325dc285524c8998edaa8d0ba2c1e8054dc4759b8d198afa95",
+      "transport.py": "469ead5a5f7a2f9067f4adaf89bc37a3571605c8c8eccd9685f8713d051725c7",
+      "windows.py": "289e6887962e20ebf88646e2052b29e701e39037b74b1acd4bf687410db50119"
+    },
+    "parent_digest": "eceffd52dc47798c19fc7fd73a2e1f1f0992ebdaa98a7eeeaa611ed6f6aa7b15",
+    "price_column": "Adj Close",
+    "provider": "Yahoo Finance via yfinance",
+    "return_basis": "adjusted_close",
+    "schema_version": 1,
+    "symbols": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "HYG"
+    ],
+    "train_end": "2020-12-31",
+    "window_length": 63
+  },
+  "execution_commit": "e1237ce3ff5ce2a3d1996bb9737634308dbb595f",
+  "jobs": [
+    {
+      "execution": {
+        "blas_threads": 1,
+        "elapsed_seconds": 1.1537103329319507,
+        "memory_scope": "process lifetime high-water RSS through task completion, includes imports and input arrays",
+        "peak_rss_bytes": 252805120,
+        "pid": 22296,
+        "platform": "macOS-26.4-arm64-arm-64bit",
+        "pre_task_peak_rss_bytes": 39337984,
+        "python": "3.11.5",
+        "ru_maxrss_raw": 252805120,
+        "ru_maxrss_unit": "bytes",
+        "threadpools": [
+          {
+            "filepath": "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sklearn/.dylibs/libomp.dylib",
+            "internal_api": "openmp",
+            "num_threads": 1,
+            "prefix": "libomp",
+            "user_api": "openmp",
+            "version": null
+          }
+        ]
+      },
+      "identity": {
+        "blas_threads": 1,
+        "cwd": "/Users/ken/Projects/wasserstein-regimes-cross-asset",
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "exchange-calendars": "4.13.2",
+          "hmmlearn": "0.3.3",
+          "matplotlib": "3.10.8",
+          "numpy": "2.4.1",
+          "pandas": "3.0.2",
+          "pyarrow": "25.0.0",
+          "scikit-learn": "1.8.0",
+          "scipy": "1.17.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "inputs": {
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/bundles/joint-bundle-605cdb225dc25b93457706f9/checksums.json": "21f1281baae4110630fe65a35990b63d25912bd6838adaccacb2b00fa357fa56",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/bundles/joint-bundle-605cdb225dc25b93457706f9/contract.json": "7c7efad8f3c620b03bed86a850748f26bfb9158a11db2d376a55e5c9cea3edec",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/bundles/joint-bundle-605cdb225dc25b93457706f9/model.npz": "1540e7f44739b0287feec5ae978ea1966f58ea35222b306b5d09362fd895ba1c",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/configs/frozen_score.yaml": "de987cbe4ad35e6dd922bd147a7ab9aa8ca3d92c816234072e154222532fcb4a",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/GLD_daily_2026-08-31.csv": "b6cf5fdd605bb9b035e00fc692845ca6b1eb908d6fafcaa80f613ba668bb96e7",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/GLD_daily_2026-08-31.json": "1535707d9dd12de245c88730d8b2984b71a0ed956fe36be23253050d08083e3b",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/HYG_daily_2026-08-31.csv": "c21ed428b212de482f466411f4080248712ff58628054778764e2e08d81e1b4e",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/HYG_daily_2026-08-31.json": "c5bd7ad7686f24f89a673dc62120bfd06d13973e8e9c8fc9ba0f28c69fc701d5",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/QQQ_daily_2026-08-31.csv": "07d0fd289438c0ac786e3f3daa5b3665ef803c49154a909325bbaeb6ee4c06c2",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/QQQ_daily_2026-08-31.json": "82932d96cdec982ed0a0a75df71e14f0df1275fd726a0aa275abfea121f302fa",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/TLT_daily_2026-08-31.csv": "a953d148eb8c1e766bcbffb317e7b7656a37f706e1f4a6474bfae138fc21ebb9",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/TLT_daily_2026-08-31.json": "73397ff37012f45c793ab631c57e49510a89d4fe51e8bd2c4b08b45481aa05be",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/spy_daily_2026-08-31.csv": "aeb4a4356b6d34fc4c67d7f446e98e8e91d2fc57a48065616137dea379d21b7d",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/spy_daily_2026-08-31.json": "604d8bf6e4181b83dc28fd61dadde6bbe88824f9bd246c4c419c7407a8755ccf"
+        },
+        "platform": "darwin",
+        "python": [
+          3,
+          11
+        ],
+        "sources": {
+          "__init__.py": "0b8a67d74760163a4dd3496239184ffbbcbd590bfaf1af947b8bab0de3b669e0",
+          "artifact_store.py": "e42afec3b19b2a09b2f2c8bdf94201b1875578bb10b2d2c0ec4a1a654aec4557",
+          "clustering.py": "36b35402156bd0cb8c1303ce2edc8f90b6678c10e580f421be5346940d564089",
+          "core.py": "e407ab12190f644836a5b742f0377d7248d4b493548199df4ce43040213ef832",
+          "data.py": "cb1d7ba44497c9c3fa26d657115d742a9bec539f331224dcc17f951b46eef7f4",
+          "evaluation.py": "27a07a05a5d73991d03d91eef3eb414f35094fa9af6f45475815fb8351b0a27f",
+          "experiments.py": "4bc2e4900e45fb2d322fb2c84d2c52fe844f056d294bbb1ee6ff713c68a782bc",
+          "frozen.py": "e54eea81104646d06bbfd3dddaf061234be46ed91d2a57af735e02b9d38fef12",
+          "job_tasks.py": "8ead17d047a31f95e5c5775651fa26e0c81edd47208963fe2fea11fcedd1d8a0",
+          "job_worker.py": "9afb31e182c155ba2659da9ece0dbdbde15ab731927c83325aba806099fb01fd",
+          "jobs.py": "f1e0c55da2aa410bfcd1819430b4592b8cfb8a52be29129a4534d6657137954d",
+          "joint.py": "3cac3de98a9f4feba3750bc420dfffa7b7d486b3200727e3bed894f25def43c1",
+          "joint_controls.py": "e184c6555e4ed0caefd14f9afe35fbe00df62ab593f0de383d6214b9f3d8aaf4",
+          "joint_market.py": "0be3cf269786ad23aa5a4496aadcc567483c3017e63660269346ab5e5cea2002",
+          "joint_validation.py": "0b296efae9c9cbbdaf5db4fe040c79c3f57a49018b30ae0d9dfb080a868800ae",
+          "panel_baselines.py": "2ae4367cc75bb1c605b62c55e0502bac15f9417b845233d53041d532bf1f332a",
+          "robustness.py": "a569c17211c2c7fae8b261836bfb4a5372093e701200af85925d155011efcbed",
+          "sliced.py": "edf6a88f75a4c9325dc285524c8998edaa8d0ba2c1e8054dc4759b8d198afa95",
+          "transport.py": "469ead5a5f7a2f9067f4adaf89bc37a3571605c8c8eccd9685f8713d051725c7",
+          "windows.py": "289e6887962e20ebf88646e2052b29e701e39037b74b1acd4bf687410db50119"
+        },
+        "spec": {
+          "bundle": "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/bundles/joint-bundle-605cdb225dc25b93457706f9",
+          "config": "/Users/ken/Projects/wasserstein-regimes-cross-asset/configs/frozen_score.yaml",
+          "type": "score"
+        }
+      },
+      "job_id": "3b08d32854b8f4b3c5b344b13e2776d858791d152047d8b6d5b336a300deff62",
+      "name": "saved-validation-score",
+      "result_digest": "cc5105e601bdbfadf538571c7db73066a2f91dc7675eb135ad6d9883e837e3c7",
+      "task": {
+        "counts": [
+          0,
+          287,
+          403
+        ],
+        "excluded_training_overlap": 63,
+        "excluded_unavailable": 0,
+        "novelty_fraction": 0.010144927536231883,
+        "novelty_interpretation": "retrospective_calibration_reuse",
+        "observation_availability_only": true,
+        "period": [
+          "2021-04-06",
+          "2023-12-29"
+        ],
+        "point_in_time_snapshot": false,
+        "type": "score",
+        "windows": 690
+      }
+    },
+    {
+      "execution": {
+        "blas_threads": 1,
+        "elapsed_seconds": 1.5912648339290172,
+        "memory_scope": "process lifetime high-water RSS through task completion, includes imports and input arrays",
+        "peak_rss_bytes": 291913728,
+        "pid": 22292,
+        "platform": "macOS-26.4-arm64-arm-64bit",
+        "pre_task_peak_rss_bytes": 39600128,
+        "python": "3.11.5",
+        "ru_maxrss_raw": 291913728,
+        "ru_maxrss_unit": "bytes",
+        "threadpools": [
+          {
+            "filepath": "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sklearn/.dylibs/libomp.dylib",
+            "internal_api": "openmp",
+            "num_threads": 1,
+            "prefix": "libomp",
+            "user_api": "openmp",
+            "version": null
+          }
+        ]
+      },
+      "identity": {
+        "blas_threads": 1,
+        "cwd": "/Users/ken/Projects/wasserstein-regimes-cross-asset",
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "exchange-calendars": "4.13.2",
+          "hmmlearn": "0.3.3",
+          "matplotlib": "3.10.8",
+          "numpy": "2.4.1",
+          "pandas": "3.0.2",
+          "pyarrow": "25.0.0",
+          "scikit-learn": "1.8.0",
+          "scipy": "1.17.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "inputs": {
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/assignments.parquet": "e8deb2208d2a17f5279b0c8d16911c952cb64660c04dc5c737e79a7c276e9f6f",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/checksums.json": "eceffd52dc47798c19fc7fd73a2e1f1f0992ebdaa98a7eeeaa611ed6f6aa7b15",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/config.json": "6ee4bc99dea58f8f5cf76281e5fdf6cb2f5d7b793a45e17eb2d6e2f41ecf56df",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/manifest.json": "3e128a0fedca6fe6d34e99335ed7b2bbba814e3e6d93abb95381290d92db0fb7",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/metrics.json": "a432fa9e9e1060f7c4494304ae225888422ed1077ddb30788af1c86426599e86",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/correlation.npz": "72a3033eb818c84a0b6145c14a4528062c632b8def10b1b433f57e53bb6363bd",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/covariance.npz": "20413879f606362de64a83e34da443d4d447a38c873a7ce1f54f61fc613ebc83",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/hmm.npz": "579dd43e4b4e4a88aa1643652c6b485c576cfc4b1282fd982786a2090fe411fc",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/marginal.npz": "09e2aea64d62719b2d7418b103a5de06b04467ffbc4455b917765ac7c822fb4f",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/raw_joint.npz": "5b9a1e54c131b3059b5d2027db1807e6d764d1762a15ca9b60dfa65e74f7268b",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/scaled_joint.npz": "1540e7f44739b0287feec5ae978ea1966f58ea35222b306b5d09362fd895ba1c",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/configs/joint_market.yaml": "cab0ad112696182c1e49ea7064c8f0e3087a4fcf9fcd48c5c12b88c1e455dfc8",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/GLD_daily_2026-08-31.csv": "b6cf5fdd605bb9b035e00fc692845ca6b1eb908d6fafcaa80f613ba668bb96e7",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/GLD_daily_2026-08-31.json": "1535707d9dd12de245c88730d8b2984b71a0ed956fe36be23253050d08083e3b",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/HYG_daily_2026-08-31.csv": "c21ed428b212de482f466411f4080248712ff58628054778764e2e08d81e1b4e",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/HYG_daily_2026-08-31.json": "c5bd7ad7686f24f89a673dc62120bfd06d13973e8e9c8fc9ba0f28c69fc701d5",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/QQQ_daily_2026-08-31.csv": "07d0fd289438c0ac786e3f3daa5b3665ef803c49154a909325bbaeb6ee4c06c2",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/QQQ_daily_2026-08-31.json": "82932d96cdec982ed0a0a75df71e14f0df1275fd726a0aa275abfea121f302fa",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/TLT_daily_2026-08-31.csv": "a953d148eb8c1e766bcbffb317e7b7656a37f706e1f4a6474bfae138fc21ebb9",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/TLT_daily_2026-08-31.json": "73397ff37012f45c793ab631c57e49510a89d4fe51e8bd2c4b08b45481aa05be",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/spy_daily_2026-08-31.csv": "aeb4a4356b6d34fc4c67d7f446e98e8e91d2fc57a48065616137dea379d21b7d",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/spy_daily_2026-08-31.json": "604d8bf6e4181b83dc28fd61dadde6bbe88824f9bd246c4c419c7407a8755ccf"
+        },
+        "platform": "darwin",
+        "python": [
+          3,
+          11
+        ],
+        "sources": {
+          "__init__.py": "0b8a67d74760163a4dd3496239184ffbbcbd590bfaf1af947b8bab0de3b669e0",
+          "artifact_store.py": "e42afec3b19b2a09b2f2c8bdf94201b1875578bb10b2d2c0ec4a1a654aec4557",
+          "clustering.py": "36b35402156bd0cb8c1303ce2edc8f90b6678c10e580f421be5346940d564089",
+          "core.py": "e407ab12190f644836a5b742f0377d7248d4b493548199df4ce43040213ef832",
+          "data.py": "cb1d7ba44497c9c3fa26d657115d742a9bec539f331224dcc17f951b46eef7f4",
+          "evaluation.py": "27a07a05a5d73991d03d91eef3eb414f35094fa9af6f45475815fb8351b0a27f",
+          "experiments.py": "4bc2e4900e45fb2d322fb2c84d2c52fe844f056d294bbb1ee6ff713c68a782bc",
+          "frozen.py": "e54eea81104646d06bbfd3dddaf061234be46ed91d2a57af735e02b9d38fef12",
+          "job_tasks.py": "8ead17d047a31f95e5c5775651fa26e0c81edd47208963fe2fea11fcedd1d8a0",
+          "job_worker.py": "9afb31e182c155ba2659da9ece0dbdbde15ab731927c83325aba806099fb01fd",
+          "jobs.py": "f1e0c55da2aa410bfcd1819430b4592b8cfb8a52be29129a4534d6657137954d",
+          "joint.py": "3cac3de98a9f4feba3750bc420dfffa7b7d486b3200727e3bed894f25def43c1",
+          "joint_controls.py": "e184c6555e4ed0caefd14f9afe35fbe00df62ab593f0de383d6214b9f3d8aaf4",
+          "joint_market.py": "0be3cf269786ad23aa5a4496aadcc567483c3017e63660269346ab5e5cea2002",
+          "joint_validation.py": "0b296efae9c9cbbdaf5db4fe040c79c3f57a49018b30ae0d9dfb080a868800ae",
+          "panel_baselines.py": "2ae4367cc75bb1c605b62c55e0502bac15f9417b845233d53041d532bf1f332a",
+          "robustness.py": "a569c17211c2c7fae8b261836bfb4a5372093e701200af85925d155011efcbed",
+          "sliced.py": "edf6a88f75a4c9325dc285524c8998edaa8d0ba2c1e8054dc4759b8d198afa95",
+          "transport.py": "469ead5a5f7a2f9067f4adaf89bc37a3571605c8c8eccd9685f8713d051725c7",
+          "windows.py": "289e6887962e20ebf88646e2052b29e701e39037b74b1acd4bf687410db50119"
+        },
+        "spec": {
+          "candidates": 128,
+          "development": "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development",
+          "market_config": "/Users/ken/Projects/wasserstein-regimes-cross-asset/configs/joint_market.yaml",
+          "seed": 42,
+          "train_end": "2017-12-31",
+          "type": "refit"
+        }
+      },
+      "job_id": "d445c045aae9e41c5c1f290193dfaf1873eb128def64a7f6e6001f1675d403a2",
+      "name": "refit-2017-42",
+      "result_digest": "9bfff657744301ec249e4dbdc8b95d3d115a8bd4f313dd08ce7119fc5ab65d76",
+      "task": {
+        "ari": 0.2061698551064568,
+        "both_single_state": false,
+        "candidates": 128,
+        "converged": true,
+        "counts": [
+          0,
+          103,
+          587
+        ],
+        "n": 690,
+        "occupancy": [
+          0.0,
+          0.1492753623188406,
+          0.8507246376811595
+        ],
+        "occupied": 2,
+        "parent_digest": "eceffd52dc47798c19fc7fd73a2e1f1f0992ebdaa98a7eeeaa611ed6f6aa7b15",
+        "reference_counts": [
+          0,
+          287,
+          403
+        ],
+        "scales": [
+          0.012674148129543171,
+          0.013209206090200033,
+          0.009386597455579527,
+          0.01201129668104081,
+          0.007764729801656263
+        ],
+        "seed": 42,
+        "single_state": false,
+        "temporal": {
+          "adjacent_pairs": 689,
+          "dwell_times": [
+            274,
+            72,
+            59,
+            10,
+            1,
+            21,
+            253
+          ],
+          "mean_dwell": 98.57142857142857,
+          "median_dwell": 59.0,
+          "switching_frequency": 0.008708272859216255,
+          "transitions": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              100,
+              3
+            ],
+            [
+              0,
+              3,
+              583
+            ]
+          ]
+        },
+        "train_end": "2017-12-31",
+        "training_returns": 2701,
+        "type": "refit"
+      }
+    },
+    {
+      "execution": {
+        "blas_threads": 1,
+        "elapsed_seconds": 1.59791920799762,
+        "memory_scope": "process lifetime high-water RSS through task completion, includes imports and input arrays",
+        "peak_rss_bytes": 303562752,
+        "pid": 22308,
+        "platform": "macOS-26.4-arm64-arm-64bit",
+        "pre_task_peak_rss_bytes": 42254336,
+        "python": "3.11.5",
+        "ru_maxrss_raw": 303562752,
+        "ru_maxrss_unit": "bytes",
+        "threadpools": [
+          {
+            "filepath": "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sklearn/.dylibs/libomp.dylib",
+            "internal_api": "openmp",
+            "num_threads": 1,
+            "prefix": "libomp",
+            "user_api": "openmp",
+            "version": null
+          }
+        ]
+      },
+      "identity": {
+        "blas_threads": 1,
+        "cwd": "/Users/ken/Projects/wasserstein-regimes-cross-asset",
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "exchange-calendars": "4.13.2",
+          "hmmlearn": "0.3.3",
+          "matplotlib": "3.10.8",
+          "numpy": "2.4.1",
+          "pandas": "3.0.2",
+          "pyarrow": "25.0.0",
+          "scikit-learn": "1.8.0",
+          "scipy": "1.17.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "inputs": {
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/assignments.parquet": "e8deb2208d2a17f5279b0c8d16911c952cb64660c04dc5c737e79a7c276e9f6f",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/checksums.json": "eceffd52dc47798c19fc7fd73a2e1f1f0992ebdaa98a7eeeaa611ed6f6aa7b15",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/config.json": "6ee4bc99dea58f8f5cf76281e5fdf6cb2f5d7b793a45e17eb2d6e2f41ecf56df",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/manifest.json": "3e128a0fedca6fe6d34e99335ed7b2bbba814e3e6d93abb95381290d92db0fb7",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/metrics.json": "a432fa9e9e1060f7c4494304ae225888422ed1077ddb30788af1c86426599e86",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/correlation.npz": "72a3033eb818c84a0b6145c14a4528062c632b8def10b1b433f57e53bb6363bd",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/covariance.npz": "20413879f606362de64a83e34da443d4d447a38c873a7ce1f54f61fc613ebc83",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/hmm.npz": "579dd43e4b4e4a88aa1643652c6b485c576cfc4b1282fd982786a2090fe411fc",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/marginal.npz": "09e2aea64d62719b2d7418b103a5de06b04467ffbc4455b917765ac7c822fb4f",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/raw_joint.npz": "5b9a1e54c131b3059b5d2027db1807e6d764d1762a15ca9b60dfa65e74f7268b",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/scaled_joint.npz": "1540e7f44739b0287feec5ae978ea1966f58ea35222b306b5d09362fd895ba1c",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/configs/joint_market.yaml": "cab0ad112696182c1e49ea7064c8f0e3087a4fcf9fcd48c5c12b88c1e455dfc8",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/GLD_daily_2026-08-31.csv": "b6cf5fdd605bb9b035e00fc692845ca6b1eb908d6fafcaa80f613ba668bb96e7",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/GLD_daily_2026-08-31.json": "1535707d9dd12de245c88730d8b2984b71a0ed956fe36be23253050d08083e3b",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/HYG_daily_2026-08-31.csv": "c21ed428b212de482f466411f4080248712ff58628054778764e2e08d81e1b4e",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/HYG_daily_2026-08-31.json": "c5bd7ad7686f24f89a673dc62120bfd06d13973e8e9c8fc9ba0f28c69fc701d5",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/QQQ_daily_2026-08-31.csv": "07d0fd289438c0ac786e3f3daa5b3665ef803c49154a909325bbaeb6ee4c06c2",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/QQQ_daily_2026-08-31.json": "82932d96cdec982ed0a0a75df71e14f0df1275fd726a0aa275abfea121f302fa",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/TLT_daily_2026-08-31.csv": "a953d148eb8c1e766bcbffb317e7b7656a37f706e1f4a6474bfae138fc21ebb9",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/TLT_daily_2026-08-31.json": "73397ff37012f45c793ab631c57e49510a89d4fe51e8bd2c4b08b45481aa05be",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/spy_daily_2026-08-31.csv": "aeb4a4356b6d34fc4c67d7f446e98e8e91d2fc57a48065616137dea379d21b7d",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/spy_daily_2026-08-31.json": "604d8bf6e4181b83dc28fd61dadde6bbe88824f9bd246c4c419c7407a8755ccf"
+        },
+        "platform": "darwin",
+        "python": [
+          3,
+          11
+        ],
+        "sources": {
+          "__init__.py": "0b8a67d74760163a4dd3496239184ffbbcbd590bfaf1af947b8bab0de3b669e0",
+          "artifact_store.py": "e42afec3b19b2a09b2f2c8bdf94201b1875578bb10b2d2c0ec4a1a654aec4557",
+          "clustering.py": "36b35402156bd0cb8c1303ce2edc8f90b6678c10e580f421be5346940d564089",
+          "core.py": "e407ab12190f644836a5b742f0377d7248d4b493548199df4ce43040213ef832",
+          "data.py": "cb1d7ba44497c9c3fa26d657115d742a9bec539f331224dcc17f951b46eef7f4",
+          "evaluation.py": "27a07a05a5d73991d03d91eef3eb414f35094fa9af6f45475815fb8351b0a27f",
+          "experiments.py": "4bc2e4900e45fb2d322fb2c84d2c52fe844f056d294bbb1ee6ff713c68a782bc",
+          "frozen.py": "e54eea81104646d06bbfd3dddaf061234be46ed91d2a57af735e02b9d38fef12",
+          "job_tasks.py": "8ead17d047a31f95e5c5775651fa26e0c81edd47208963fe2fea11fcedd1d8a0",
+          "job_worker.py": "9afb31e182c155ba2659da9ece0dbdbde15ab731927c83325aba806099fb01fd",
+          "jobs.py": "f1e0c55da2aa410bfcd1819430b4592b8cfb8a52be29129a4534d6657137954d",
+          "joint.py": "3cac3de98a9f4feba3750bc420dfffa7b7d486b3200727e3bed894f25def43c1",
+          "joint_controls.py": "e184c6555e4ed0caefd14f9afe35fbe00df62ab593f0de383d6214b9f3d8aaf4",
+          "joint_market.py": "0be3cf269786ad23aa5a4496aadcc567483c3017e63660269346ab5e5cea2002",
+          "joint_validation.py": "0b296efae9c9cbbdaf5db4fe040c79c3f57a49018b30ae0d9dfb080a868800ae",
+          "panel_baselines.py": "2ae4367cc75bb1c605b62c55e0502bac15f9417b845233d53041d532bf1f332a",
+          "robustness.py": "a569c17211c2c7fae8b261836bfb4a5372093e701200af85925d155011efcbed",
+          "sliced.py": "edf6a88f75a4c9325dc285524c8998edaa8d0ba2c1e8054dc4759b8d198afa95",
+          "transport.py": "469ead5a5f7a2f9067f4adaf89bc37a3571605c8c8eccd9685f8713d051725c7",
+          "windows.py": "289e6887962e20ebf88646e2052b29e701e39037b74b1acd4bf687410db50119"
+        },
+        "spec": {
+          "candidates": 128,
+          "development": "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development",
+          "market_config": "/Users/ken/Projects/wasserstein-regimes-cross-asset/configs/joint_market.yaml",
+          "seed": 83,
+          "train_end": "2017-12-31",
+          "type": "refit"
+        }
+      },
+      "job_id": "6a6ff3ecb8abadac046f5db76104197986f38aca06884dc15ebf4157553cffe1",
+      "name": "refit-2017-83",
+      "result_digest": "1f560f39daed9dc37d716822818b3227b3a57d21ccf17538ed5a8dbfd698ea2c",
+      "task": {
+        "ari": 0.9427561245164279,
+        "both_single_state": false,
+        "candidates": 128,
+        "converged": true,
+        "counts": [
+          0,
+          395,
+          295
+        ],
+        "n": 690,
+        "occupancy": [
+          0.0,
+          0.572463768115942,
+          0.427536231884058
+        ],
+        "occupied": 2,
+        "parent_digest": "eceffd52dc47798c19fc7fd73a2e1f1f0992ebdaa98a7eeeaa611ed6f6aa7b15",
+        "reference_counts": [
+          0,
+          287,
+          403
+        ],
+        "scales": [
+          0.012674148129543171,
+          0.013209206090200033,
+          0.009386597455579527,
+          0.01201129668104081,
+          0.007764729801656263
+        ],
+        "seed": 83,
+        "single_state": false,
+        "temporal": {
+          "adjacent_pairs": 689,
+          "dwell_times": [
+            221,
+            292,
+            7,
+            1,
+            1,
+            2,
+            166
+          ],
+          "mean_dwell": 98.57142857142857,
+          "median_dwell": 7.0,
+          "switching_frequency": 0.008708272859216255,
+          "transitions": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              391,
+              3
+            ],
+            [
+              0,
+              3,
+              292
+            ]
+          ]
+        },
+        "train_end": "2017-12-31",
+        "training_returns": 2701,
+        "type": "refit"
+      }
+    },
+    {
+      "execution": {
+        "blas_threads": 1,
+        "elapsed_seconds": 1.6251934161409736,
+        "memory_scope": "process lifetime high-water RSS through task completion, includes imports and input arrays",
+        "peak_rss_bytes": 288931840,
+        "pid": 22309,
+        "platform": "macOS-26.4-arm64-arm-64bit",
+        "pre_task_peak_rss_bytes": 41697280,
+        "python": "3.11.5",
+        "ru_maxrss_raw": 288931840,
+        "ru_maxrss_unit": "bytes",
+        "threadpools": [
+          {
+            "filepath": "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sklearn/.dylibs/libomp.dylib",
+            "internal_api": "openmp",
+            "num_threads": 1,
+            "prefix": "libomp",
+            "user_api": "openmp",
+            "version": null
+          }
+        ]
+      },
+      "identity": {
+        "blas_threads": 1,
+        "cwd": "/Users/ken/Projects/wasserstein-regimes-cross-asset",
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "exchange-calendars": "4.13.2",
+          "hmmlearn": "0.3.3",
+          "matplotlib": "3.10.8",
+          "numpy": "2.4.1",
+          "pandas": "3.0.2",
+          "pyarrow": "25.0.0",
+          "scikit-learn": "1.8.0",
+          "scipy": "1.17.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "inputs": {
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/assignments.parquet": "e8deb2208d2a17f5279b0c8d16911c952cb64660c04dc5c737e79a7c276e9f6f",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/checksums.json": "eceffd52dc47798c19fc7fd73a2e1f1f0992ebdaa98a7eeeaa611ed6f6aa7b15",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/config.json": "6ee4bc99dea58f8f5cf76281e5fdf6cb2f5d7b793a45e17eb2d6e2f41ecf56df",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/manifest.json": "3e128a0fedca6fe6d34e99335ed7b2bbba814e3e6d93abb95381290d92db0fb7",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/metrics.json": "a432fa9e9e1060f7c4494304ae225888422ed1077ddb30788af1c86426599e86",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/correlation.npz": "72a3033eb818c84a0b6145c14a4528062c632b8def10b1b433f57e53bb6363bd",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/covariance.npz": "20413879f606362de64a83e34da443d4d447a38c873a7ce1f54f61fc613ebc83",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/hmm.npz": "579dd43e4b4e4a88aa1643652c6b485c576cfc4b1282fd982786a2090fe411fc",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/marginal.npz": "09e2aea64d62719b2d7418b103a5de06b04467ffbc4455b917765ac7c822fb4f",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/raw_joint.npz": "5b9a1e54c131b3059b5d2027db1807e6d764d1762a15ca9b60dfa65e74f7268b",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/scaled_joint.npz": "1540e7f44739b0287feec5ae978ea1966f58ea35222b306b5d09362fd895ba1c",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/configs/joint_market.yaml": "cab0ad112696182c1e49ea7064c8f0e3087a4fcf9fcd48c5c12b88c1e455dfc8",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/GLD_daily_2026-08-31.csv": "b6cf5fdd605bb9b035e00fc692845ca6b1eb908d6fafcaa80f613ba668bb96e7",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/GLD_daily_2026-08-31.json": "1535707d9dd12de245c88730d8b2984b71a0ed956fe36be23253050d08083e3b",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/HYG_daily_2026-08-31.csv": "c21ed428b212de482f466411f4080248712ff58628054778764e2e08d81e1b4e",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/HYG_daily_2026-08-31.json": "c5bd7ad7686f24f89a673dc62120bfd06d13973e8e9c8fc9ba0f28c69fc701d5",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/QQQ_daily_2026-08-31.csv": "07d0fd289438c0ac786e3f3daa5b3665ef803c49154a909325bbaeb6ee4c06c2",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/QQQ_daily_2026-08-31.json": "82932d96cdec982ed0a0a75df71e14f0df1275fd726a0aa275abfea121f302fa",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/TLT_daily_2026-08-31.csv": "a953d148eb8c1e766bcbffb317e7b7656a37f706e1f4a6474bfae138fc21ebb9",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/TLT_daily_2026-08-31.json": "73397ff37012f45c793ab631c57e49510a89d4fe51e8bd2c4b08b45481aa05be",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/spy_daily_2026-08-31.csv": "aeb4a4356b6d34fc4c67d7f446e98e8e91d2fc57a48065616137dea379d21b7d",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/spy_daily_2026-08-31.json": "604d8bf6e4181b83dc28fd61dadde6bbe88824f9bd246c4c419c7407a8755ccf"
+        },
+        "platform": "darwin",
+        "python": [
+          3,
+          11
+        ],
+        "sources": {
+          "__init__.py": "0b8a67d74760163a4dd3496239184ffbbcbd590bfaf1af947b8bab0de3b669e0",
+          "artifact_store.py": "e42afec3b19b2a09b2f2c8bdf94201b1875578bb10b2d2c0ec4a1a654aec4557",
+          "clustering.py": "36b35402156bd0cb8c1303ce2edc8f90b6678c10e580f421be5346940d564089",
+          "core.py": "e407ab12190f644836a5b742f0377d7248d4b493548199df4ce43040213ef832",
+          "data.py": "cb1d7ba44497c9c3fa26d657115d742a9bec539f331224dcc17f951b46eef7f4",
+          "evaluation.py": "27a07a05a5d73991d03d91eef3eb414f35094fa9af6f45475815fb8351b0a27f",
+          "experiments.py": "4bc2e4900e45fb2d322fb2c84d2c52fe844f056d294bbb1ee6ff713c68a782bc",
+          "frozen.py": "e54eea81104646d06bbfd3dddaf061234be46ed91d2a57af735e02b9d38fef12",
+          "job_tasks.py": "8ead17d047a31f95e5c5775651fa26e0c81edd47208963fe2fea11fcedd1d8a0",
+          "job_worker.py": "9afb31e182c155ba2659da9ece0dbdbde15ab731927c83325aba806099fb01fd",
+          "jobs.py": "f1e0c55da2aa410bfcd1819430b4592b8cfb8a52be29129a4534d6657137954d",
+          "joint.py": "3cac3de98a9f4feba3750bc420dfffa7b7d486b3200727e3bed894f25def43c1",
+          "joint_controls.py": "e184c6555e4ed0caefd14f9afe35fbe00df62ab593f0de383d6214b9f3d8aaf4",
+          "joint_market.py": "0be3cf269786ad23aa5a4496aadcc567483c3017e63660269346ab5e5cea2002",
+          "joint_validation.py": "0b296efae9c9cbbdaf5db4fe040c79c3f57a49018b30ae0d9dfb080a868800ae",
+          "panel_baselines.py": "2ae4367cc75bb1c605b62c55e0502bac15f9417b845233d53041d532bf1f332a",
+          "robustness.py": "a569c17211c2c7fae8b261836bfb4a5372093e701200af85925d155011efcbed",
+          "sliced.py": "edf6a88f75a4c9325dc285524c8998edaa8d0ba2c1e8054dc4759b8d198afa95",
+          "transport.py": "469ead5a5f7a2f9067f4adaf89bc37a3571605c8c8eccd9685f8713d051725c7",
+          "windows.py": "289e6887962e20ebf88646e2052b29e701e39037b74b1acd4bf687410db50119"
+        },
+        "spec": {
+          "candidates": 128,
+          "development": "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development",
+          "market_config": "/Users/ken/Projects/wasserstein-regimes-cross-asset/configs/joint_market.yaml",
+          "seed": 42,
+          "train_end": "2020-12-31",
+          "type": "refit"
+        }
+      },
+      "job_id": "a021d9c02d8a80913eb6a1a083f4343d5651519ad9b2b8005c3cb214c17f850b",
+      "name": "refit-2020-42",
+      "result_digest": "7ad9883f978f25cf253055034e0eaad196e5b742aafc556fec5a2d501488f80c",
+      "task": {
+        "ari": 1.0,
+        "both_single_state": false,
+        "candidates": 128,
+        "converged": true,
+        "counts": [
+          0,
+          287,
+          403
+        ],
+        "n": 690,
+        "occupancy": [
+          0.0,
+          0.41594202898550725,
+          0.5840579710144927
+        ],
+        "occupied": 2,
+        "parent_digest": "eceffd52dc47798c19fc7fd73a2e1f1f0992ebdaa98a7eeeaa611ed6f6aa7b15",
+        "reference_counts": [
+          0,
+          287,
+          403
+        ],
+        "scales": [
+          0.013085056793495847,
+          0.014013427871785838,
+          0.00942456452717372,
+          0.01142079979960158,
+          0.007558879793438513
+        ],
+        "seed": 42,
+        "single_state": false,
+        "temporal": {
+          "adjacent_pairs": 689,
+          "dwell_times": [
+            229,
+            284,
+            8,
+            3,
+            166
+          ],
+          "mean_dwell": 138.0,
+          "median_dwell": 166.0,
+          "switching_frequency": 0.005805515239477504,
+          "transitions": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              285,
+              2
+            ],
+            [
+              0,
+              2,
+              400
+            ]
+          ]
+        },
+        "train_end": "2020-12-31",
+        "training_returns": 3457,
+        "type": "refit"
+      }
+    },
+    {
+      "execution": {
+        "blas_threads": 1,
+        "elapsed_seconds": 1.6287796250544488,
+        "memory_scope": "process lifetime high-water RSS through task completion, includes imports and input arrays",
+        "peak_rss_bytes": 291651584,
+        "pid": 22318,
+        "platform": "macOS-26.4-arm64-arm-64bit",
+        "pre_task_peak_rss_bytes": 39206912,
+        "python": "3.11.5",
+        "ru_maxrss_raw": 291651584,
+        "ru_maxrss_unit": "bytes",
+        "threadpools": [
+          {
+            "filepath": "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sklearn/.dylibs/libomp.dylib",
+            "internal_api": "openmp",
+            "num_threads": 1,
+            "prefix": "libomp",
+            "user_api": "openmp",
+            "version": null
+          }
+        ]
+      },
+      "identity": {
+        "blas_threads": 1,
+        "cwd": "/Users/ken/Projects/wasserstein-regimes-cross-asset",
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "exchange-calendars": "4.13.2",
+          "hmmlearn": "0.3.3",
+          "matplotlib": "3.10.8",
+          "numpy": "2.4.1",
+          "pandas": "3.0.2",
+          "pyarrow": "25.0.0",
+          "scikit-learn": "1.8.0",
+          "scipy": "1.17.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "inputs": {
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/assignments.parquet": "e8deb2208d2a17f5279b0c8d16911c952cb64660c04dc5c737e79a7c276e9f6f",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/checksums.json": "eceffd52dc47798c19fc7fd73a2e1f1f0992ebdaa98a7eeeaa611ed6f6aa7b15",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/config.json": "6ee4bc99dea58f8f5cf76281e5fdf6cb2f5d7b793a45e17eb2d6e2f41ecf56df",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/manifest.json": "3e128a0fedca6fe6d34e99335ed7b2bbba814e3e6d93abb95381290d92db0fb7",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/metrics.json": "a432fa9e9e1060f7c4494304ae225888422ed1077ddb30788af1c86426599e86",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/correlation.npz": "72a3033eb818c84a0b6145c14a4528062c632b8def10b1b433f57e53bb6363bd",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/covariance.npz": "20413879f606362de64a83e34da443d4d447a38c873a7ce1f54f61fc613ebc83",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/hmm.npz": "579dd43e4b4e4a88aa1643652c6b485c576cfc4b1282fd982786a2090fe411fc",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/marginal.npz": "09e2aea64d62719b2d7418b103a5de06b04467ffbc4455b917765ac7c822fb4f",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/raw_joint.npz": "5b9a1e54c131b3059b5d2027db1807e6d764d1762a15ca9b60dfa65e74f7268b",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development/models/scaled_joint.npz": "1540e7f44739b0287feec5ae978ea1966f58ea35222b306b5d09362fd895ba1c",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/configs/joint_market.yaml": "cab0ad112696182c1e49ea7064c8f0e3087a4fcf9fcd48c5c12b88c1e455dfc8",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/GLD_daily_2026-08-31.csv": "b6cf5fdd605bb9b035e00fc692845ca6b1eb908d6fafcaa80f613ba668bb96e7",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/GLD_daily_2026-08-31.json": "1535707d9dd12de245c88730d8b2984b71a0ed956fe36be23253050d08083e3b",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/HYG_daily_2026-08-31.csv": "c21ed428b212de482f466411f4080248712ff58628054778764e2e08d81e1b4e",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/HYG_daily_2026-08-31.json": "c5bd7ad7686f24f89a673dc62120bfd06d13973e8e9c8fc9ba0f28c69fc701d5",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/QQQ_daily_2026-08-31.csv": "07d0fd289438c0ac786e3f3daa5b3665ef803c49154a909325bbaeb6ee4c06c2",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/QQQ_daily_2026-08-31.json": "82932d96cdec982ed0a0a75df71e14f0df1275fd726a0aa275abfea121f302fa",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/TLT_daily_2026-08-31.csv": "a953d148eb8c1e766bcbffb317e7b7656a37f706e1f4a6474bfae138fc21ebb9",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/TLT_daily_2026-08-31.json": "73397ff37012f45c793ab631c57e49510a89d4fe51e8bd2c4b08b45481aa05be",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/spy_daily_2026-08-31.csv": "aeb4a4356b6d34fc4c67d7f446e98e8e91d2fc57a48065616137dea379d21b7d",
+          "/Users/ken/Projects/wasserstein-regimes-cross-asset/data/raw/spy_daily_2026-08-31.json": "604d8bf6e4181b83dc28fd61dadde6bbe88824f9bd246c4c419c7407a8755ccf"
+        },
+        "platform": "darwin",
+        "python": [
+          3,
+          11
+        ],
+        "sources": {
+          "__init__.py": "0b8a67d74760163a4dd3496239184ffbbcbd590bfaf1af947b8bab0de3b669e0",
+          "artifact_store.py": "e42afec3b19b2a09b2f2c8bdf94201b1875578bb10b2d2c0ec4a1a654aec4557",
+          "clustering.py": "36b35402156bd0cb8c1303ce2edc8f90b6678c10e580f421be5346940d564089",
+          "core.py": "e407ab12190f644836a5b742f0377d7248d4b493548199df4ce43040213ef832",
+          "data.py": "cb1d7ba44497c9c3fa26d657115d742a9bec539f331224dcc17f951b46eef7f4",
+          "evaluation.py": "27a07a05a5d73991d03d91eef3eb414f35094fa9af6f45475815fb8351b0a27f",
+          "experiments.py": "4bc2e4900e45fb2d322fb2c84d2c52fe844f056d294bbb1ee6ff713c68a782bc",
+          "frozen.py": "e54eea81104646d06bbfd3dddaf061234be46ed91d2a57af735e02b9d38fef12",
+          "job_tasks.py": "8ead17d047a31f95e5c5775651fa26e0c81edd47208963fe2fea11fcedd1d8a0",
+          "job_worker.py": "9afb31e182c155ba2659da9ece0dbdbde15ab731927c83325aba806099fb01fd",
+          "jobs.py": "f1e0c55da2aa410bfcd1819430b4592b8cfb8a52be29129a4534d6657137954d",
+          "joint.py": "3cac3de98a9f4feba3750bc420dfffa7b7d486b3200727e3bed894f25def43c1",
+          "joint_controls.py": "e184c6555e4ed0caefd14f9afe35fbe00df62ab593f0de383d6214b9f3d8aaf4",
+          "joint_market.py": "0be3cf269786ad23aa5a4496aadcc567483c3017e63660269346ab5e5cea2002",
+          "joint_validation.py": "0b296efae9c9cbbdaf5db4fe040c79c3f57a49018b30ae0d9dfb080a868800ae",
+          "panel_baselines.py": "2ae4367cc75bb1c605b62c55e0502bac15f9417b845233d53041d532bf1f332a",
+          "robustness.py": "a569c17211c2c7fae8b261836bfb4a5372093e701200af85925d155011efcbed",
+          "sliced.py": "edf6a88f75a4c9325dc285524c8998edaa8d0ba2c1e8054dc4759b8d198afa95",
+          "transport.py": "469ead5a5f7a2f9067f4adaf89bc37a3571605c8c8eccd9685f8713d051725c7",
+          "windows.py": "289e6887962e20ebf88646e2052b29e701e39037b74b1acd4bf687410db50119"
+        },
+        "spec": {
+          "candidates": 128,
+          "development": "/Users/ken/Projects/wasserstein-regimes-cross-asset/artifacts/joint-market-9277c7c4c48af92b2d83/development",
+          "market_config": "/Users/ken/Projects/wasserstein-regimes-cross-asset/configs/joint_market.yaml",
+          "seed": 83,
+          "train_end": "2020-12-31",
+          "type": "refit"
+        }
+      },
+      "job_id": "14380b65cbeb1b9e71542ac8158bae8d472d3fefcae6e88769b83eb9a59a2d1f",
+      "name": "refit-2020-83",
+      "result_digest": "277038b900eebfa6bef2a29fedf8e8c8b03fff97c4eb2384c422e47ca7925068",
+      "task": {
+        "ari": 0.4051959923895873,
+        "both_single_state": false,
+        "candidates": 128,
+        "converged": true,
+        "counts": [
+          412,
+          278,
+          0
+        ],
+        "n": 690,
+        "occupancy": [
+          0.5971014492753624,
+          0.4028985507246377,
+          0.0
+        ],
+        "occupied": 2,
+        "parent_digest": "eceffd52dc47798c19fc7fd73a2e1f1f0992ebdaa98a7eeeaa611ed6f6aa7b15",
+        "reference_counts": [
+          0,
+          287,
+          403
+        ],
+        "scales": [
+          0.013085056793495847,
+          0.014013427871785838,
+          0.00942456452717372,
+          0.01142079979960158,
+          0.007558879793438513
+        ],
+        "seed": 83,
+        "single_state": false,
+        "temporal": {
+          "adjacent_pairs": 689,
+          "dwell_times": [
+            17,
+            11,
+            1,
+            170,
+            354,
+            97,
+            40
+          ],
+          "mean_dwell": 98.57142857142857,
+          "median_dwell": 40.0,
+          "switching_frequency": 0.008708272859216255,
+          "transitions": [
+            [
+              408,
+              3,
+              0
+            ],
+            [
+              3,
+              275,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "train_end": "2020-12-31",
+        "training_returns": 3457,
+        "type": "refit"
+      }
+    },
+    {
+      "execution": {
+        "blas_threads": 1,
+        "elapsed_seconds": 0.39388320897705853,
+        "memory_scope": "process lifetime high-water RSS through task completion, includes imports and input arrays",
+        "peak_rss_bytes": 98385920,
+        "pid": 22319,
+        "platform": "macOS-26.4-arm64-arm-64bit",
+        "pre_task_peak_rss_bytes": 38846464,
+        "python": "3.11.5",
+        "ru_maxrss_raw": 98385920,
+        "ru_maxrss_unit": "bytes",
+        "threadpools": []
+      },
+      "identity": {
+        "blas_threads": 1,
+        "cwd": "/Users/ken/Projects/wasserstein-regimes-cross-asset",
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "exchange-calendars": "4.13.2",
+          "hmmlearn": "0.3.3",
+          "matplotlib": "3.10.8",
+          "numpy": "2.4.1",
+          "pandas": "3.0.2",
+          "pyarrow": "25.0.0",
+          "scikit-learn": "1.8.0",
+          "scipy": "1.17.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "inputs": {},
+        "platform": "darwin",
+        "python": [
+          3,
+          11
+        ],
+        "sources": {
+          "__init__.py": "0b8a67d74760163a4dd3496239184ffbbcbd590bfaf1af947b8bab0de3b669e0",
+          "artifact_store.py": "e42afec3b19b2a09b2f2c8bdf94201b1875578bb10b2d2c0ec4a1a654aec4557",
+          "clustering.py": "36b35402156bd0cb8c1303ce2edc8f90b6678c10e580f421be5346940d564089",
+          "core.py": "e407ab12190f644836a5b742f0377d7248d4b493548199df4ce43040213ef832",
+          "data.py": "cb1d7ba44497c9c3fa26d657115d742a9bec539f331224dcc17f951b46eef7f4",
+          "evaluation.py": "27a07a05a5d73991d03d91eef3eb414f35094fa9af6f45475815fb8351b0a27f",
+          "experiments.py": "4bc2e4900e45fb2d322fb2c84d2c52fe844f056d294bbb1ee6ff713c68a782bc",
+          "frozen.py": "e54eea81104646d06bbfd3dddaf061234be46ed91d2a57af735e02b9d38fef12",
+          "job_tasks.py": "8ead17d047a31f95e5c5775651fa26e0c81edd47208963fe2fea11fcedd1d8a0",
+          "job_worker.py": "9afb31e182c155ba2659da9ece0dbdbde15ab731927c83325aba806099fb01fd",
+          "jobs.py": "f1e0c55da2aa410bfcd1819430b4592b8cfb8a52be29129a4534d6657137954d",
+          "joint.py": "3cac3de98a9f4feba3750bc420dfffa7b7d486b3200727e3bed894f25def43c1",
+          "joint_controls.py": "e184c6555e4ed0caefd14f9afe35fbe00df62ab593f0de383d6214b9f3d8aaf4",
+          "joint_market.py": "0be3cf269786ad23aa5a4496aadcc567483c3017e63660269346ab5e5cea2002",
+          "joint_validation.py": "0b296efae9c9cbbdaf5db4fe040c79c3f57a49018b30ae0d9dfb080a868800ae",
+          "panel_baselines.py": "2ae4367cc75bb1c605b62c55e0502bac15f9417b845233d53041d532bf1f332a",
+          "robustness.py": "a569c17211c2c7fae8b261836bfb4a5372093e701200af85925d155011efcbed",
+          "sliced.py": "edf6a88f75a4c9325dc285524c8998edaa8d0ba2c1e8054dc4759b8d198afa95",
+          "transport.py": "469ead5a5f7a2f9067f4adaf89bc37a3571605c8c8eccd9685f8713d051725c7",
+          "windows.py": "289e6887962e20ebf88646e2052b29e701e39037b74b1acd4bf687410db50119"
+        },
+        "spec": {
+          "candidates": 128,
+          "dimensions": 5,
+          "k": 3,
+          "length": 63,
+          "n_init": 3,
+          "n_windows": 1000,
+          "projections": 64,
+          "seed": 17,
+          "type": "benchmark"
+        }
+      },
+      "job_id": "115b265449a35a8ca8de1673b52f2af6acf446c2bfb7555b7aef3340d6f6d63b",
+      "name": "benchmark-1000-17",
+      "result_digest": "afb1a85e648c8a1272acc69cd44261dd2117336e5ea60c5de88faef9a93db06e",
+      "task": {
+        "converged": true,
+        "counts": [
+          71,
+          342,
+          587
+        ],
+        "fit_seconds": 0.3237947500310838,
+        "inertia": 59.70263129099772,
+        "input_bytes": 2520000,
+        "parameters": {
+          "candidates": 128,
+          "dimensions": 5,
+          "k": 3,
+          "length": 63,
+          "n_init": 3,
+          "n_windows": 1000,
+          "projections": 64,
+          "seed": 17,
+          "type": "benchmark"
+        },
+        "scope": "engineering benchmark on iid Gaussian windows, not regime recovery",
+        "score_seconds": 0.04403979191556573,
+        "type": "benchmark"
+      }
+    },
+    {
+      "execution": {
+        "blas_threads": 1,
+        "elapsed_seconds": 0.3918172081466764,
+        "memory_scope": "process lifetime high-water RSS through task completion, includes imports and input arrays",
+        "peak_rss_bytes": 80592896,
+        "pid": 22322,
+        "platform": "macOS-26.4-arm64-arm-64bit",
+        "pre_task_peak_rss_bytes": 38420480,
+        "python": "3.11.5",
+        "ru_maxrss_raw": 80592896,
+        "ru_maxrss_unit": "bytes",
+        "threadpools": []
+      },
+      "identity": {
+        "blas_threads": 1,
+        "cwd": "/Users/ken/Projects/wasserstein-regimes-cross-asset",
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "exchange-calendars": "4.13.2",
+          "hmmlearn": "0.3.3",
+          "matplotlib": "3.10.8",
+          "numpy": "2.4.1",
+          "pandas": "3.0.2",
+          "pyarrow": "25.0.0",
+          "scikit-learn": "1.8.0",
+          "scipy": "1.17.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "inputs": {},
+        "platform": "darwin",
+        "python": [
+          3,
+          11
+        ],
+        "sources": {
+          "__init__.py": "0b8a67d74760163a4dd3496239184ffbbcbd590bfaf1af947b8bab0de3b669e0",
+          "artifact_store.py": "e42afec3b19b2a09b2f2c8bdf94201b1875578bb10b2d2c0ec4a1a654aec4557",
+          "clustering.py": "36b35402156bd0cb8c1303ce2edc8f90b6678c10e580f421be5346940d564089",
+          "core.py": "e407ab12190f644836a5b742f0377d7248d4b493548199df4ce43040213ef832",
+          "data.py": "cb1d7ba44497c9c3fa26d657115d742a9bec539f331224dcc17f951b46eef7f4",
+          "evaluation.py": "27a07a05a5d73991d03d91eef3eb414f35094fa9af6f45475815fb8351b0a27f",
+          "experiments.py": "4bc2e4900e45fb2d322fb2c84d2c52fe844f056d294bbb1ee6ff713c68a782bc",
+          "frozen.py": "e54eea81104646d06bbfd3dddaf061234be46ed91d2a57af735e02b9d38fef12",
+          "job_tasks.py": "8ead17d047a31f95e5c5775651fa26e0c81edd47208963fe2fea11fcedd1d8a0",
+          "job_worker.py": "9afb31e182c155ba2659da9ece0dbdbde15ab731927c83325aba806099fb01fd",
+          "jobs.py": "f1e0c55da2aa410bfcd1819430b4592b8cfb8a52be29129a4534d6657137954d",
+          "joint.py": "3cac3de98a9f4feba3750bc420dfffa7b7d486b3200727e3bed894f25def43c1",
+          "joint_controls.py": "e184c6555e4ed0caefd14f9afe35fbe00df62ab593f0de383d6214b9f3d8aaf4",
+          "joint_market.py": "0be3cf269786ad23aa5a4496aadcc567483c3017e63660269346ab5e5cea2002",
+          "joint_validation.py": "0b296efae9c9cbbdaf5db4fe040c79c3f57a49018b30ae0d9dfb080a868800ae",
+          "panel_baselines.py": "2ae4367cc75bb1c605b62c55e0502bac15f9417b845233d53041d532bf1f332a",
+          "robustness.py": "a569c17211c2c7fae8b261836bfb4a5372093e701200af85925d155011efcbed",
+          "sliced.py": "edf6a88f75a4c9325dc285524c8998edaa8d0ba2c1e8054dc4759b8d198afa95",
+          "transport.py": "469ead5a5f7a2f9067f4adaf89bc37a3571605c8c8eccd9685f8713d051725c7",
+          "windows.py": "289e6887962e20ebf88646e2052b29e701e39037b74b1acd4bf687410db50119"
+        },
+        "spec": {
+          "candidates": 128,
+          "dimensions": 5,
+          "k": 3,
+          "length": 63,
+          "n_init": 3,
+          "n_windows": 1000,
+          "projections": 64,
+          "seed": 42,
+          "type": "benchmark"
+        }
+      },
+      "job_id": "8185088b4707f085430ca04454384442f8b548a955c2b41ff9259c92e65e9a8f",
+      "name": "benchmark-1000-42",
+      "result_digest": "52ba107949eb8c553a9488570bfe76111415acff15f4fc2c15f0cecff37beb28",
+      "task": {
+        "converged": true,
+        "counts": [
+          365,
+          262,
+          373
+        ],
+        "fit_seconds": 0.3220697499345988,
+        "inertia": 59.546188907804044,
+        "input_bytes": 2520000,
+        "parameters": {
+          "candidates": 128,
+          "dimensions": 5,
+          "k": 3,
+          "length": 63,
+          "n_init": 3,
+          "n_windows": 1000,
+          "projections": 64,
+          "seed": 42,
+          "type": "benchmark"
+        },
+        "scope": "engineering benchmark on iid Gaussian windows, not regime recovery",
+        "score_seconds": 0.04312166688032448,
+        "type": "benchmark"
+      }
+    },
+    {
+      "execution": {
+        "blas_threads": 1,
+        "elapsed_seconds": 1.9695822079665959,
+        "memory_scope": "process lifetime high-water RSS through task completion, includes imports and input arrays",
+        "peak_rss_bytes": 124338176,
+        "pid": 22331,
+        "platform": "macOS-26.4-arm64-arm-64bit",
+        "pre_task_peak_rss_bytes": 37699584,
+        "python": "3.11.5",
+        "ru_maxrss_raw": 124338176,
+        "ru_maxrss_unit": "bytes",
+        "threadpools": []
+      },
+      "identity": {
+        "blas_threads": 1,
+        "cwd": "/Users/ken/Projects/wasserstein-regimes-cross-asset",
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "exchange-calendars": "4.13.2",
+          "hmmlearn": "0.3.3",
+          "matplotlib": "3.10.8",
+          "numpy": "2.4.1",
+          "pandas": "3.0.2",
+          "pyarrow": "25.0.0",
+          "scikit-learn": "1.8.0",
+          "scipy": "1.17.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "inputs": {},
+        "platform": "darwin",
+        "python": [
+          3,
+          11
+        ],
+        "sources": {
+          "__init__.py": "0b8a67d74760163a4dd3496239184ffbbcbd590bfaf1af947b8bab0de3b669e0",
+          "artifact_store.py": "e42afec3b19b2a09b2f2c8bdf94201b1875578bb10b2d2c0ec4a1a654aec4557",
+          "clustering.py": "36b35402156bd0cb8c1303ce2edc8f90b6678c10e580f421be5346940d564089",
+          "core.py": "e407ab12190f644836a5b742f0377d7248d4b493548199df4ce43040213ef832",
+          "data.py": "cb1d7ba44497c9c3fa26d657115d742a9bec539f331224dcc17f951b46eef7f4",
+          "evaluation.py": "27a07a05a5d73991d03d91eef3eb414f35094fa9af6f45475815fb8351b0a27f",
+          "experiments.py": "4bc2e4900e45fb2d322fb2c84d2c52fe844f056d294bbb1ee6ff713c68a782bc",
+          "frozen.py": "e54eea81104646d06bbfd3dddaf061234be46ed91d2a57af735e02b9d38fef12",
+          "job_tasks.py": "8ead17d047a31f95e5c5775651fa26e0c81edd47208963fe2fea11fcedd1d8a0",
+          "job_worker.py": "9afb31e182c155ba2659da9ece0dbdbde15ab731927c83325aba806099fb01fd",
+          "jobs.py": "f1e0c55da2aa410bfcd1819430b4592b8cfb8a52be29129a4534d6657137954d",
+          "joint.py": "3cac3de98a9f4feba3750bc420dfffa7b7d486b3200727e3bed894f25def43c1",
+          "joint_controls.py": "e184c6555e4ed0caefd14f9afe35fbe00df62ab593f0de383d6214b9f3d8aaf4",
+          "joint_market.py": "0be3cf269786ad23aa5a4496aadcc567483c3017e63660269346ab5e5cea2002",
+          "joint_validation.py": "0b296efae9c9cbbdaf5db4fe040c79c3f57a49018b30ae0d9dfb080a868800ae",
+          "panel_baselines.py": "2ae4367cc75bb1c605b62c55e0502bac15f9417b845233d53041d532bf1f332a",
+          "robustness.py": "a569c17211c2c7fae8b261836bfb4a5372093e701200af85925d155011efcbed",
+          "sliced.py": "edf6a88f75a4c9325dc285524c8998edaa8d0ba2c1e8054dc4759b8d198afa95",
+          "transport.py": "469ead5a5f7a2f9067f4adaf89bc37a3571605c8c8eccd9685f8713d051725c7",
+          "windows.py": "289e6887962e20ebf88646e2052b29e701e39037b74b1acd4bf687410db50119"
+        },
+        "spec": {
+          "candidates": 128,
+          "dimensions": 5,
+          "k": 3,
+          "length": 63,
+          "n_init": 3,
+          "n_windows": 10000,
+          "projections": 64,
+          "seed": 17,
+          "type": "benchmark"
+        }
+      },
+      "job_id": "96aa1327da0fb83ca7214356e02279be01a670c8e9959f35001e805b58f1e194",
+      "name": "benchmark-10000-17",
+      "result_digest": "1d29572f69d2aa1d53b5a3ebcacce5aeaa2ec06e069dc2ccd852c4f97e4b45fa",
+      "task": {
+        "converged": true,
+        "counts": [
+          1055,
+          3864,
+          5081
+        ],
+        "fit_seconds": 1.493454874958843,
+        "inertia": 602.2558928774304,
+        "input_bytes": 25200000,
+        "parameters": {
+          "candidates": 128,
+          "dimensions": 5,
+          "k": 3,
+          "length": 63,
+          "n_init": 3,
+          "n_windows": 10000,
+          "projections": 64,
+          "seed": 17,
+          "type": "benchmark"
+        },
+        "scope": "engineering benchmark on iid Gaussian windows, not regime recovery",
+        "score_seconds": 0.43812266713939607,
+        "type": "benchmark"
+      }
+    },
+    {
+      "execution": {
+        "blas_threads": 1,
+        "elapsed_seconds": 1.9713105410337448,
+        "memory_scope": "process lifetime high-water RSS through task completion, includes imports and input arrays",
+        "peak_rss_bytes": 123846656,
+        "pid": 22332,
+        "platform": "macOS-26.4-arm64-arm-64bit",
+        "pre_task_peak_rss_bytes": 37584896,
+        "python": "3.11.5",
+        "ru_maxrss_raw": 123846656,
+        "ru_maxrss_unit": "bytes",
+        "threadpools": []
+      },
+      "identity": {
+        "blas_threads": 1,
+        "cwd": "/Users/ken/Projects/wasserstein-regimes-cross-asset",
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "exchange-calendars": "4.13.2",
+          "hmmlearn": "0.3.3",
+          "matplotlib": "3.10.8",
+          "numpy": "2.4.1",
+          "pandas": "3.0.2",
+          "pyarrow": "25.0.0",
+          "scikit-learn": "1.8.0",
+          "scipy": "1.17.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "inputs": {},
+        "platform": "darwin",
+        "python": [
+          3,
+          11
+        ],
+        "sources": {
+          "__init__.py": "0b8a67d74760163a4dd3496239184ffbbcbd590bfaf1af947b8bab0de3b669e0",
+          "artifact_store.py": "e42afec3b19b2a09b2f2c8bdf94201b1875578bb10b2d2c0ec4a1a654aec4557",
+          "clustering.py": "36b35402156bd0cb8c1303ce2edc8f90b6678c10e580f421be5346940d564089",
+          "core.py": "e407ab12190f644836a5b742f0377d7248d4b493548199df4ce43040213ef832",
+          "data.py": "cb1d7ba44497c9c3fa26d657115d742a9bec539f331224dcc17f951b46eef7f4",
+          "evaluation.py": "27a07a05a5d73991d03d91eef3eb414f35094fa9af6f45475815fb8351b0a27f",
+          "experiments.py": "4bc2e4900e45fb2d322fb2c84d2c52fe844f056d294bbb1ee6ff713c68a782bc",
+          "frozen.py": "e54eea81104646d06bbfd3dddaf061234be46ed91d2a57af735e02b9d38fef12",
+          "job_tasks.py": "8ead17d047a31f95e5c5775651fa26e0c81edd47208963fe2fea11fcedd1d8a0",
+          "job_worker.py": "9afb31e182c155ba2659da9ece0dbdbde15ab731927c83325aba806099fb01fd",
+          "jobs.py": "f1e0c55da2aa410bfcd1819430b4592b8cfb8a52be29129a4534d6657137954d",
+          "joint.py": "3cac3de98a9f4feba3750bc420dfffa7b7d486b3200727e3bed894f25def43c1",
+          "joint_controls.py": "e184c6555e4ed0caefd14f9afe35fbe00df62ab593f0de383d6214b9f3d8aaf4",
+          "joint_market.py": "0be3cf269786ad23aa5a4496aadcc567483c3017e63660269346ab5e5cea2002",
+          "joint_validation.py": "0b296efae9c9cbbdaf5db4fe040c79c3f57a49018b30ae0d9dfb080a868800ae",
+          "panel_baselines.py": "2ae4367cc75bb1c605b62c55e0502bac15f9417b845233d53041d532bf1f332a",
+          "robustness.py": "a569c17211c2c7fae8b261836bfb4a5372093e701200af85925d155011efcbed",
+          "sliced.py": "edf6a88f75a4c9325dc285524c8998edaa8d0ba2c1e8054dc4759b8d198afa95",
+          "transport.py": "469ead5a5f7a2f9067f4adaf89bc37a3571605c8c8eccd9685f8713d051725c7",
+          "windows.py": "289e6887962e20ebf88646e2052b29e701e39037b74b1acd4bf687410db50119"
+        },
+        "spec": {
+          "candidates": 128,
+          "dimensions": 5,
+          "k": 3,
+          "length": 63,
+          "n_init": 3,
+          "n_windows": 10000,
+          "projections": 64,
+          "seed": 42,
+          "type": "benchmark"
+        }
+      },
+      "job_id": "26a3760123e883dbfc1d802d7140e03f008c90440545bd548cf2f980d4e1812b",
+      "name": "benchmark-10000-42",
+      "result_digest": "56e6dead4bba34c930e1330a1fa9c5698bf1144f429407f0337957bb0bece32e",
+      "task": {
+        "converged": true,
+        "counts": [
+          1585,
+          6602,
+          1813
+        ],
+        "fit_seconds": 1.4958259160630405,
+        "inertia": 584.9523075110778,
+        "input_bytes": 25200000,
+        "parameters": {
+          "candidates": 128,
+          "dimensions": 5,
+          "k": 3,
+          "length": 63,
+          "n_init": 3,
+          "n_windows": 10000,
+          "projections": 64,
+          "seed": 42,
+          "type": "benchmark"
+        },
+        "scope": "engineering benchmark on iid Gaussian windows, not regime recovery",
+        "score_seconds": 0.43803458381444216,
+        "type": "benchmark"
+      }
+    },
+    {
+      "execution": {
+        "blas_threads": 1,
+        "elapsed_seconds": 8.9835621251259,
+        "memory_scope": "process lifetime high-water RSS through task completion, includes imports and input arrays",
+        "peak_rss_bytes": 243417088,
+        "pid": 22338,
+        "platform": "macOS-26.4-arm64-arm-64bit",
+        "pre_task_peak_rss_bytes": 37502976,
+        "python": "3.11.5",
+        "ru_maxrss_raw": 243417088,
+        "ru_maxrss_unit": "bytes",
+        "threadpools": []
+      },
+      "identity": {
+        "blas_threads": 1,
+        "cwd": "/Users/ken/Projects/wasserstein-regimes-cross-asset",
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "exchange-calendars": "4.13.2",
+          "hmmlearn": "0.3.3",
+          "matplotlib": "3.10.8",
+          "numpy": "2.4.1",
+          "pandas": "3.0.2",
+          "pyarrow": "25.0.0",
+          "scikit-learn": "1.8.0",
+          "scipy": "1.17.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "inputs": {},
+        "platform": "darwin",
+        "python": [
+          3,
+          11
+        ],
+        "sources": {
+          "__init__.py": "0b8a67d74760163a4dd3496239184ffbbcbd590bfaf1af947b8bab0de3b669e0",
+          "artifact_store.py": "e42afec3b19b2a09b2f2c8bdf94201b1875578bb10b2d2c0ec4a1a654aec4557",
+          "clustering.py": "36b35402156bd0cb8c1303ce2edc8f90b6678c10e580f421be5346940d564089",
+          "core.py": "e407ab12190f644836a5b742f0377d7248d4b493548199df4ce43040213ef832",
+          "data.py": "cb1d7ba44497c9c3fa26d657115d742a9bec539f331224dcc17f951b46eef7f4",
+          "evaluation.py": "27a07a05a5d73991d03d91eef3eb414f35094fa9af6f45475815fb8351b0a27f",
+          "experiments.py": "4bc2e4900e45fb2d322fb2c84d2c52fe844f056d294bbb1ee6ff713c68a782bc",
+          "frozen.py": "e54eea81104646d06bbfd3dddaf061234be46ed91d2a57af735e02b9d38fef12",
+          "job_tasks.py": "8ead17d047a31f95e5c5775651fa26e0c81edd47208963fe2fea11fcedd1d8a0",
+          "job_worker.py": "9afb31e182c155ba2659da9ece0dbdbde15ab731927c83325aba806099fb01fd",
+          "jobs.py": "f1e0c55da2aa410bfcd1819430b4592b8cfb8a52be29129a4534d6657137954d",
+          "joint.py": "3cac3de98a9f4feba3750bc420dfffa7b7d486b3200727e3bed894f25def43c1",
+          "joint_controls.py": "e184c6555e4ed0caefd14f9afe35fbe00df62ab593f0de383d6214b9f3d8aaf4",
+          "joint_market.py": "0be3cf269786ad23aa5a4496aadcc567483c3017e63660269346ab5e5cea2002",
+          "joint_validation.py": "0b296efae9c9cbbdaf5db4fe040c79c3f57a49018b30ae0d9dfb080a868800ae",
+          "panel_baselines.py": "2ae4367cc75bb1c605b62c55e0502bac15f9417b845233d53041d532bf1f332a",
+          "robustness.py": "a569c17211c2c7fae8b261836bfb4a5372093e701200af85925d155011efcbed",
+          "sliced.py": "edf6a88f75a4c9325dc285524c8998edaa8d0ba2c1e8054dc4759b8d198afa95",
+          "transport.py": "469ead5a5f7a2f9067f4adaf89bc37a3571605c8c8eccd9685f8713d051725c7",
+          "windows.py": "289e6887962e20ebf88646e2052b29e701e39037b74b1acd4bf687410db50119"
+        },
+        "spec": {
+          "candidates": 128,
+          "dimensions": 5,
+          "k": 3,
+          "length": 63,
+          "n_init": 3,
+          "n_windows": 50000,
+          "projections": 64,
+          "seed": 17,
+          "type": "benchmark"
+        }
+      },
+      "job_id": "06285e08ff140d34c4085151f7ae65342631ef69e515475186b3d34596da05ba",
+      "name": "benchmark-50000-17",
+      "result_digest": "e71c7c8d7327ead19c9f6e4ed4da35ea3a640d38465f5f6db5338d9161b3df21",
+      "task": {
+        "converged": true,
+        "counts": [
+          28798,
+          6971,
+          14231
+        ],
+        "fit_seconds": 6.674873583950102,
+        "inertia": 2979.744267647764,
+        "input_bytes": 126000000,
+        "parameters": {
+          "candidates": 128,
+          "dimensions": 5,
+          "k": 3,
+          "length": 63,
+          "n_init": 3,
+          "n_windows": 50000,
+          "projections": 64,
+          "seed": 17,
+          "type": "benchmark"
+        },
+        "scope": "engineering benchmark on iid Gaussian windows, not regime recovery",
+        "score_seconds": 2.2229130829218775,
+        "type": "benchmark"
+      }
+    },
+    {
+      "execution": {
+        "blas_threads": 1,
+        "elapsed_seconds": 9.104836957994848,
+        "memory_scope": "process lifetime high-water RSS through task completion, includes imports and input arrays",
+        "peak_rss_bytes": 225050624,
+        "pid": 22341,
+        "platform": "macOS-26.4-arm64-arm-64bit",
+        "pre_task_peak_rss_bytes": 37486592,
+        "python": "3.11.5",
+        "ru_maxrss_raw": 225050624,
+        "ru_maxrss_unit": "bytes",
+        "threadpools": []
+      },
+      "identity": {
+        "blas_threads": 1,
+        "cwd": "/Users/ken/Projects/wasserstein-regimes-cross-asset",
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "exchange-calendars": "4.13.2",
+          "hmmlearn": "0.3.3",
+          "matplotlib": "3.10.8",
+          "numpy": "2.4.1",
+          "pandas": "3.0.2",
+          "pyarrow": "25.0.0",
+          "scikit-learn": "1.8.0",
+          "scipy": "1.17.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "inputs": {},
+        "platform": "darwin",
+        "python": [
+          3,
+          11
+        ],
+        "sources": {
+          "__init__.py": "0b8a67d74760163a4dd3496239184ffbbcbd590bfaf1af947b8bab0de3b669e0",
+          "artifact_store.py": "e42afec3b19b2a09b2f2c8bdf94201b1875578bb10b2d2c0ec4a1a654aec4557",
+          "clustering.py": "36b35402156bd0cb8c1303ce2edc8f90b6678c10e580f421be5346940d564089",
+          "core.py": "e407ab12190f644836a5b742f0377d7248d4b493548199df4ce43040213ef832",
+          "data.py": "cb1d7ba44497c9c3fa26d657115d742a9bec539f331224dcc17f951b46eef7f4",
+          "evaluation.py": "27a07a05a5d73991d03d91eef3eb414f35094fa9af6f45475815fb8351b0a27f",
+          "experiments.py": "4bc2e4900e45fb2d322fb2c84d2c52fe844f056d294bbb1ee6ff713c68a782bc",
+          "frozen.py": "e54eea81104646d06bbfd3dddaf061234be46ed91d2a57af735e02b9d38fef12",
+          "job_tasks.py": "8ead17d047a31f95e5c5775651fa26e0c81edd47208963fe2fea11fcedd1d8a0",
+          "job_worker.py": "9afb31e182c155ba2659da9ece0dbdbde15ab731927c83325aba806099fb01fd",
+          "jobs.py": "f1e0c55da2aa410bfcd1819430b4592b8cfb8a52be29129a4534d6657137954d",
+          "joint.py": "3cac3de98a9f4feba3750bc420dfffa7b7d486b3200727e3bed894f25def43c1",
+          "joint_controls.py": "e184c6555e4ed0caefd14f9afe35fbe00df62ab593f0de383d6214b9f3d8aaf4",
+          "joint_market.py": "0be3cf269786ad23aa5a4496aadcc567483c3017e63660269346ab5e5cea2002",
+          "joint_validation.py": "0b296efae9c9cbbdaf5db4fe040c79c3f57a49018b30ae0d9dfb080a868800ae",
+          "panel_baselines.py": "2ae4367cc75bb1c605b62c55e0502bac15f9417b845233d53041d532bf1f332a",
+          "robustness.py": "a569c17211c2c7fae8b261836bfb4a5372093e701200af85925d155011efcbed",
+          "sliced.py": "edf6a88f75a4c9325dc285524c8998edaa8d0ba2c1e8054dc4759b8d198afa95",
+          "transport.py": "469ead5a5f7a2f9067f4adaf89bc37a3571605c8c8eccd9685f8713d051725c7",
+          "windows.py": "289e6887962e20ebf88646e2052b29e701e39037b74b1acd4bf687410db50119"
+        },
+        "spec": {
+          "candidates": 128,
+          "dimensions": 5,
+          "k": 3,
+          "length": 63,
+          "n_init": 3,
+          "n_windows": 50000,
+          "projections": 64,
+          "seed": 42,
+          "type": "benchmark"
+        }
+      },
+      "job_id": "a7d206409bf0d933d46f680301a24c32f4b9194fe0dcd9d908a019270b579be2",
+      "name": "benchmark-50000-42",
+      "result_digest": "6389f00e65cdc567c3b9d263afea9fcebd9301ce4a9e453bcdeb915df9f8e808",
+      "task": {
+        "converged": true,
+        "counts": [
+          25853,
+          5603,
+          18544
+        ],
+        "fit_seconds": 6.801258875057101,
+        "inertia": 2985.00952523819,
+        "input_bytes": 126000000,
+        "parameters": {
+          "candidates": 128,
+          "dimensions": 5,
+          "k": 3,
+          "length": 63,
+          "n_init": 3,
+          "n_windows": 50000,
+          "projections": 64,
+          "seed": 42,
+          "type": "benchmark"
+        },
+        "scope": "engineering benchmark on iid Gaussian windows, not regime recovery",
+        "score_seconds": 2.2183774169534445,
+        "type": "benchmark"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "verification": {
+    "blas_threads": 1,
+    "distinct_worker_pids": 11,
+    "exact_dates_labels_availability": true,
+    "initial_run": "407c91f9ac4f43a4b665b42060a4ba5a",
+    "initial_workers": 2,
+    "resume_workers": 1,
+    "resumed_jobs": 11,
+    "resumed_run": "f47d156eb101465ca212f318b4e62557",
+    "resumed_same_attempts": true,
+    "saved_validation_labels": 690
+  }
+}
