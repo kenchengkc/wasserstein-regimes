@@ -14,6 +14,9 @@ def dispatch(spec,output):
     if spec['type']=='score':
         from .frozen import score_snapshot
         return dict(type='score',**score_snapshot(spec['bundle'],spec['config'],output))
+    if spec['type']=='risk':
+        from .risk_study import run_risk
+        return run_risk(spec['bundle'],spec['config'],output)
     if spec['type']=='refit': return refit(spec,output)
     if spec['type']=='benchmark': return benchmark(spec)
     raise ValueError('unknown job type')

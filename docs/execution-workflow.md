@@ -39,6 +39,7 @@ Supported strict job types:
 | Type | Inputs | Output |
 | --- | --- | --- |
 | `score` | Frozen bundle plus snapshot/scoring configuration | Labels, distances, novelty flags and aggregates |
+| `risk` | Frozen bundle plus risk/snapshot configuration | Causal five-session forecasts, proper losses and paired dependent uncertainty; see [risk workflow](risk-workflow.md) |
 | `refit` | Sealed development, market configuration, training cutoff, seed and candidate budget | Validation-anchor agreement and occupancy |
 | `benchmark` | Synthetic window dimensions, seed and optimizer budgets | Fit/score timings, occupancy and execution RSS |
 
