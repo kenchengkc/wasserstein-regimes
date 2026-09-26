@@ -12,11 +12,13 @@ Exact one-dimensional W2 clustering of equal-size empirical distributions is Euc
 
 **Cross-asset replication:** QQQ, TLT, GLD and HYG show 95.27–97.53% scale contribution to raw centroid separation. Shape stability is mixed; TLT and HYG occupy only one raw holdout state. Read the [cross-asset results](cross-asset-results.md).
 
-**Exploratory joint market study:** Six models scored the same 605 synchronized five-asset windows. Joint states remain sensitive to resampling (mean validation ARI 0.521); predictive value is untested. Read the [market results](joint-market-results.md).
+**Exploratory joint market study:** Six models scored the same 605 synchronized five-asset windows. Joint states remain sensitive to resampling (mean validation ARI 0.521); clustering alone does not establish predictive value. Read the [market results](joint-market-results.md).
 
 **Joint robustness:** Return-level resampling averages ARI 0.518; 1% extreme training contamination collapses validation to one state. Stationary nulls also produce persistent clusters. Read the [robustness results](joint-validation-results.md).
 
 **Execution infrastructure:** Frozen scoring reproduces all 690 validation labels; 11 isolated jobs resume from verified artifacts. Read the [execution measurements](execution-results.md) and [workflow](execution-workflow.md).
+
+**Risk forecasting:** Across 600 exploratory five-session forecasts, joint regimes had higher average QLIKE loss than all four baselines. The EWMA comparison interval includes zero; no forecasting advantage is demonstrated. Read the [risk results](risk-results.md) and [frozen protocol](risk-protocol.md).
 
 **Joint research extension:** Fixed-projection sliced W2 and sampled medoids detect dependence that marginals miss, with a fixed candidate memory budget. Read the [academic comparison and roadmap](research-roadmap.md) and [measured synthetic results](joint-results.md).
 
