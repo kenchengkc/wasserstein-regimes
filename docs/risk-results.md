@@ -72,7 +72,7 @@ Independent review preceded empirical evaluation. Its two panel-boundary finding
 
 The empirical worker completed in **2.45 seconds**, with **249.6 MiB** process-lifetime high-water RSS including imports/input arrays, on macOS arm64, Python 3.11.5, one worker/one BLAS thread. This is one measured run, not a performance guarantee. The second invocation was a verified cache hit on the identical attempt. Its complete inventory and all 600 aggregate loss calculations were checked against the saved local forecast table.
 
-Read the [reproduction workflow](risk-workflow.md). [Aggregate evidence and checksums](https://github.com/kenchengkc/wasserstein-regimes/tree/feat/regime-risk-forecasting/results/risk_forecasting) contain all losses, block sensitivities, yearly slices, source/dependency fingerprints and run identities. Market observations, medoids and per-origin audit rows remain local.
+Read the [reproduction workflow](risk-workflow.md). [Aggregate evidence and checksums](https://github.com/kenchengkc/wasserstein-regimes/tree/8248acf222b4274d53eeffaec02bea4b3ca3b8a5/results/risk_forecasting) contain all losses, block sensitivities, yearly slices, source/dependency fingerprints and run identities. Market observations, medoids and per-origin audit rows remain local.
 
 - Frozen protocol: commit `4ce3b1b`.
 - Executed source: [`8b2e235`](https://github.com/kenchengkc/wasserstein-regimes/commit/8b2e2352523afbbaf7580041c109a08c6672c41c).
