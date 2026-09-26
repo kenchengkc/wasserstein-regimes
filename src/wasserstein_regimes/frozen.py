@@ -67,6 +67,7 @@ def load_bundle(path):
 def freeze_joint(development,*,model='scaled_joint',output_root='artifacts/bundles'):
     if model not in ('scaled_joint','raw_joint'): raise ValueError('unsupported frozen model')
     dev=Path(development)
+    parent_digest=digest(dev/'checksums.json')
     verify_artifact(dev)
     inventory=json.loads((dev/'checksums.json').read_text())
     required={'config.json','manifest.json','metrics.json',f'models/{model}.npz'}
@@ -83,7 +84,7 @@ def freeze_joint(development,*,model='scaled_joint',output_root='artifacts/bundl
     contract=dict(schema_version=1,symbols=symbols,window_length=config['window_length'],provider=config['provider'],
         price_column=config['price_column'],return_basis='adjusted_close',calendar='XNYS',train_end=config['train_end'],
         calibration_end=config['validation_end'],novelty_threshold=metrics['calibration'][model],model=model,
-        parent_digest=digest(dev/'checksums.json'),numerical_sources=sources,dependencies=manifest['dependency_versions'])
+        parent_digest=parent_digest,numerical_sources=sources,dependencies=manifest['dependency_versions'])
     validate_contract(contract)
     model_digest=digest(dev/f'models/{model}.npz')
     name='joint-bundle-'+identity(dict(contract=contract,model_sha256=model_digest))[:24]
@@ -91,6 +92,9 @@ def freeze_joint(development,*,model='scaled_joint',output_root='artifacts/bundl
     with lock(Path(output_root)/'.locks'/name):
         if target.exists():
             load_bundle(target)
+            verify_artifact(dev)
+            if digest(dev/'checksums.json')!=parent_digest:
+                raise ValueError('parent changed during bundle export')
             return target
         target.parent.mkdir(parents=True,exist_ok=True)
         temp=Path(tempfile.mkdtemp(prefix=name+'-partial-',dir=target.parent))

@@ -65,10 +65,12 @@ def _input_files(spec):
             raise ValueError('refit cannot extend beyond training')
         files.append(cfg)
     for asset in config['assets']:
-        path=Path(asset['dataset']).resolve()
+        path=Path(asset['dataset']).absolute()
         if digest(path)!=asset['sha256']: raise ValueError('snapshot hash mismatch')
         files.extend([path,path.with_suffix('.json')])
-    return {str(p.resolve()):digest(p) for p in files}
+    # Keep lexical paths: execution derives sidecars beside the configured CSV,
+    # and verification must observe later symlink retargeting.
+    return {str(p.absolute()):digest(p) for p in files}
 
 
 def prepare_job(job,*,blas_threads=1):

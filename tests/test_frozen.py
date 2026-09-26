@@ -109,3 +109,50 @@ def test_freeze_rejects_parent_changed_during_copy(bundle,tmp_path,monkeypatch):
     monkeypatch.setattr(frozen.shutil,'copyfile',changed)
     with pytest.raises(ValueError,match='changed'):
         frozen.freeze_joint(dev,output_root=tmp_path/'new')
+
+
+def test_freeze_rejects_parent_changed_before_digest_capture(bundle,tmp_path,monkeypatch):
+    from wasserstein_regimes import frozen
+    from wasserstein_regimes.artifact_store import seal
+    original=Path.read_text
+    metrics=tmp_path/'development/metrics.json'
+    changed=False
+    def read(path,*args,**kwargs):
+        nonlocal changed
+        value=original(path,*args,**kwargs)
+        if path==metrics and not changed:
+            changed=True
+            latest=json.loads(value)
+            latest['calibration']['scaled_joint']=3.
+            metrics.write_text(json.dumps(latest))
+            seal(metrics.parent)
+        return value
+    monkeypatch.setattr(Path,'read_text',read)
+    with pytest.raises(ValueError,match='changed'):
+        frozen.freeze_joint(metrics.parent,output_root=tmp_path/'new')
+
+
+def test_job_identity_tracks_consumed_sidecar_and_symlink_retarget(bundle,tmp_path):
+    import yaml
+    from wasserstein_regimes.jobs import prepare_job,verify_request
+    from wasserstein_regimes.artifact_store import digest
+    source=tmp_path/'data.csv';source.write_text('original snapshot')
+    source.with_suffix('.json').write_text('{"not_consumed":true}')
+    alias=tmp_path/'alias.csv';alias.symlink_to(source)
+    alias.with_suffix('.json').write_text('{"consumed":true}')
+    second=tmp_path/'B.csv';second.write_text('other snapshot')
+    second.with_suffix('.json').write_text('{}')
+    cfg=tmp_path/'score.yaml'
+    cfg.write_text(yaml.safe_dump(dict(schema_version=1,provider='fixture',price_column='Adj Close',
+        start='2021-01-01',end='2021-02-01',as_of='2021-02-02T00:00:00Z',assets=[
+            dict(symbol='A',dataset=str(alias),sha256=digest(alias)),dict(symbol='B',dataset=str(second),sha256=digest(second))])))
+    spec=dict(name='score',type='score',bundle=str(bundle[0]),config=str(cfg))
+    request=prepare_job(spec)
+    assert str(alias.with_suffix('.json')) in request['identity']['inputs']
+    alias.with_suffix('.json').write_text('{"consumed":"changed"}')
+    assert prepare_job(spec)['id']!=request['id']
+    with pytest.raises(ValueError,match='input identity'): verify_request(request)
+    request=prepare_job(spec)
+    alternate=tmp_path/'alternate.csv';alternate.write_text('different data')
+    alias.unlink();alias.symlink_to(alternate)
+    with pytest.raises(ValueError,match='input identity'): verify_request(request)
