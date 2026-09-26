@@ -119,3 +119,34 @@ def test_real_risk_job_sealed_resumed_and_content_bound(study,tmp_path):
     cfg.write_text(yaml.safe_dump(dict(c,prior_count=11)))
     assert prepare_job(spec)['id']!=request['id']
     with pytest.raises(ValueError,match='input identity'): verify_request(request)
+
+
+def test_origin_end_keeps_available_later_target_observations(study):
+    _,_,c,contract,model,panel=study
+    full,_=risk_panel(panel,c,contract,model)
+    shortened,summary=risk_panel(panel,dict(c,end='2023-04-21'),contract,model)
+    expected=full[full.date<='2023-04-21'].reset_index(drop=True)
+    pd.testing.assert_frame_equal(shortened,expected)
+    assert summary['pending_targets']==0
+    assert shortened.target_end.iloc[-1]==pd.Timestamp('2023-04-25')
+
+
+def test_compressed_exchange_session_cannot_be_a_daily_observation(study):
+    _,_,c,contract,model,panel=study
+    compressed={}
+    for name,s in panel.items():
+        i=s.dates.get_loc('2023-04-17')
+        keep=np.arange(len(s.returns))!=i
+        r=s.returns.copy();r[i+1]+=r[i]
+        starts=s.price_start.to_numpy(copy=True);starts[i+1]=starts[i]
+        compressed[name]=replace(s,returns=r[keep],dates=s.dates[keep],available_at=s.available_at[keep],
+                                 price_start=starts[keep],price_end=s.price_end[keep])
+    with pytest.raises(ValueError,match='exchange sessions'):
+        risk_panel(compressed,c,contract,model)
+
+
+def test_close_return_cannot_be_available_before_exchange_close(study):
+    _,_,c,contract,model,panel=study
+    premature={name:replace(s,available_at=s.dates.tz_localize('UTC')+pd.Timedelta(hours=17)) for name,s in panel.items()}
+    with pytest.raises(ValueError,match='exchange close'):
+        risk_panel(premature,c,contract,model)

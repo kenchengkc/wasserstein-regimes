@@ -8,7 +8,7 @@ import pandas as pd
 import yaml
 
 from .artifact_store import digest,write_json
-from .data import load_csv
+from .data import _calendar,load_csv
 from .frozen import load_bundle,session_date,validate_contract,validate_score_config
 from .joint import joint_windows
 from .joint_market import _crop,check_acquisition
@@ -43,17 +43,25 @@ def _panel(panel,c,contract):
         raise ValueError('input convention differs')
     if any(not len(s.dates) for s in panel.values()): raise ValueError('empty panel')
     start=max(s.dates[0] for s in panel.values())
-    end=min(session_date(c['end']),min(s.dates[-1] for s in panel.values()))
+    # `end` bounds forecast origins, not the observations maturing their targets.
+    end=min(s.dates[-1] for s in panel.values())
     if start>end: raise ValueError('no common risk history')
     panel={name:_crop(s,start,end) for name,s in panel.items()}
     first=next(iter(panel.values()))
     if (any(not np.isfinite(s.returns).all() for s in panel.values())
             or not first.price_start[1:].equals(first.price_end[:-1])):
         raise ValueError('risk requires complete contiguous daily returns')
+    exchange=_calendar(contract['calendar'],min(1993,int(first.price_start[0].year)),
+                       max(2026,int(first.price_end[-1].year)))
+    sessions=exchange.sessions_in_range(first.price_start[0],first.price_end[-1]).tz_localize(None)
+    if not first.dates.equals(sessions[1:]) or not first.price_start.equals(sessions[:-1]):
+        raise ValueError('risk intervals must be consecutive exchange sessions')
     window=contract['window_length']
     batch=joint_windows(panel,window)  # validates exact dates, intervals and basis
     if len(batch.samples)!=len(first.returns)-window+1: raise ValueError('incomplete risk windows')
     available=pd.to_datetime(np.column_stack([s.available_at.as_unit('ns').asi8 for s in panel.values()]).max(axis=1),utc=True)
+    closes=pd.DatetimeIndex(exchange.schedule.loc[first.dates,'close'])
+    if np.any(available<closes): raise ValueError('closing returns unavailable before exchange close')
     if not np.all(np.diff(available.asi8)>0): raise ValueError('risk requires strictly increasing availability')
     return panel,first,batch,available
 
