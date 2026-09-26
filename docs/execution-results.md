@@ -48,7 +48,7 @@ Initial batch: `407c91f9ac4f43a4b665b42060a4ba5a`. Cache-only batch: `f47d156eb1
 
 Automated tests exercise real subprocess isolation, cache reuse with a changed worker count, two coordinators requesting the same job, timeout/retry, interrupted attempts, and live supervisor cancellation with worker cleanup. They also reject corrupt output inventories, changed inputs during computation, symlink/sidecar identity mismatches, mixed-generation bundle exports and incompatible scoring contracts. Independent review identified two provenance defects; regression tests reproduced both before fixes and evidence execution.
 
-[Public aggregate evidence](https://github.com/kenchengkc/wasserstein-regimes/tree/feat/resumable-experiments/results/execution) includes all 11 job results, exact computational specifications/fingerprints, runtime threadpool/RSS metadata and checksums. The local job store retains per-attempt status and logs. This supports process interruption recovery on local Linux/macOS filesystems; it is not a power-loss durability guarantee or a distributed scheduler.
+[Public aggregate evidence](https://github.com/kenchengkc/wasserstein-regimes/tree/e846df22a91a2c005cad36a4c8fd4bc7c4968424/results/execution) includes all 11 job results, exact computational specifications/fingerprints, runtime threadpool/RSS metadata and checksums. The local job store retains per-attempt status and logs. This supports process interruption recovery on local Linux/macOS filesystems; it is not a power-loss durability guarantee or a distributed scheduler.
 
 ## Next research gate
 
