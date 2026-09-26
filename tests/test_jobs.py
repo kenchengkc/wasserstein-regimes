@@ -110,3 +110,41 @@ def test_changed_input_during_execution_cannot_publish(tmp_path,monkeypatch):
     with pytest.raises(ValueError,match='input identity'):
         execute(request,tmp_path/'job')
     assert not (tmp_path/'job/result.json').exists()
+
+
+def test_live_supervisor_interrupt_stops_active_worker(tmp_path):
+    import signal
+    import subprocess
+    import sys
+    import time
+    import yaml
+    cfg=tmp_path/'batch.yaml'
+    cfg.write_text(yaml.safe_dump(dict(schema_version=1,jobs=[dict(benchmark(),n_windows=50000,length=63,dimensions=5,projections=64,n_init=3)])))
+    root=tmp_path/'jobs'
+    worker_pid=None
+    with (tmp_path/'supervisor.log').open('w') as log:
+        proc=subprocess.Popen([sys.executable,'-m','wasserstein_regimes.cli','run-jobs','--config',str(cfg),
+                               '--output-root',str(root),'--workers','1'],stdout=log,stderr=log,start_new_session=True)
+        try:
+            deadline=time.monotonic()+15
+            while time.monotonic()<deadline:
+                states=list(root.glob('*/attempts/*/status.json'))
+                if states:
+                    state=json.loads(states[0].read_text())
+                    if state['status']=='running':
+                        worker_pid=state['pid']
+                        break
+                if proc.poll() is not None: pytest.fail('supervisor exited before worker started')
+                time.sleep(.02)
+            assert worker_pid is not None
+            proc.send_signal(signal.SIGINT)
+            assert proc.wait(timeout=10)!=0
+            with pytest.raises(ProcessLookupError): os.kill(worker_pid,0)
+            assert not list(root.glob('*/result.json'))
+        finally:
+            if proc.poll() is None:
+                os.killpg(proc.pid,signal.SIGKILL)
+                proc.wait()
+            if worker_pid is not None:
+                try: os.killpg(worker_pid,signal.SIGKILL)
+                except ProcessLookupError: pass
