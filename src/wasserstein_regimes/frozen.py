@@ -85,7 +85,8 @@ def freeze_joint(development,*,model='scaled_joint',output_root='artifacts/bundl
         calibration_end=config['validation_end'],novelty_threshold=metrics['calibration'][model],model=model,
         parent_digest=digest(dev/'checksums.json'),numerical_sources=sources,dependencies=manifest['dependency_versions'])
     validate_contract(contract)
-    name='joint-bundle-'+identity(dict(contract=contract,model_sha256=digest(dev/f'models/{model}.npz')))[:24]
+    model_digest=digest(dev/f'models/{model}.npz')
+    name='joint-bundle-'+identity(dict(contract=contract,model_sha256=model_digest))[:24]
     target=Path(output_root)/name
     with lock(Path(output_root)/'.locks'/name):
         if target.exists():
@@ -98,6 +99,8 @@ def freeze_joint(development,*,model='scaled_joint',output_root='artifacts/bundl
         seal(temp)
         load_bundle(temp)
         verify_artifact(dev)
+        if digest(dev/'checksums.json')!=contract['parent_digest'] or digest(temp/'model.npz')!=model_digest:
+            raise ValueError('parent changed during bundle export')
         temp.rename(target)
     return target
 
