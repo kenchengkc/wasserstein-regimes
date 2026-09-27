@@ -1,0 +1,6 @@
+schema_version: 1
+jobs:
+- name: risk-five-session
+  type: risk
+  bundle: artifacts/bundles/joint-bundle-605cdb225dc25b93457706f9
+  config: configs/risk_forecast.yaml

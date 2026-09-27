@@ -1,6 +1,6 @@
 # Research roadmap: from marginal regimes to joint structure
 
-Reviewed September 23, 2026. The original design remains the research contract; this page updates priorities using the completed SPY and cross-asset studies and primary academic sources.
+Reviewed September 26, 2026. The original design remains the research contract; this page updates priorities using the completed SPY and cross-asset studies and primary academic sources.
 
 ## Current evidence and gaps
 
@@ -25,7 +25,7 @@ No third-party implementation is copied. References are methodological compariso
 
 1. Add more marginal assets: cheap, but unlikely to resolve dependence blindness; revised data and unequal histories still confound comparisons.
 2. Add joint sliced transport with observed prototypes: directly tests the next planned hypothesis and exposes an explicit computation budget. **Selected.**
-3. Add risk forecasts now: potentially useful, but requires a separate target, loss, baselines and untouched evaluation period. Defer the claim, while specifying its future gate.
+3. Add risk forecasts after the infrastructure and robustness gates: requires a separate target, loss, baselines and untouched evaluation period or explicit exploratory label. The subsequent [phase-6 study](risk-results.md) is now complete and shows no demonstrated advantage over simple baselines.
 
 The first delivery is a tested joint-distribution engine plus reproducible synthetic and performance evidence. The subsequent panel study explicitly labels the previously inspected market period exploratory; it does not select a trading strategy or claim that synthetic accuracy transfers to markets.
 
@@ -38,8 +38,10 @@ The first delivery is a tested joint-distribution engine plus reproducible synth
 | 3, exploratory study delivered; cross-provider gate pending | Common-history, synchronized SPY/QQQ/TLT/GLD/HYG panel with raw and training-scaled ablations | Explicit session/availability contract; no fills; full interval purging; covariance/correlation, marginal and HMM baselines; projection/window/K choices frozen on development; source sensitivity |
 | 4, delivered | [Refit, null and perturbation validation](joint-validation-results.md) | Return-block and projection-seed stability, occupancy including single-state flags, stationary dependence null, rare/gradual transitions, outlier sensitivity, chronological anchor sets |
 | 5, delivered | [Frozen-model scoring and experiment scale](execution-results.md) | Atomic resumable jobs, isolated fold/seed workers, bounded worker count and BLAS threads, job identity independent of report-only files, validation against frozen schema, measured process RSS |
-| 6, next | Risk forecasting | Prespecified horizon and proper loss; expanding-window historical, EWMA/GARCH or covariance shrinkage baselines; common information sets; dependence-aware uncertainty; genuinely untouched period or explicit exploratory label |
-| 7 | Path-aware or entropic extensions | Prove the blind spot with controls first; compare lag vectors/signatures or debiased Sinkhorn on cost, stability and benefit. GPU work follows profiling. |
+| 6, delivered | [Exploratory risk forecasting](risk-results.md) | Prespecified horizon and proper loss; expanding-window historical, EWMA/GARCH or covariance shrinkage baselines; common information sets; dependence-aware uncertainty; genuinely untouched period or explicit exploratory label |
+| 7, next | Path-aware or entropic extensions | Prove the blind spot with controls first; compare lag vectors/signatures or debiased Sinkhorn on cost, stability and benefit. GPU work follows profiling. |
+
+The phase-6 comparison scored 600 five-session basket-risk forecasts. Regime QLIKE was higher than all four baselines; the primary paired difference against EWMA was +0.172 with a 95% interval spanning zero. Keep this negative exploratory result; phase 7 starts with controlled evidence of path-order blindness, not retuning the exposed risk assessment.
 
 ## Data expansion
 

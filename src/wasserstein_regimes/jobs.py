@@ -18,10 +18,10 @@ from .artifact_store import digest,identity,lock,write_json
 
 _SOURCE_NAMES=('__init__.py','artifact_store.py','frozen.py','jobs.py','job_worker.py','job_tasks.py',
     'sliced.py','transport.py','joint.py','joint_market.py','joint_validation.py','joint_controls.py',
-    'robustness.py','panel_baselines.py','data.py','windows.py','evaluation.py','experiments.py','core.py','clustering.py')
+    'risk.py','risk_study.py','robustness.py','panel_baselines.py','data.py','windows.py','evaluation.py','experiments.py','core.py','clustering.py')
 _PACKAGES=('numpy','scipy','scikit-learn','pandas','pyarrow','hmmlearn','exchange-calendars','matplotlib','PyYAML','threadpoolctl')
 _FIELDS={'benchmark':{'n_windows','length','dimensions','k','projections','candidates','n_init','seed'},
-         'score':{'bundle','config'},'refit':{'development','market_config','train_end','seed','candidates'}}
+         'score':{'bundle','config'},'risk':{'bundle','config'},'refit':{'development','market_config','train_end','seed','candidates'}}
 
 
 def _integer(value,name,minimum=1,maximum=None):
@@ -42,12 +42,15 @@ def _input_files(spec):
     files=[]
     if spec['type']=='benchmark': return {}
     from .frozen import load_bundle,validate_score_config,session_date
-    if spec['type']=='score':
+    if spec['type'] in ('score','risk'):
         root=Path(spec['bundle'])
         contract,_=load_bundle(root)
         cfg=Path(spec['config'])
         config=yaml.safe_load(cfg.read_text())
-        validate_score_config(config,contract)
+        if spec['type']=='risk':
+            from .risk_study import validate_risk_config
+            validate_risk_config(config,contract)
+        else: validate_score_config(config,contract)
         files += [root/'model.npz',root/'contract.json',root/'checksums.json',cfg]
     else:
         from .experiments import verify_artifact
