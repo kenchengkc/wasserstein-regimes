@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/brand/wasserstein-regimes-logo.png" alt="Wasserstein Regimes logo" width="144" height="144">
+</p>
+
 # Wasserstein Regimes
 
 **Market-regime research using optimal transport on full empirical return distributions.**
