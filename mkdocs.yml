@@ -5,6 +5,7 @@ repo_name: kenchengkc/wasserstein-regimes
 copyright: Original project code and documentation licensed under GNU GPL v3 only.
 theme:
   name: material
+  custom_dir: overrides
   logo: assets/brand/wasserstein-regimes-logo.png
   favicon: assets/brand/wasserstein-regimes-logo.png
   font: false
