@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/brand/wasserstein-regimes-logo.png" alt="Wasserstein Regimes logo" width="144" height="144">
+</p>
+
 # Wasserstein Regimes
 
 **Question:** What market-state information is lost when a return window is compressed into volatility or a few moments?

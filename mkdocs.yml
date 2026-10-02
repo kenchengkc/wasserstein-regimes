@@ -5,6 +5,8 @@ repo_name: kenchengkc/wasserstein-regimes
 copyright: Original project code and documentation licensed under GNU GPL v3 only.
 theme:
   name: material
+  logo: assets/brand/wasserstein-regimes-logo.png
+  favicon: assets/brand/wasserstein-regimes-logo.png
   font: false
   palette:
     primary: teal
@@ -53,6 +55,8 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.arithmatex:
       generic: true
+extra_css:
+  - stylesheets/brand.css
 extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js

@@ -1,0 +1,4 @@
+/* Keep the compact mark legible on the teal navigation header. */
+.md-header__button.md-logo img {
+  filter: brightness(0) invert(1);
+}
