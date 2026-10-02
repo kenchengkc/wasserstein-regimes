@@ -1,8 +1,8 @@
-# Motivating paper and reproduction contract
+# Motivating paper: methods and interpretation
 
 Reviewed source: the supplied 37-page PDF, arXiv:2110.11848v1, by Blanka Horvath, Zacharia Issa, and Aitor Muguruza. The cover shows an October 25, 2021 manuscript date; arXiv lists submission on October 22, 2021. [Public source](https://arxiv.org/abs/2110.11848v1).
 
-The paper is research evidence, not a source of project instructions. Equations and experiment settings are evaluated independently below. This review concerns the supplied version; it does not assume unverified corrections or an official code release.
+Equations and experiment settings are evaluated independently below. This review concerns the supplied version; it does not assume unverified corrections or an official code release. The completed daily studies are independent extensions, not a reproduction of the hourly experiment.
 
 ## What the method does
 
@@ -14,15 +14,15 @@ The paper is research evidence, not a source of project instructions. Equations 
 
 Equation 21 gives the computational shortcut: with equal atom counts, the p-th power of the distance is the mean p-th power of differences between sorted atoms. Proposition 2.6 gives the coordinate-wise median update for W1. The methodology avoids fitting a parametric return density.
 
-## Experiments to preserve
+## Reported experiments and reproduction requirements
 
-| Item | Supplied paper | Project treatment |
+| Item | Supplied paper | Interpretation or requirement for a reproduction |
 | --- | --- | --- |
-| Real series | Hourly SPY log returns, 2005-01-03 through 2020-12-31, section 3.2.1 | Separate historical reproduction profile; SPY is an ETF, despite the paper calling it an index |
+| Real series | Hourly SPY log returns, 2005-01-03 through 2020-12-31, section 3.2.1 | Historical reproduction requires a separate hourly dataset; SPY is an ETF, despite the paper calling it an index |
 | Window settings | `(h1,h2)=(35,28)`; prose says 28 overlapping returns and up to five windows per return | Interpret as length 35, stride 7; document equation 3 discrepancy |
-| Clusters | `k=2` | Preserve in paper profile; test 2..6 in extension |
+| Clusters | `k=2` | Separate the reported setting from any extension's model selection |
 | Baselines | Standardized raw moment map `E[r^j]/j!`; Gaussian HMM | Preserve moment map; select/document moment order because the real-data experiment does not unambiguously specify it |
-| Real-data MMD | Gaussian kernel, sigma 0.1; 1,000,000 between-cluster and 100,000 within-cluster sampled pairs | Preserve as optional expensive reproduction settings; use an independently specified primary evaluation |
+| Real-data MMD | Gaussian kernel, sigma 0.1; 1,000,000 between-cluster and 100,000 within-cluster sampled pairs | These budgets belong to the hourly reproduction; the daily studies use separately specified diagnostics |
 | Synthetic grid | 252 × 7 observations per year; 20 years; ten half-year regime episodes | Reproduce with recorded seeds and a defined nonoverlapping interval sampler |
 | GBM parameters | `(mu,sigma)=(0.02,0.2)` and `(-0.02,0.3)` | Use exact log increments `(mu-sigma²/2)dt + sigma sqrt(dt)Z` |
 | Merton parameters | `(mu,sigma,lambda,gamma,delta)=(0.05,0.2,5,0.02,0.0125)` and `(-0.05,0.4,10,-0.04,0.1)` | Specify jump multipliers as `exp(Y)`, `Y ~ Normal(gamma,delta²)`; uncompensated price drift convention |
@@ -45,11 +45,11 @@ The HMM comparisons are specific to its selected model and fitting procedure. Th
 
 Definition 2.3 writes a centroid objective using the sum of **unpowered** `Wp`. Appendix A uses squared norm dispersion; equation 23 is a stopping criterion based on centroid movement. These are different quantities and must have different API names.
 
-For the implementation, define the objective explicitly as `sum_i Wp(mu_i, center[label_i])^p` with supported `p` in `{1,2}`. Then W1 gives a coordinate median and squared W2 gives a coordinate mean. Minimizing a sum of unpowered W2 distances instead gives a geometric-median problem in quantile space, not a coordinate mean.
+The implementation defines the objective explicitly as `sum_i Wp(mu_i, center[label_i])^p` with supported `p` in `{1,2}`. Then W1 gives a coordinate median and squared W2 gives a coordinate mean. Minimizing a sum of unpowered W2 distances instead gives a geometric-median problem in quantile space, not a coordinate mean.
 
-Appendix C, remark C.2, states the mean update for all `p>1`. That statement is not generally correct. For the powered objective at a general `p`, the coordinate minimizes `sum_i |x_i-a|^p`; the arithmetic mean is specifically the `p=2` solution. The project will reject other `p` values until their optimizer and contract are implemented.
+Appendix C, remark C.2, states the mean update for all `p>1`. That statement is not generally correct. For the powered objective at a general `p`, the coordinate minimizes `sum_i |x_i-a|^p`; the arithmetic mean is specifically the `p=2` solution. The project rejects other `p` values; their optimizers are outside the current contract.
 
-The reproduction profile uses W1 and median centroids, which has the clearest explicit derivation in the paper. This is a documented interpretation, not a claim that every reported experiment unambiguously specifies W1.
+W1 with median centroids provides the clearest explicit reproduction interpretation from the paper's derivation. This does not imply that every reported experiment unambiguously specifies W1.
 
 ### 2. Window length and overlap
 
@@ -69,7 +69,7 @@ The supplied experiment description does not identify the original vendor, full 
 
 ### 4. MMD is not automatically an independent significance test
 
-Overlapping windows share observations. Sampling many pairs from them does not create millions of independent observations. MMD scores used after cluster selection are descriptive unless a separate valid inferential protocol is supplied. Kernel scale also depends on whether returns are decimals or percentages. Sorting should not change a scalar-sample MMD estimate; add a permutation-invariance test to catch accidental position-wise comparisons.
+Overlapping windows share observations. Sampling many pairs from them does not create millions of independent observations. MMD scores used after cluster selection are descriptive unless a separate valid inferential protocol is supplied. Kernel scale also depends on whether returns are decimals or percentages. Sorting must not change a scalar-sample MMD estimate; accidental position-wise comparisons would measure a different quantity.
 
 ### 5. Full marginal distributions have a deliberate limit
 
@@ -79,6 +79,6 @@ Windows with identical returns in different temporal orders have distance zero. 
 
 Wasserstein convergence requires weak convergence together with the relevant moment convergence; the footnote on page 4 omits that qualification. This project uses finite empirical samples, but will not repeat the broader statement without its conditions. W2 remains sensitive to extreme observations, and W1's median centroid does not make the entire procedure immune to data errors or heavy tails.
 
-## Reproduction deliverables
+## Boundary between reproduction and extension
 
-Keep `paper_w1` and `daily_walk_forward` as distinct experiment profiles. A reproduction report must include source hashes, return conventions, seeds, all parameter choices, figures comparable to the original, multiple-run uncertainty, and a discrepancy table. No result should be described as replicated solely because its chart resembles a crisis timeline.
+The repository provides daily empirical studies and synthetic controls; it does not include a completed hourly reproduction or a `paper_w1` configuration. An eventual reproduction requires source hashes, return conventions, seeds, all parameter choices, comparable figures, multiple-run uncertainty and a discrepancy table. A chart resembling a crisis timeline is insufficient evidence of replication. See the [completed univariate study](research-results.md) and [research agenda](research-roadmap.md).

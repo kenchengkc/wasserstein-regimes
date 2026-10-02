@@ -1,6 +1,6 @@
 # Reproduce the risk forecasting study
 
-Read the [frozen protocol](risk-protocol.md) before changing any configuration. The five-asset snapshots, acquisition sidecars and frozen joint bundle are the same inputs used in phase 5. The forecast comparison is exploratory because the assessment prices were previously inspected.
+Read the [frozen protocol](risk-protocol.md) before changing any configuration. The five-asset snapshots, acquisition sidecars and frozen joint bundle are the same inputs used in the [execution study](execution-results.md). The forecast comparison is exploratory because the assessment prices were previously inspected.
 
 From the repository root, in the original pinned research environment:
 

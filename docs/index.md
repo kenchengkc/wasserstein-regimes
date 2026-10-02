@@ -4,71 +4,63 @@
 
 # Wasserstein Regimes
 
-**Question:** What market-state information is lost when a return window is compressed into volatility or a few moments?
+**What market-state information is lost when a return window is compressed into volatility or a few moments?**
 
-**Measured result:** In the frozen SPY study, **97.87% of raw-W2 centroid separation is scale**. Strict holdout assignments agree closely with volatility-only clustering (**ARI 0.990**). Full distributions separate exact matched-four-moment synthetic laws, but this study does not establish added predictive value from shape.
+This research compares full empirical return distributions with volatility, moment and dependence baselines. Synthetic controls establish what the representations can distinguish; chronological market studies test their stability and forecasting value.
 
-![What drives W2 separation](assets/components.png)
+## Marginal clusters mostly reflect scale
 
-Rolling returns → empirical distributions → Wasserstein geometry → distributional k-means → chronological regime assignments.
+In SPY, **97.87%** of raw-W2 training-centroid separation is scale. Holdout assignments closely agree with volatility-only clustering (**ARI 0.990**). Independent QQQ, TLT, GLD and HYG studies find **95.27–97.53%** scale contribution. Shape stability is mixed; TLT and HYG occupy only one raw holdout state.
 
-Exact one-dimensional W2 clustering of equal-size empirical distributions is Euclidean k-means over **all order statistics**, rather than selected moments. W2 uses mean quantile barycenters; W1 uses median barycenters. Sorting intentionally discards within-window temporal order.
+Full distributions separate exact matched-four-moment synthetic laws. That capability does not establish incremental market information or predictive value from shape. ARI measures agreement, not accuracy; identical single-state assignments can produce ARI 1.
 
-**Cross-asset replication:** QQQ, TLT, GLD and HYG show 95.27–97.53% scale contribution to raw centroid separation. Shape stability is mixed; TLT and HYG occupy only one raw holdout state. Read the [cross-asset results](cross-asset-results.md).
+## Joint information is detectable; empirical partitions remain fragile
 
-**Exploratory joint market study:** Six models scored the same 605 synchronized five-asset windows. Joint states remain sensitive to resampling (mean validation ARI 0.521); clustering alone does not establish predictive value. Read the [market results](joint-market-results.md).
+Joint sliced-W2 medoids distinguish dependence changes missed by marginal representations, including a constructed control with identical covariance. Correlation changes are also detected by covariance clustering, so correlation recovery alone establishes no distributional advantage.
 
-**Joint robustness:** Return-level resampling averages ARI 0.518; 1% extreme training contamination collapses validation to one state. Stationary nulls also produce persistent clusters. Read the [robustness results](joint-validation-results.md).
+In the market study, return-level resampling gives mean validation **ARI 0.518**. A seeded **1% extreme training contamination** scenario collapses clean validation assignments to one state. Stationary nulls produce persistent clusters and novelty flags. These are sensitivity measurements, not confidence intervals or calibrated market hypothesis tests.
 
-**Execution infrastructure:** Frozen scoring reproduces all 690 validation labels; 11 isolated jobs resume from verified artifacts. Read the [execution measurements](execution-results.md) and [workflow](execution-workflow.md).
+## Risk forecasting shows no demonstrated advantage
 
-**Risk forecasting:** Across 600 exploratory five-session forecasts, joint regimes had higher average QLIKE loss than all four baselines. The EWMA comparison interval includes zero; no forecasting advantage is demonstrated. Read the [risk results](risk-results.md) and [frozen protocol](risk-protocol.md).
+Across **600** scored five-session basket-risk forecasts, joint regimes have higher average primary QLIKE loss than expanding history, EWMA, rolling history and volatility-only states. The regime-minus-EWMA difference is **+0.1715**, with a paired 95% interval of **[−0.0217, +0.4816]**. Lower loss is better; the interval establishes neither superiority nor equivalence.
 
-**Joint research extension:** Fixed-projection sliced W2 and sampled medoids detect dependence that marginals miss, with a fixed candidate memory budget. Read the [academic comparison and roadmap](research-roadmap.md) and [measured synthetic results](joint-results.md).
+The target is the next five sessions' average daily squared simple return of an equal-weight SPY/QQQ/TLT/GLD/HYG basket: a conditional second moment, interpretable as variance only under zero conditional mean. Paired bootstrap intervals condition on the selected model and frozen forecasting rule; they exclude selection uncertainty and do not guarantee coverage under nonstationarity.
 
-## Completed research release
+![Exploratory five-session risk forecast comparison, with paired uncertainty intervals](assets/risk-comparison.png)
 
-- Frozen daily SPY snapshot, five development folds and a fixed 2024–August 2026 holdout.
-- Raw W2, W1 and shape-only W2; volatility, mean/volatility, moments, rich features, GMM and causal HMM baselines.
-- Exact location/scale/shape decomposition, seed/block/refit stability, overlap-null persistence, validation-calibrated novelty and evaluation-only future outcomes.
-- Five synthetic controls, window-length power/delay studies, measured kernels, immutable artifacts and saved-artifact HTML reports.
-- Numerical oracles, temporal leakage checks, saved-model round trips and artifact-integrity tests.
+## Published studies
 
-Read the [measured results](research-results.md), [reproduction workflow](research-workflow.md), [data sourcing](data.md), [paper review](paper-review.md), [design](design.md) and [future implementation roadmap](implementation-plan.md). Aggregate evidence is saved in [results](https://github.com/kenchengkc/wasserstein-regimes/tree/feat/distributional-evidence/results).
+| Study | Evidence |
+| --- | --- |
+| [Univariate market regimes](research-results.md) | SPY geometry, baseline agreement, overlapping-window nulls and synthetic recovery |
+| [Cross-asset replication](cross-asset-results.md) | Independent QQQ/TLT/GLD/HYG fits, occupancy and shape stability |
+| [Joint dependence controls](joint-results.md) | Representational capability beyond marginals and covariance; measured computation |
+| [Joint market panel](joint-market-results.md) | Six models on 605 shared windows; conditional window-refit mean ARI 0.521 |
+| [Robustness and failure modes](joint-validation-results.md) | Return resampling, stationary nulls, rare transitions and contamination |
+| [Frozen inference and execution](execution-results.md) | 690/690 validation labels reproduced; all 11 jobs resume from verified artifacts |
+| [Risk forecasting](risk-results.md) | Frozen target, all baseline comparisons and dependence sensitivities |
 
-## Run
+Each study reports limitations, source identities and aggregate artifact checksums. Execution measurements establish reproducibility and resource use, with no implication for regime stability or prediction.
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements-research.txt
-python -m pip install -e '.[research,dev,data]'
-export VECLIB_MAXIMUM_THREADS=1
-python -m pytest
-regimes run --config configs/spy_daily_w2.yaml --stage development
-regimes run --config configs/spy_daily_w2.yaml --stage holdout
-regimes report --run RUN_ID
-```
+## Methods and research context
 
-The frozen CSV is deliberately excluded. A new download may differ because adjusted history is revised; follow the workflow before claiming an exact reproduction. `run` includes synthetic controls and the numerical benchmark. `report` never refits models.
+Exact one-dimensional W2 clustering uses every order statistic and mean quantile barycenters; W1 uses median barycenters. Joint models use finite-projection sliced W2 and sampled observed-window medoids, an approximation to sliced geometry rather than a full multivariate W2 solver. Both representations discard temporal order within each window; chronological assignment does not recover it.
 
-```python
-from wasserstein_regimes import WassersteinKMeans
+Read the [methods](methods.md), frozen [market](joint-market-protocol.md), [robustness](joint-validation-protocol.md) and [risk](risk-protocol.md) protocols, [Research agenda](research-roadmap.md) and [motivating paper review](paper-review.md). Next questions include temporal-order controls, source validation and confirmation on newly reserved observations.
 
-model = WassersteinKMeans(metric="w2", n_clusters=3, n_init=20, random_state=42)
-model.fit(train_windows)
-labels = model.predict(test_windows)
-distances = model.transform(test_windows)  # true W2 distances
-```
+## Reproduce the evidence
 
-The base estimator remains NumPy-only. Research commands require the `research` extra. Joint sliced-W2 medoids are available; full multivariate OT solvers, live inference and trading remain future work.
+- [Univariate study workflow](research-workflow.md)
+- [Frozen scoring and experiment workflow](execution-workflow.md)
+- [Risk forecasting workflow](risk-workflow.md)
+- [Data sourcing, schemas and availability assumptions](data.md)
 
-## Paper and license
+Market CSVs, observed medoids and per-origin audit rows remain local. Fresh downloads may differ from frozen hashes and cannot establish exact reproduction. Numerical sources, dependencies, configuration and input identities bind the saved evidence. The estimators require only NumPy; research commands need the research dependencies.
 
-Motivated by Horvath, Issa and Muguruza, [Clustering Market Regimes using the Wasserstein Distance](https://arxiv.org/abs/2110.11848v1). This is an independent empirical study, not a claim to reproduce the paper's hourly experiment.
+## Scope and data rights
+
+The joint market and risk studies reuse a previously inspected 2024–August 2026 period and are explicitly **exploratory**. Revised adjusted-close histories are not verified point-in-time archives. Overlapping windows, correlated assets and sparse state occupancy limit inference; cross-provider validation remains open. No trading profitability or executable-close claim follows from these results.
+
+Motivated by Horvath, Issa and Muguruza's [Clustering Market Regimes using the Wasserstein Distance](https://arxiv.org/abs/2110.11848v1). These independent daily studies do not reproduce the paper's hourly experiment.
 
 Original code and documentation are **GNU GPL v3 only** (`GPL-3.0-only`); see [LICENSE](https://github.com/kenchengkc/wasserstein-regimes/blob/main/LICENSE). Third-party data and papers retain their own terms.
-
-## Static documentation deployment
-
-Vercel serves MkDocs output with `framework: null`, `requirements-docs.txt`, and output directory `site/`. The research package needs no HTTP entrypoint. Build with `python -m mkdocs build --strict`; the documentation build neither downloads data nor runs research.

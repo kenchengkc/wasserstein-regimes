@@ -1,4 +1,4 @@
-# Phase 6: exploratory risk forecast results
+# Exploratory risk forecast results
 
 **The frozen regime-conditioned forecast did not demonstrate an advantage over simple baselines.** It had higher average primary QLIKE loss than all four comparators. The regime-minus-EWMA difference was **+0.1715**, with a paired 95% interval of **[−0.0217, +0.4816]**. Zero remains inside the interval; this is neither evidence of superiority nor proof of equivalence.
 
@@ -64,11 +64,11 @@ Year slices are descriptive, grouped by origin year; 2024 and 2026 cover partial
 
 The scored joint states have counts **[0, 110, 490]**; one fitted state is absent. The volatility-only bins have counts **[55, 237, 308]**. Historical matured-target support ranges from 1,140 to 3,389 for the current joint state, versus 1,176–1,944 for volatility bins. These overlapping historical counts are not independent effective sample sizes. Support size does not establish regime stability; preceding [robustness failures](joint-validation-results.md) still apply.
 
-This study evaluates one existing classifier and one frozen mapping to basket risk. It does not rule out every distribution-based forecast or establish an incremental tail/dependence benefit. No covariance-matrix, tail-risk, allocation, transaction-cost or trading-profit claim is made. A negative result completes this phase; do not tune on this period to manufacture an advantage. A confirmatory successor needs newly reserved observations and point-in-time/source validation. The next roadmap gate is a controlled test of path-order blindness before adding path-aware methods.
+This study evaluates one existing classifier and one frozen mapping to basket risk. It does not rule out every distribution-based forecast or establish an incremental tail/dependence benefit. No covariance-matrix, tail-risk, allocation, transaction-cost or trading-profit claim is made. A confirmatory successor needs newly reserved observations and point-in-time/source validation. The [research agenda](research-roadmap.md) includes controlled tests of path-order blindness; this exposed assessment must not be reused to tune a forecasting advantage.
 
 ## Verification and provenance
 
-Independent review preceded empirical evaluation. Its two panel-boundary findings were reproduced and fixed: target observations may extend beyond the requested forecast-origin endpoint, and daily intervals must match consecutive exchange sessions. An additional regression enforces closing-return availability. **241 tests** and the strict documentation build pass. One minor suggested test extension—nonconstant cross-loss bootstrap pairing—is deferred; existing paired-difference tests and source review verify the implemented shared draws.
+Before empirical evaluation, the implementation passed **241 tests** and a strict documentation build. Validation covers forecast-origin boundaries with later target observations, consecutive exchange-session intervals, closing-return availability and shared bootstrap draws. These checks support implementation correctness; they do not remove the statistical or data limitations above.
 
 The empirical worker completed in **2.45 seconds**, with **249.6 MiB** process-lifetime high-water RSS including imports/input arrays, on macOS arm64, Python 3.11.5, one worker/one BLAS thread. This is one measured run, not a performance guarantee. The second invocation was a verified cache hit on the identical attempt. Its complete inventory and all 600 aggregate loss calculations were checked against the saved local forecast table.
 

@@ -1,10 +1,10 @@
 # Joint regime robustness protocol
 
-Frozen before executing this suite. This is roadmap phase 4, following the exploratory five-ETF panel. The question is whether partitions withstand resampling and contamination, and whether similar apparent structure occurs without regime changes. No predictive or confirmatory market claim is authorized by this study.
+Frozen before executing this suite, following the exploratory five-ETF panel. The question is whether partitions withstand resampling and contamination, and whether similar apparent structure occurs without regime changes. The study does not establish predictive or confirmatory market evidence.
 
 ## Decisions
 
-Use the existing sliced-W2 medoid engine, unchanged, with covariance clustering as a synthetic comparator. A larger empirical universe would not address forced partitions. Forecasting would require new targets and evaluation data. This phase therefore tests the current model's failure modes before either expansion.
+Use the existing sliced-W2 medoid engine, unchanged, with covariance clustering as a synthetic comparator. A larger empirical universe would not address forced partitions. This suite tests the current model's failure modes; forecasting is evaluated separately under its own [protocol](risk-protocol.md).
 
 The existing development artifact supplies the frozen K=3 reference, directions, scales, configuration and data identities. Verify its checksum inventory, numerical source files, dependency versions and acquisition metadata. New orchestration and CLI code may differ; existing numerical source files may not. Do not read assessment assignments or evaluate observations after 2023. Original adjusted-price snapshots remain local and unchanged. Public artifacts contain aggregate diagnostics and provenance only.
 
@@ -29,11 +29,11 @@ Use five assets, 3,000 daily vectors, L=63, fit stride 5, 64 seed-42 projections
 
 For changing controls report pure-test ARI, per-state recall and balanced accuracy using label mapping learned on pure training windows only. Include full test occupancy. For rare episodes report the first five consecutive mapped high predictions within the test episode; failure is right-censored at the episode end, and observed delay includes the rolling-window lag. Do not report only successful delays. Covariance is expected to recognize correlation changes; this control does not establish a distributional advantage beyond covariance.
 
-## Artifacts and acceptance
+## Reproducibility and artifacts
 
-Strict YAML schema and deterministic seeds. One command produces a sealed directory with config, manifest, all result rows, and HTML; repeated execution verifies and reuses that directory. Identity binds source hashes, dependency versions, snapshots and parent development checksum digest. Atomic rename exposes only complete runs. No parallel workers in this phase.
+Strict YAML schema and deterministic seeds. One command produces a sealed directory with config, manifest, all result rows, and HTML; repeated execution verifies and reuses that directory. Identity binds source hashes, dependency versions, snapshots and parent development checksum digest. Atomic rename exposes only complete runs. This suite executes sequentially.
 
-Tests must cover synchronized resampling, deterministic generation, constant population parameters under nulls, disjoint raw-return splits, training-only scaling and label mapping, contamination immutability, censored delays, frozen parent compatibility and cache tamper detection. Scientific success is a complete truthful report, including poor outcomes. Do not optimize the protocol after seeing results.
+Report all outcomes, including poor recovery, collapsed states and censored delays. The protocol must not be optimized after seeing results. The [recorded protocol](https://github.com/kenchengkc/wasserstein-regimes/blob/fcd4d08029c4c216cba44e61c5f759ceb60fa0dc/docs/joint-validation-protocol.md) preserves the original specification and execution context. See the [published results](joint-validation-results.md) for measurements and provenance.
 
 ## Sources
 

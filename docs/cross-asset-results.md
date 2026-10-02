@@ -41,7 +41,7 @@ Prices are revised Yahoo Finance adjusted closes retrieved through yfinance 1.7.
 | GLD | 2004-11-18 | 5479 | `7acc75f00006c383621c` | `28562cebe13075097ea3` |
 | HYG | 2007-04-11 | 4879 | `30f950c58235634d3186` | `cf8f61605d527b4ef196` |
 
-Acquisition timestamps, full snapshot hashes, model manifests, aggregate fold metrics and refit comparisons are published in [the aggregate evidence](https://github.com/kenchengkc/wasserstein-regimes/tree/feat/cross-asset-robustness/results/cross_asset). Raw prices and per-window market observations remain local. All eight sealed run artifacts passed checksum verification; the public aggregate files have their own checksum inventory.
+Acquisition timestamps, full snapshot hashes, model manifests, aggregate fold metrics and refit comparisons are published in [the aggregate evidence](https://github.com/kenchengkc/wasserstein-regimes/tree/eddc780d39e79649a6d408fe29f96caee62588ea/results/cross_asset). Raw prices and per-window market observations remain local. All eight sealed run artifacts passed checksum verification; the public aggregate files have their own checksum inventory.
 
 ## Reproduction
 

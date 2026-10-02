@@ -1,6 +1,6 @@
 # Frozen scoring and resumable experiment jobs
 
-This workflow packages existing joint models and runs independent computations safely. It adds execution controls, not evidence that market regimes are stable or predictive. Read the [design](execution-design.md), [implementation plan](execution-plan.md), and [preceding robustness findings](joint-validation-results.md).
+This workflow packages existing joint models and runs independent computations safely. It adds execution controls, not evidence that market regimes are stable or predictive. Read the [methods and artifact contracts](methods.md), [measured execution results](execution-results.md), and [preceding robustness findings](joint-validation-results.md).
 
 ## Export and score
 

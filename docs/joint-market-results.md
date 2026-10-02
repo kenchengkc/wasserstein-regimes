@@ -40,7 +40,7 @@ The Gaussian HMM uses full-covariance emissions on daily return vectors and caus
 
 ## Reproduction and provenance
 
-The [protocol](joint-market-protocol.md) and [implementation plan](joint-market-plan.md) were recorded before running the new market models. The final reviewed execution code is commit `bcbb2ab`; run identity is `joint-market-9277c7c4c48af92b2d83`. All development and assessment research files passed checksum verification. Assessment loads sealed development models and checks their source/dependency versions, configuration, acquisition identity and development digest; it never fits.
+The [protocol](joint-market-protocol.md) was recorded before running the new market models. The final reviewed execution code is commit `bcbb2ab`; run identity is `joint-market-9277c7c4c48af92b2d83`. All development and assessment research files passed checksum verification. Assessment loads sealed development models and checks their source/dependency versions, configuration, acquisition identity and development digest; it never fits.
 
 ```sh
 regimes joint-study --config configs/joint_market.yaml --stage development
@@ -53,4 +53,4 @@ Use the parent directory of the report.html path printed by the first command. O
 
 These are revised adjusted-close histories, not point-in-time data. SPY was retrieved earlier than the four other snapshots. The common history removes differing inception lengths from this panel comparison, but does not remove provider revisions, chosen-universe effects or dependence among overlapping windows. Cross-provider sensitivity is still untested.
 
-Next, freeze a stationary dependence-null and outlier/rare-transition stress suite, extend chronological refit comparisons, and compare candidate budgets without selecting on assessment. A predictive risk study needs separate targets, losses, baselines and a new untouched period; the existing assessment must remain exploratory. Neither these results nor the synthetic controls justify a trading claim.
+The subsequent [robustness suite](joint-validation-results.md) evaluates stationary dependence nulls, contamination, rare/gradual transitions, chronological refits and candidate budgets without selecting on assessment. It reveals unstable partitions and contamination sensitivity. The [risk study](risk-results.md) uses separately frozen targets, losses and baselines, but remains exploratory on the exposed period and finds no demonstrated advantage. Confirmatory forecasting needs newly reserved observations and point-in-time/source validation. Neither these results nor the synthetic controls justify a trading claim.

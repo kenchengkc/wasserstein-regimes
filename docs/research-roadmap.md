@@ -1,54 +1,50 @@
-# Research roadmap: from marginal regimes to joint structure
+# Research agenda
 
-Reviewed September 26, 2026. The original design remains the research contract; this page updates priorities using the completed SPY and cross-asset studies and primary academic sources.
+The central question is whether full return distributions contain reliable market-state information beyond volatility, moments and covariance. The completed studies establish mathematical capability and reproducible execution, but do not establish robust empirical regimes or an advantage in risk forecasting. Further experiments should resolve those gaps before adding complexity.
 
-## Current evidence and gaps
+## Evidence guiding the next experiments
 
-Exact univariate W1/W2, chronological evaluation, nine baselines, synthetic controls, saved reports and independent QQQ/TLT/GLD/HYG replication are implemented. The old milestone document's opening description predates those releases. Raw centroid geometry is overwhelmingly scale-driven; shape stability is mixed. TLT and HYG occupy one raw holdout state. These findings motivate testing a different information source—joint dependence—before making economic claims.
+The [SPY study](research-results.md) and [cross-asset replication](cross-asset-results.md) find that raw univariate transport geometry is overwhelmingly scale-driven. Shape-only partitions differ from volatility, but their stability is mixed. The [joint synthetic controls](joint-results.md) demonstrate information beyond marginals and covariance; the [market panel](joint-market-results.md) does not establish its economic usefulness.
 
-The daily provider, strict split machinery and market snapshots are reusable. Joint alignment, finite-projection geometry, sampled prototype selection and the first [exploratory empirical panel](joint-market-results.md) are now delivered. Projection and conditional window-block diagnostics are available; [return-level resampling, stationary nulls and refit/perturbation validation](joint-validation-results.md) are now delivered; cross-provider validation and selection uncertainty remain outstanding. Reusing an exposed holdout to select the next model would not constitute a new confirmatory test.
+The [robustness study](joint-validation-results.md) exposes unstable refits, rare-state failures and contamination sensitivity. Stationary processes also produce persistent apparent states. The [risk comparison](risk-results.md) scores 600 five-session basket-risk forecasts: regimes have higher mean primary QLIKE loss than all four baselines. The regime-minus-EWMA difference is +0.1715, with a paired 95% interval of [−0.0217, +0.4816]. This negative exploratory result establishes neither superiority nor equivalence.
 
-## Academic projects and decisions
+## Open research questions
 
-| Primary source / project | Relevant contribution | Decision for this project |
+### Does temporal order add information?
+
+Both current representations treat a window as an unordered empirical measure. Begin with controls containing identical observations in different orders: current Wasserstein distances are exactly zero. Compare lag-vector distributions and simple serial-dependence features before introducing signature kernels. Evaluate recovery, delay, stability and computational cost on the same samples. A more complex representation needs a measured benefit beyond simpler controls.
+
+### Can partitions withstand realistic perturbations?
+
+Compare rare-state coverage and robust alternatives under a new development protocol. Candidate sampling can omit small states, and the observed contamination collapse warrants explicit sensitivity analysis. Changes to sampling, scaling, clipping or geometry need covariance and marginal baselines, all seeds, occupied-state counts and unsuccessful runs. The existing exposed sweeps cannot become new confirmatory evidence.
+
+### How much uncertainty comes from selection and revised data?
+
+Current bootstrap diagnostics condition on selected settings; they do not repeat complete model selection. A separate study should include preprocessing and selection inside chronological refits, score common evaluation anchors, and report absent states and matching failures. Independent-provider snapshots and point-in-time archives are needed to distinguish model instability from source revisions. Availability timestamps alone do not reconstruct historical vintages.
+
+### Does added information improve a prespecified forecast?
+
+Retain the completed negative risk result. A successor needs newly reserved observations, a locked target and loss, common information sets and simple baselines before evaluation. Tail-risk or covariance-matrix targets are separate questions, not demonstrated benefits of the basket second-moment study. Dependence-aware intervals must state their conditioning and stationarity assumptions. Retuning on the 2024–August 2026 assessment cannot establish a new advantage.
+
+## Academic context
+
+| Primary source / project | Contribution | Relationship to this project |
 | --- | --- | --- |
-| [Horvath, Issa & Muguruza, original Wasserstein regime paper](https://arxiv.org/abs/2110.11848) | Distribution clustering with synthetic and empirical comparisons | Preserve exact univariate models and their results as controls. Published success is not evidence of forecasting value here. |
-| [Luan & Hamp, sliced Wasserstein regime classification](https://arxiv.org/html/2310.01285v2) (2025 journal article; revised preprint May 2026) | Fixed projection directions, multivariate synthetic regimes, hyperparameter sensitivity and FX application | Add joint-window sliced W2 with saved projections. Evaluate dependence-only changes and sensitivity to projection count. Our medoid implementation is an alternative, not a reproduction of their projected-centroid algorithm. |
-| [Zhuang, Chen & Yang, NeurIPS 2022](https://papers.neurips.cc/paper_files/paper/2022/hash/4a1d69d1f64c6b6df105b15984ca527a-Abstract-Conference.html), [author code](https://github.com/Yubo02/Wasserstein-K-means-for-clustering-probability-distributions) | Distinguishes distance-based and barycenter-based formulations in Wasserstein space | Keep observed windows as medoids initially. Their SDP recovery theorem does not apply to our sampled medoid optimizer; do not transfer that guarantee. |
-| [Issa & Horvath, pathwise regime methods](https://arxiv.org/abs/2306.15835), [author code](https://github.com/issaz/signature-regime-detection) | Signature-kernel MMD detects distribution changes on path space, including path dependence | Add lag-vector and identical-bag/different-order controls before introducing a signature stack. Joint distributions alone still discard within-window order. |
-| [Rowland et al., AISTATS 2019](https://proceedings.mlr.press/v89/rowland19a.html) | Orthogonally coupled projection estimators and variance analysis | Benchmark projection seeds and counts first. Orthogonal directions are a later alternative, not an unmeasured default improvement. |
-| [POT sliced transport documentation](https://pythonot.github.io/gen_modules/ot.sliced.html), [project](https://github.com/PythonOT/POT) | Reference Monte Carlo sliced distance, explicit projection inputs and preprocessing | Use as an optional independent numerical oracle. Keep the initial runtime NumPy-only; do not add an entropic solver to exact one-dimensional work. |
+| [Horvath, Issa & Muguruza](https://arxiv.org/abs/2110.11848), motivating Wasserstein regime paper | Empirical distribution clustering and synthetic/market comparisons | Exact univariate W1/W2 are retained as controls. The daily studies do not reproduce the hourly experiment or demonstrate forecasting value. |
+| [Luan & Hamp](https://arxiv.org/html/2310.01285v2), sliced Wasserstein regime classification | Multivariate projections, dependence controls and sensitivity | Fixed projections motivate the joint extension. Our sampled observed medoids differ from their projected-centroid algorithm. |
+| [Zhuang, Chen & Yang, NeurIPS 2022](https://papers.neurips.cc/paper_files/paper/2022/hash/4a1d69d1f64c6b6df105b15984ca527a-Abstract-Conference.html), [author code](https://github.com/Yubo02/Wasserstein-K-means-for-clustering-probability-distributions) | Distance-based and barycenter-based formulations | Their SDP recovery theorem does not apply to this sampled medoid optimizer. |
+| [Issa & Horvath](https://arxiv.org/abs/2306.15835), [signature-regime code](https://github.com/issaz/signature-regime-detection) | Signature-kernel MMD on path space | Motivates temporal-order controls and simpler lag comparisons before adopting signatures. |
+| [Rowland et al., AISTATS 2019](https://proceedings.mlr.press/v89/rowland19a.html) | Orthogonally coupled projection estimators and variance analysis | Orthogonal directions are a candidate comparison, not an assumed improvement over measured projection sweeps. |
+| [POT documentation](https://pythonot.github.io/gen_modules/ot.sliced.html), [project](https://github.com/PythonOT/POT) | Reference sliced distances and explicit projection inputs | An optional numerical oracle; the current estimator runtime remains NumPy-only. |
 
-No third-party implementation is copied. References are methodological comparisons, not endorsements of their dependency security or promises of installation compatibility.
+No third-party implementation is copied. Results and guarantees from another optimizer are not transferred to this one. See the [paper review](paper-review.md) for ambiguities in the motivating method and the [methods](methods.md) for implemented contracts.
 
-## Options and selected first delivery
+## Data needed for stronger evidence
 
-1. Add more marginal assets: cheap, but unlikely to resolve dependence blindness; revised data and unequal histories still confound comparisons.
-2. Add joint sliced transport with observed prototypes: directly tests the next planned hypothesis and exposes an explicit computation budget. **Selected.**
-3. Add risk forecasts after the infrastructure and robustness gates: requires a separate target, loss, baselines and untouched evaluation period or explicit exploratory label. The subsequent [phase-6 study](risk-results.md) is now complete and shows no demonstrated advantage over simple baselines.
+New sources must preserve return intervals, calendars, price conventions, ordered assets, availability times and hashes. Missing returns must not be filled or compressed into a daily clock. Repeating the ETF panel with an independent provider directly tests source sensitivity; an entitled [WRDS/CRSP](https://wrds-www.wharton.upenn.edu/pages/about/data-vendors/center-for-research-in-security-prices-crsp/) archive could support survivorship and corporate-action research.
 
-The first delivery is a tested joint-distribution engine plus reproducible synthetic and performance evidence. The subsequent panel study explicitly labels the previously inspected market period exploratory; it does not select a trading strategy or claim that synthetic accuracy transfers to markets.
+[FRED/ALFRED](https://fred.stlouisfed.org/docs/api/fred/) offers revision-aware macro retrieval; [ECB reference-rate downloads](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html) offer a documented FX source. Each needs a separate availability/calendar adapter. FX fixing rates are not synchronous ETF closes. Record applicable rights before distributing observations. Synthetic controls need no paid data; the [data guide](data.md) describes current inputs and limits.
 
-## Staged implementation and acceptance gates
+## Standards for further claims
 
-| Order | Deliverable | Acceptance gate |
-| --- | --- | --- |
-| 1, this change | Fixed-projection sliced W2; bounded candidate medoids; aligned trailing joint windows; safe saved inference | Exact 1D reduction, row-permutation invariance, projection oracle, frozen scales/directions, deterministic seeds, round-trip predictions, no full N-by-N matrix for fixed candidate budget |
-| 2, this change | Dependence-only controls, covariance baseline, projection sweep, measured scaling example | Marginals provably identical in a deterministic control; independent train/test synthetic windows; all seeds/counts reported; memory metric labeled; no selective best-run result |
-| 3, exploratory study delivered; cross-provider gate pending | Common-history, synchronized SPY/QQQ/TLT/GLD/HYG panel with raw and training-scaled ablations | Explicit session/availability contract; no fills; full interval purging; covariance/correlation, marginal and HMM baselines; projection/window/K choices frozen on development; source sensitivity |
-| 4, delivered | [Refit, null and perturbation validation](joint-validation-results.md) | Return-block and projection-seed stability, occupancy including single-state flags, stationary dependence null, rare/gradual transitions, outlier sensitivity, chronological anchor sets |
-| 5, delivered | [Frozen-model scoring and experiment scale](execution-results.md) | Atomic resumable jobs, isolated fold/seed workers, bounded worker count and BLAS threads, job identity independent of report-only files, validation against frozen schema, measured process RSS |
-| 6, delivered | [Exploratory risk forecasting](risk-results.md) | Prespecified horizon and proper loss; expanding-window historical, EWMA/GARCH or covariance shrinkage baselines; common information sets; dependence-aware uncertainty; genuinely untouched period or explicit exploratory label |
-| 7, next | Path-aware or entropic extensions | Prove the blind spot with controls first; compare lag vectors/signatures or debiased Sinkhorn on cost, stability and benefit. GPU work follows profiling. |
-
-The phase-6 comparison scored 600 five-session basket-risk forecasts. Regime QLIKE was higher than all four baselines; the primary paired difference against EWMA was +0.172 with a 95% interval spanning zero. Keep this negative exploratory result; phase 7 starts with controlled evidence of path-order blindness, not retuning the exposed risk assessment.
-
-## Data expansion
-
-Start the joint empirical study with the existing immutable ETF snapshots on a common date range beginning with the latest inception. Require identical return intervals, session calendars, adjusted-return convention and asset ordering. Never forward-fill a missing return or silently turn a multi-day return into a daily vector. Preserve each source hash and the latest component availability time.
-
-For the next sources, evaluate [FRED/ALFRED](https://fred.stlouisfed.org/docs/api/fred/) for macro series with revision-aware retrieval, [ECB reference-rate downloads](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html) for a documented FX panel, and an entitled [WRDS/CRSP](https://wrds-www.wharton.upenn.edu/pages/about/data-vendors/center-for-research-in-security-prices-crsp/) snapshot for survivorship and corporate-action work. These are separate adapters with different calendars and availability assumptions; daily FX fixing rates are not synchronous ETF closing returns. Obtain and record applicable data rights before distributing observations. No paid data is needed for the synthetic engine.
-
-## Scientific stopping rules
-
-Do not treat a forced partition as proof of regimes. Report absent/tiny states and all unsuccessful comparisons. A correlation-switch success is also achievable by a covariance baseline; distributional advantage requires harder controls beyond covariance. Sliced W2 is a different metric from full multivariate W2; finite projections add approximation error relative to sliced distance, not a convergence guarantee to full W2. A large-scale fit is an engineering result, not evidence of economic value.
+A forced partition is not proof of regimes. Report empty and tiny states, degeneracy, adverse comparisons and all prespecified settings. Correlation-switch recovery is also achievable by covariance clustering; a distributional benefit needs controls beyond covariance. Finite-projection sliced W2 approximates sliced geometry, not full multivariate W2. Larger fits and faster execution are engineering measurements, not evidence of economic value. Entropic solvers, GPU work and trading integration require separate motivation and evaluation.

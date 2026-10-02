@@ -10,7 +10,7 @@ Treat each trailing return window as an empirical probability distribution. Comp
 
 **Research question:** What market-state information is lost when return distributions are compressed into volatility or a few moments?
 
-**Current status:** The engineering and research deliveries through **phase 6** are implemented. The latest exploratory risk study found **no demonstrated forecasting advantage over simple baselines**. Cross-provider and point-in-time validation remain open; phase 7 starts with controlled tests of within-window temporal order. See the [current roadmap](docs/research-roadmap.md).
+**Current evidence:** Univariate and joint-distribution studies, robustness controls and frozen risk forecasting are complete. The exploratory risk study found **no demonstrated forecasting advantage over simple baselines**. Cross-provider and point-in-time validation remain open. The [research agenda](docs/research-roadmap.md) prioritizes controlled tests of within-window temporal order and the reliability of the observed partitions.
 
 ## What is implemented
 
@@ -96,7 +96,7 @@ joint_model.fit(joint_windows)
 joint_labels = joint_model.predict(joint_windows[:5])
 ```
 
-These toy arrays illustrate the APIs. Use training-only scales and the strict alignment contract for empirical joint studies; see the [joint design](docs/joint-design.md).
+These toy arrays illustrate the APIs. Use training-only scales and the strict alignment contract for empirical joint studies; see the [methods](docs/methods.md).
 
 ## Reproduce the research
 
@@ -121,7 +121,7 @@ The requirements file records tested direct dependencies; it is not a complete p
 | Joint panel development and assessment | [Joint market protocol](docs/joint-market-protocol.md) |
 | Joint robustness controls | [Validation protocol](docs/joint-validation-protocol.md) |
 | Export frozen models, score snapshots and resume jobs | [Execution workflow](docs/execution-workflow.md) |
-| Reproduce phase 6 | [Risk workflow](docs/risk-workflow.md) |
+| Causal risk forecasts and baseline comparisons | [Risk workflow](docs/risk-workflow.md) |
 
 Once the matching local snapshots and frozen bundle are prepared, run the execution batch or risk study:
 
@@ -142,9 +142,9 @@ These configs name the original local artifact paths; check the workflows before
 | [results](results/) | Published aggregate evidence and checksums |
 | [examples](examples/) / [benchmarks](benchmarks/) | Offline examples and numerical benchmarks |
 | [scripts](scripts/) | Snapshot acquisition |
-| [docs](docs/) | Designs, protocols, results, reproduction and paper review |
+| [docs](docs/) | Methods, findings, frozen protocols, reproduction and research agenda |
 
-The [research roadmap](docs/research-roadmap.md) tracks current completion and open gates. The [original design](docs/design.md) and [initial implementation plan](docs/implementation-plan.md) retain the longer-term research context. Phase 7 will first test distributions with identical samples but different temporal order, then compare path-aware representations if the controls justify them. Full multivariate OT, entropic methods, GPU work, live data services and trading integration remain future work.
+The [methods](docs/methods.md) define the geometry, temporal contracts and interpretation limits. The [research agenda](docs/research-roadmap.md) connects the findings to unresolved questions and related academic work. Path-aware representations, full multivariate OT and entropic methods remain research extensions; the current studies do not establish their benefit.
 
 ## Documentation
 
