@@ -1,4 +1,5 @@
-/* Keep the compact mark legible on the teal navigation header. */
-.md-header__button.md-logo img {
+/* Keep the mark legible on the teal header and mobile navigation drawer. */
+.md-header__button.md-logo img,
+.md-nav__button.md-logo img {
   filter: brightness(0) invert(1);
 }

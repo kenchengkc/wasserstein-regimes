@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  <link rel="apple-touch-icon" href="{{ config.theme.favicon | url }}">
+{% endblock %}
