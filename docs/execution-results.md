@@ -50,6 +50,6 @@ Automated tests exercise real subprocess isolation, cache reuse with a changed w
 
 [Public aggregate evidence](https://github.com/kenchengkc/wasserstein-regimes/tree/e846df22a91a2c005cad36a4c8fd4bc7c4968424/results/execution) includes all 11 job results, exact computational specifications/fingerprints, runtime threadpool/RSS metadata and checksums. The local job store retains per-attempt status and logs. This supports process interruption recovery on local Linux/macOS filesystems; it is not a power-loss durability guarantee or a distributed scheduler.
 
-## Next research gate
+## Research implications
 
-Roadmap phase 5 is delivered. Phase 6 requires a separate frozen risk-forecast target, horizon, proper loss, baselines and dependence-aware uncertainty. The previous market periods remain exposed, and the regime representation remains fragile. This infrastructure makes such experiments reproducible; it does not justify selecting a trading rule or claiming a useful risk forecast.
+The subsequent [risk forecast comparison](risk-results.md) uses a frozen target, horizon, proper loss, baselines and dependence-aware uncertainty. It finds no demonstrated forecasting advantage. The market assessment remains exploratory, and the regime representation remains fragile. Reproducible execution does not establish economic usefulness; the [research agenda](research-roadmap.md) identifies the remaining validation questions.

@@ -122,8 +122,9 @@ No histogram approximation or multivariate sorting shortcut is used.
 - Benchmark kernels receive sorted vectors; sorting/preparation is not included
   in their timing. Python-traced memory is not full process peak RSS.
 
-Cross-asset replication, multivariate OT, path-aware distributions and
-regime-conditioned forecasting remain separate future phases. The original
-[design](design.md) and [implementation plan](implementation-plan.md) describe
-that longer roadmap; this release deliberately implements the univariate
-research slice.
+This workflow reproduces the univariate study. Subsequent work includes
+[cross-asset replication](cross-asset-results.md), the
+[joint market panel](joint-market-results.md), and
+[exploratory risk forecasting](risk-results.md). The [methods](methods.md)
+describe their shared temporal contracts; the [research agenda](research-roadmap.md)
+identifies the remaining scientific questions.

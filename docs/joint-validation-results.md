@@ -84,8 +84,8 @@ with open("configs/joint_validation.yaml") as handle:
     results = run_controls(yaml.safe_load(handle))
 ```
 
-[Public aggregate evidence](https://github.com/kenchengkc/wasserstein-regimes/tree/e2043b0122fd2e39f03e42df7c31540b27d28cbc/results/joint_validation) contains every row, configuration, manifest and checksum inventory. Source snapshots, observed medoids and per-window market assignments remain local. Code and documentation remain GPL-3.0-only. See the [implementation plan](joint-validation-plan.md).
+[Public aggregate evidence](https://github.com/kenchengkc/wasserstein-regimes/tree/e2043b0122fd2e39f03e42df7c31540b27d28cbc/results/joint_validation) contains every row, configuration, manifest and checksum inventory. Source snapshots, observed medoids and per-window market assignments remain local. Code and documentation remain GPL-3.0-only.
 
-## Consequences for the next phase
+## Research implications
 
-The engine's mathematical capability is established by earlier controls; robust empirical regime identification is still unproven. Preserve the unsuccessful results. The next engineering phase can add resumable experiment jobs, measured process memory and frozen-model scoring, while further research should compare rare-state coverage and robust alternatives under a new frozen development protocol. Neither budget tuning nor clipping is adopted from this exposed sweep. Cross-provider validation, selection uncertainty and predictive evaluation remain outstanding.
+The engine's mathematical capability is established by earlier controls; robust empirical regime identification is still unproven. The subsequent [execution study](execution-results.md) verifies frozen-model scoring, resumable jobs and process memory measurements. The [exploratory risk study](risk-results.md) finds no demonstrated forecasting advantage. Rare-state coverage and robust alternatives require a new frozen development protocol; neither budget tuning nor clipping is adopted from this exposed sweep. Cross-provider validation, selection uncertainty and confirmatory predictive evaluation remain open.

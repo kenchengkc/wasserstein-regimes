@@ -1,6 +1,6 @@
-# Phase 6: exploratory regime-conditioned risk forecasting
+# Exploratory risk forecasting protocol
 
-Frozen before examining any phase-6 forecast losses. This is a research comparison, not a trading system. The 2024–August 2026 prices have already been inspected in earlier phases; this assessment is explicitly exploratory. Revised adjusted-close snapshots are not point-in-time data.
+Frozen before examining the forecast losses. This is a research comparison, not a trading system. The 2024–August 2026 prices had already been inspected in earlier studies; this assessment is explicitly exploratory. Revised adjusted-close snapshots are not point-in-time data. The [recorded protocol](https://github.com/kenchengkc/wasserstein-regimes/blob/4ce3b1b4fb9f7adbc0bb9bbf6263266a7b2b656c/docs/risk-protocol.md) preserves the original specification.
 
 ## Question and frozen choices
 
@@ -34,6 +34,6 @@ Use paired circular stationary-bootstrap draws of the chronological loss differe
 
 ## Reproducibility and stopping rule
 
-Add a `risk` job to the existing content-bound, resumable executor. Fingerprint the frozen bundle, risk config, all five CSVs and acquisition sidecars, numerical sources and dependencies. Save forecast-level audit data only in ignored local artifacts. Publish only aggregate comparisons, provenance and checksums; no market observations, medoids or per-window states. The worker seals complete outputs and verifies consumed inputs before and after execution.
+The `risk` job uses the content-bound, resumable executor. Its identity fingerprints the frozen bundle, risk config, all five CSVs and acquisition sidecars, numerical sources and dependencies. Forecast-level audit data stay in ignored local artifacts. Published outputs contain only aggregate comparisons, provenance and checksums; no market observations, medoids or per-window states. The worker seals complete outputs and verifies consumed inputs before and after execution.
 
-A negative result completes this phase. Do not retune to beat EWMA. A confirmatory successor requires a newly locked protocol and genuinely unseen observations, plus point-in-time/source validation. Tail risk, covariance-matrix targets, GARCH, trading allocation and transaction costs are separate extensions, not claims of this study.
+A negative result is a complete scientific outcome; settings must not be retuned to beat EWMA on this assessment. A confirmatory successor requires a newly locked protocol and genuinely unseen observations, plus point-in-time/source validation. Tail risk, covariance-matrix targets, GARCH, trading allocation and transaction costs are separate extensions, not claims of this study.

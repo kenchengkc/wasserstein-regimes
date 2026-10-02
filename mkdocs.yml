@@ -13,35 +13,31 @@ theme:
     primary: teal
     accent: teal
   features:
+    - navigation.sections
     - navigation.footer
     - content.code.copy
 nav:
   - Overview: index.md
-  - Research roadmap: research-roadmap.md
-  - Risk results: risk-results.md
-  - Risk protocol: risk-protocol.md
-  - Risk workflow: risk-workflow.md
-  - Risk implementation: risk-plan.md
-  - Execution results: execution-results.md
-  - Execution workflow: execution-workflow.md
-  - Execution design: execution-design.md
-  - Execution plan: execution-plan.md
-  - Robustness results: joint-validation-results.md
-  - Robustness protocol: joint-validation-protocol.md
-  - Robustness implementation: joint-validation-plan.md
-  - Joint market results: joint-market-results.md
-  - Joint market protocol: joint-market-protocol.md
-  - Joint market plan: joint-market-plan.md
-  - Joint engine: joint-results.md
-  - Joint design: joint-design.md
-  - Joint implementation: joint-implementation-plan.md
-  - Cross-asset results: cross-asset-results.md
-  - Study results: research-results.md
-  - Research workflow: research-workflow.md
-  - System design: design.md
-  - Data sourcing: data.md
-  - Implementation plan: implementation-plan.md
-  - Paper review: paper-review.md
+  - Research:
+      - Methods: methods.md
+      - Univariate study: research-results.md
+      - Cross-asset replication: cross-asset-results.md
+      - Joint synthetic controls: joint-results.md
+      - Joint market panel: joint-market-results.md
+      - Robustness: joint-validation-results.md
+      - Risk forecasting: risk-results.md
+      - Execution measurements: execution-results.md
+      - Motivating paper: paper-review.md
+  - Reproducibility:
+      - Data sources and conventions: data.md
+      - Univariate workflow: research-workflow.md
+      - Frozen scoring and jobs: execution-workflow.md
+      - Risk forecasting workflow: risk-workflow.md
+      - Study protocols:
+          - Joint market: joint-market-protocol.md
+          - Robustness: joint-validation-protocol.md
+          - Risk forecasting: risk-protocol.md
+  - Research agenda: research-roadmap.md
 plugins:
   - search
 markdown_extensions:
