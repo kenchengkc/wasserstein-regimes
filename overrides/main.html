@@ -3,4 +3,8 @@
 {% block extrahead %}
   {{ super() }}
   <link rel="apple-touch-icon" href="{{ config.theme.favicon | url }}">
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 {% endblock %}
